@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.fernando-moretes/moretes-aws-architect-mcp",
+  "title": "Moretes Architect MCP",
+  "description": "Evidence-first architecture workbench: 48 deterministic tools, 10 architect personas, any cloud",
+  "version": "0.2.0",
+  "websiteUrl": "https://fernando.moretes.com/mcp",
+  "repository": {
+    "url": "https://github.com/fernando-moretes/moretes-aws-architect-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp"
+    }
+  ]
+}

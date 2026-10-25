@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "description": "Evidence-first architecture workbench MCP by Fernando Azevedo: architect personas, cloud-agnostic design tools, IaC/code/API reviews, AI-agent and MCP safety, live AWS knowledge. Deterministic, no model calls. CLI for pipelines.",
   "type": "module",
-  "private": true,
   "license": "MIT",
   "mcpName": "io.github.fernando-moretes/moretes-aws-architect-mcp",
   "homepage": "https://fernando.moretes.com/mcp",
@@ -38,13 +37,14 @@
     "moretes-aws-architect-mcp": "dist/stdio.js"
   },
   "files": [
-    "dist",
-    "src/data",
-    "README.md",
     "LICENSE",
     "NOTICE.md",
     "PRIVACY.md",
-    "SECURITY.md"
+    "README.md",
+    "SECURITY.md",
+    "dist",
+    "server.json",
+    "src/data"
   ],
   "scripts": {
     "build": "tsc && node scripts/bundle.mjs",
@@ -72,5 +72,9 @@
     "esbuild": "^0.25.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

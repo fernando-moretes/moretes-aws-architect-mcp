@@ -1,0 +1,51 @@
+name: Publish
+
+# Tag v* (ou disparo manual): publica no MCP Registry via OIDC, sem segredo.
+# O npm só é publicado quando o segredo NPM_TOKEN existir no repositório;
+# aí o server.json ganha a entrada "packages" e o Registry valida o mcpName.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm ci --ignore-scripts
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Check versions match
+        run: |
+          PKG=$(node -p "require('./package.json').version")
+          SRV=$(node -p "require('./server.json').version")
+          [ "$PKG" = "$SRV" ] || { echo "package.json $PKG != server.json $SRV"; exit 1; }
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then [ "v$PKG" = "${GITHUB_REF_NAME}" ] || { echo "tag ${GITHUB_REF_NAME} != v$PKG"; exit 1; }; fi
+      - name: Publish to npm (only with NPM_TOKEN)
+        if: env.NPM_TOKEN != ''
+        run: |
+          npm publish --access public --provenance
+          jq --arg v "$(node -p "require('./package.json').version")" \
+            '.packages = [{"registryType":"npm","identifier":"moretes-aws-architect-mcp","version":$v,"transport":{"type":"stdio"}}]' \
+            server.json > server.tmp && mv server.tmp server.json
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+      - run: ./mcp-publisher login github-oidc
+      - run: ./mcp-publisher publish
