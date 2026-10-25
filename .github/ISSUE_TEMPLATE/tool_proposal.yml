@@ -1,0 +1,64 @@
+name: Tool proposal
+description: Propose a new tool or a change to an existing one. Portuguese or English.
+labels: ["tool-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tools here are deterministic: no model calls, strict input schemas, explicit limitations. Read CONTRIBUTING.md before proposing.
+  - type: input
+    id: name
+    attributes:
+      label: Proposed tool name
+      placeholder: lambda_cold_start_budget
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Which architecture task does this help with, and why can the client model not do it well alone?
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Inputs
+      description: Fields, types, bounds and defaults. A sample arguments JSON is ideal.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output
+      description: Fields of the result and a worked example with real numbers.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Boundary and limitations
+      description: What the tool must not claim or do. These become the `limitations` field of the output.
+    validations:
+      required: true
+  - type: dropdown
+    id: external
+    attributes:
+      label: Does it call anything outside the process?
+      description: External calls need a fixed destination, a timeout and a privacy note.
+      options:
+        - "No"
+        - "Yes"
+    validations:
+      required: true
+  - type: textarea
+    id: external_detail
+    attributes:
+      label: If yes, which destination and what data is sent?
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Official documentation, papers or standards the logic is based on.

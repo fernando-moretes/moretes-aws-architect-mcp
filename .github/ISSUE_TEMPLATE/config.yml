@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Tutorials, course and FAQ
+    url: https://fernando.moretes.com/mcp
+    about: Videos, the course and answers to common questions about Moretes Architect MCP.
+  - name: Report a security vulnerability
+    url: https://github.com/fernando-moretes/moretes-aws-architect-mcp/blob/main/SECURITY.md
+    about: Report privately by e-mail, never in a public issue.

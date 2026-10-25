@@ -1,0 +1,63 @@
+name: Bug report
+description: A tool, transport or the CLI behaves differently from its documentation. Portuguese or English.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, AWS account IDs, customer data or private architecture. Security vulnerabilities go privately to fernando@moretes.com (see SECURITY.md).
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did it happen?
+      options:
+        - Public endpoint (Streamable HTTP)
+        - Local stdio
+        - CLI (dist/cli.js)
+        - Local AWS account tools
+        - Local federation
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Tool, prompt or resource
+      placeholder: terraform_plan_review
+  - type: input
+    id: version
+    attributes:
+      label: Server version and client
+      description: Version from /health or package.json, and your MCP client with its version.
+      placeholder: 0.2.0, Claude Code 2.x
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Sanitized input (arguments JSON or CLI command) that reproduces the problem.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: Exact error message, HTTP status, exit code, or the relevant part of the output. Include the requestId and UTC time if the public endpoint returned a 5xx.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I removed secrets, account IDs and customer data from this report.
+          required: true
+        - label: I checked docs/troubleshooting.md.
