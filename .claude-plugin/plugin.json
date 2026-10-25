@@ -1,0 +1,13 @@
+{
+  "name": "moretes-architect",
+  "version": "0.4.0",
+  "description": "Evidence-first architecture workbench: 48 deterministic tools and 10 architect personas (solution, enterprise, data, security, AI, FinOps...) for requirements, ADRs, C4, costs, IaC and code reviews, and AI-agent safety. No model calls, no API key.",
+  "author": { "name": "Fernando Azevedo", "url": "https://fernando.moretes.com" },
+  "homepage": "https://fernando.moretes.com/mcp",
+  "repository": "https://github.com/fernando-moretes/moretes-aws-architect-mcp",
+  "license": "MIT",
+  "keywords": ["architecture", "aws", "azure", "gcp", "well-architected", "adr", "terraform", "kubernetes", "finops", "mcp", "security"],
+  "mcpServers": {
+    "moretes-architect": { "type": "http", "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp" }
+  }
+}

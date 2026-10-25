@@ -24,7 +24,7 @@ const RANK: Record<string, number> = { info: 1, medium: 2, high: 3 };
 
 function usage(message?: string): never {
   if (message) console.error(`error: ${message}\n`);
-  console.error(`moretes-architect ${VERSION}\n\n  list [--json]                      tools by group\n  describe <tool>                    description and JSON schema\n  call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]\n\nExit codes: 0 ok · 1 findings at/above --fail-on · 2 usage or input error`);
+  console.error(`moretes-architect ${VERSION}\n\n  list [--json]                      tools by group\n  describe <tool>                    description and JSON schema\n  call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]\n  check <tool> [--fail-on high] [--format markdown|json] file...   one review per file (pre-commit, CI)\n\nExit codes: 0 ok · 1 findings at/above --fail-on · 2 usage or input error`);
   process.exit(2);
 }
 
@@ -91,6 +91,7 @@ async function main() {
     console.log(JSON.stringify({ name: t.name, description: t.description, external: t.external, inputSchema: z.toJSONSchema(t.schema) }, null, 2));
     return;
   }
+  if (command === 'check') return check(rest);
   if (command !== 'call') usage(`unknown command: ${command}`);
   const name = rest[0];
   const t = publicTools.find(x => x.name === name);
@@ -105,35 +106,72 @@ async function main() {
     else if (a === '--arg') { const kv = rest[++i] ?? ''; const eq = kv.indexOf('='); if (eq < 1) usage('--arg key=value'); args[kv.slice(0, eq)] = coerce(kv.slice(eq + 1)); }
     else usage(`unknown option: ${a}`);
   }
-  if (inputFile) {
-    const raw = readInput(inputFile);
-    const wrap = WRAP[name];
-    if (wrap === 'code') args = { ...args, code: raw, filename: args.filename ?? (inputFile === '-' ? 'stdin' : inputFile) };
-    else {
-      let parsed: unknown;
-      try { parsed = JSON.parse(raw); } catch { usage('input is not valid JSON'); }
-      const obj = parsed as Record<string, unknown>;
-      const keys = Object.keys((z.toJSONSchema(t.schema) as { properties?: Record<string, unknown> }).properties ?? {});
-      const looksLikeArgs = !Array.isArray(parsed) && Object.keys(obj).some(k => keys.includes(k));
-      if (wrap && !looksLikeArgs) args = { ...args, [wrap]: obj };
-      else if (name === 'kubernetes_manifest_review' && Array.isArray(parsed)) args = { ...args, manifests: parsed };
-      else args = { ...obj, ...args };
-    }
-  }
-  let result: Record<string, unknown>;
-  try { result = await t.run(args); }
+  if (inputFile) args = argsFromFile(name, readInput(inputFile), inputFile === '-' ? 'stdin' : inputFile, args);
+  const result = await runTool(name, args);
+  emit(name, result, format, inputFile && inputFile !== '-' ? inputFile : undefined);
+  if (failOn && worst(result) >= RANK[failOn]) process.exit(1);
+}
+
+/** Tool arguments from a file: a raw document is wrapped in the tool's single document argument. */
+function argsFromFile(name: string, raw: string, filename: string, base: Record<string, unknown> = {}): Record<string, unknown> {
+  const t = publicTools.find(x => x.name === name)!;
+  const wrap = WRAP[name];
+  if (wrap === 'code') return { ...base, code: raw, filename: base.filename ?? filename };
+  if (name === 'dependency_manifest_review') return { ...base, filename: filename.split('/').pop() ?? filename, content: raw };
+  let parsed: unknown;
+  try { parsed = JSON.parse(raw); } catch { usage(`${filename}: input is not valid JSON`); }
+  const obj = parsed as Record<string, unknown>;
+  const keys = Object.keys((z.toJSONSchema(t.schema) as { properties?: Record<string, unknown> }).properties ?? {});
+  const looksLikeArgs = !Array.isArray(parsed) && Object.keys(obj).some(k => keys.includes(k));
+  if (wrap && !looksLikeArgs) return { ...base, [wrap]: obj };
+  if (name === 'kubernetes_manifest_review' && Array.isArray(parsed)) return { ...base, manifests: parsed };
+  if (name === 'kubernetes_manifest_review' && !looksLikeArgs && obj.kind) return { ...base, manifests: [obj] };
+  return { ...obj, ...base };
+}
+
+async function runTool(name: string, args: Record<string, unknown>): Promise<Record<string, unknown>> {
+  try { return await publicTools.find(x => x.name === name)!.run(args); }
   catch (error) {
     const detail = error instanceof z.ZodError ? 'Invalid input: ' + error.issues.map(i => i.path.join('.') + ': ' + i.message).join('; ') : error instanceof Error ? error.message : String(error);
     console.error(`error: ${detail}`);
     process.exit(2);
   }
+}
+
+function emit(name: string, result: Record<string, unknown>, format: string, file?: string) {
   if (format === 'json') console.log(JSON.stringify(result, null, 2));
   else if (format === 'markdown') console.log(toMarkdown(name, result));
-  else console.log(JSON.stringify(toSarif(name, result, inputFile && inputFile !== '-' ? inputFile : undefined), null, 2));
-  if (failOn) {
-    const worst = Math.max(0, ...findings(result).map(f => RANK[f.severity ?? ''] ?? 0));
-    if (worst >= RANK[failOn]) process.exit(1);
+  else console.log(JSON.stringify(toSarif(name, result, file), null, 2));
+}
+
+const worst = (result: Record<string, unknown>) => Math.max(0, ...findings(result).map(f => RANK[f.severity ?? ''] ?? 0));
+
+/**
+ * `check <tool> [--fail-on high] [--format markdown|json] file...`: one review per file,
+ * a single exit code. Built for pre-commit hooks and CI steps that pass file lists.
+ */
+async function check(rest: string[]) {
+  const name = rest[0];
+  if (!publicTools.some(x => x.name === name)) usage(`unknown tool: ${name}`);
+  let failOn = 'high', format = 'markdown';
+  const files: string[] = [];
+  for (let i = 1; i < rest.length; i++) {
+    const a = rest[i];
+    if (a === '--fail-on') { failOn = rest[++i]; if (!RANK[failOn]) usage('--fail-on high|medium|info'); }
+    else if (a === '--format') { format = rest[++i]; if (!['json', 'markdown'].includes(format)) usage('check supports --format markdown|json'); }
+    else files.push(a);
   }
+  if (!files.length) return;
+  let exit = 0;
+  for (const file of files) {
+    const result = await runTool(name, argsFromFile(name, readInput(file), file));
+    const w = worst(result);
+    if (w >= RANK[failOn]) exit = 1;
+    if (format === 'json') console.log(JSON.stringify({ file, ...result }));
+    else if (findings(result).length) console.log(`### ${file}\n\n` + toMarkdown(name, result));
+    else console.log(`${file}: no findings`);
+  }
+  process.exit(exit);
 }
 
 main().catch(error => { console.error(`error: ${error instanceof Error ? error.message : String(error)}`); process.exit(2); });

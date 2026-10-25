@@ -10,7 +10,7 @@
   <a href="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml/badge.svg"></a>
   <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.fernando-moretes/moretes-aws-architect-mcp"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-listado-ff9900"></a>
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff9900"></a>
-  <img alt="Versão 0.3.0" src="https://img.shields.io/badge/vers%C3%A3o-0.3.0-0f1b2d">
+  <img alt="Versão 0.4.0" src="https://img.shields.io/badge/vers%C3%A3o-0.4.0-0f1b2d">
   <img alt="48 ferramentas" src="https://img.shields.io/badge/ferramentas-48-0f1b2d">
   <img alt="Sem chamadas a modelo" src="https://img.shields.io/badge/chamadas%20a%20modelo-0-10b981">
   <img alt="Sem chave de API" src="https://img.shields.io/badge/chave%20de%20API-nenhuma-10b981">
@@ -208,6 +208,19 @@ node dist/cli.js call terraform_plan_review --input plan.json --format sarif --f
 ```
 
 Roda offline e sem cota. O SARIF entra no code scanning do GitHub; o Markdown vai para o resumo do job. GitHub Actions, GitLab CI e pre-commit prontos em [docs/pipelines.md](docs/pipelines.md).
+
+## Integrações
+
+| Onde | Como |
+|---|---|
+| **Claude Code (plugin + skill)** | `/plugin marketplace add fernando-moretes/moretes-aws-architect-mcp` e `/plugin install moretes-architect@moretes` |
+| **Gemini CLI** | `gemini extensions install https://github.com/fernando-moretes/moretes-aws-architect-mcp` |
+| **Qualquer agente com Agent Skills** | `npx skills add fernando-moretes/moretes-aws-architect-mcp` |
+| **GitHub Actions** | `uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.0` com `tool`, `files`, `fail-on` e `sarif` |
+| **pre-commit** | hooks `mcp-config-review`, `dependency-manifest-review`, `cloudformation-review`, `openapi-review`, `code-review-architecture` |
+| **Docker** | `docker run -i --rm ghcr.io/fernando-moretes/moretes-aws-architect-mcp` (stdio), `... http`, `... cli check <ferramenta> <arquivo>` |
+
+Detalhes e exemplos: [docs/integrations-clients.md](docs/integrations-clients.md).
 
 ## Rodar local
 
