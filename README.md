@@ -36,7 +36,7 @@ Kiro (`.kiro/settings/mcp.json`), Cursor (`.cursor/mcp.json`), VS Code (`.vscode
 {"mcpServers":{"moretes-architect":{"url":"https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp"}}}
 ```
 
-O mesmo servidor responde em `https://fernando.moretes.com/api/mcp`. Sem chave, sem cadastro. Cota: 300 requisições por dia por cliente e 3.000 por dia no total; acima disso, `429`. Para uso sem cota e com entradas privadas, rode local (abaixo). Todos os clientes, passo a passo: [docs/clients.md](docs/clients.md).
+O mesmo servidor responde em `https://fernando.moretes.com/api/mcp`, mas esse endereço passa pelo site e todos os seus usuários dividem uma única cota diária; use a URL direta acima para ter a sua. Sem chave, sem cadastro. Cota: 300 requisições por dia por cliente e 3.000 por dia no total; acima disso, `429`. Para uso sem cota e com entradas privadas, rode local (abaixo). Todos os clientes, passo a passo: [docs/clients.md](docs/clients.md).
 
 Depois de conectar, peça ao agente:
 
