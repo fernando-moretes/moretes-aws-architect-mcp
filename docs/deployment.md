@@ -26,10 +26,12 @@ CloudFormation reported CREATE_COMPLETE. Production SDK smoke verified initializ
 | Live AWS Knowledge read, regions, regional availability and exact-ID skill retrieval | Passed |
 | Optional local AWS Documentation 1.2.3 discovery | Passed |
 | Optional local allowlisted documentation search | Passed |
+| Local STS identity, tagged Lambda inventory and one-day cost history | Passed; private results were not published |
+| Runtime IAM simulation for S3 account listing, role assumption, Bedrock invocation, IAM user creation and Lambda invocation | All five denied |
 | Runtime dependency audit | No known vulnerabilities reported at validation time |
 
 The initial GitHub CI run passed on Node 22 and Node 24. The test suite contains 15 behavioral/negative tests. The verified local provider allowlist exposed only `read_documentation` and `search_documentation`; a real documentation search succeeded through the bridge.
 
-This is not a claim of full interactive testing inside every IDE. Client configuration examples follow official documentation. Other catalog packages have pinned configurations, but were not all installed or functionally tested. No AWS resource mutation was performed through a provider. Account cost-history/resource-inventory functions are implemented with guards; they are not a claim of complete account discovery.
+This is not a claim of full interactive testing inside every IDE. Client configuration examples follow official documentation. Other catalog packages have pinned configurations, but were not all installed or functionally tested. No AWS resource mutation was performed through a provider. The tagged-resource inventory test is not a claim of complete account discovery, and the IAM simulation covers only the listed actions.
 
 The public service is an initial community release with shared quotas and no uptime SLA. Full source, validation commands, operational limits and recovery procedures are in this repository. CI results are available in the Actions tab after publication.
