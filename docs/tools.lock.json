@@ -1,0 +1,199 @@
+{
+  "version": "0.3.0",
+  "note": "sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.",
+  "aggregate": "04902b392ca6205fb16fde769fee737093a5d7fcb8ab9b424672173ab8fc92ea",
+  "tools": [
+    {
+      "name": "architect_panel",
+      "sha256": "7e96a850b568cd0e99109293b1fcbf5ffca5216e061036b422cda37a76fa7fc3"
+    },
+    {
+      "name": "code_review_architecture",
+      "sha256": "e8043002a009b92300a732e7f2ec139a52f441b89adb47b020c36f908365bd20"
+    },
+    {
+      "name": "dependency_manifest_review",
+      "sha256": "039dfb5fe8c2c6b495ee01bcd20e43db5b8fb90adf7d3499d64ddbc09d9cdca2"
+    },
+    {
+      "name": "requirements_check",
+      "sha256": "d5ef48f588e66763a0e6760bc4793ef1fb62a47b465899ece328b021bc02f735"
+    },
+    {
+      "name": "architecture_pattern",
+      "sha256": "b73d8d8b909c86f16d21d0e4ec71ca6946cdc30395d9f39415a47fcfa341d3e5"
+    },
+    {
+      "name": "service_compare",
+      "sha256": "4faa0dbb576926cc094c4f6a43cc47ca96388ee4ddfa0f4abf9be6c7e5462df1"
+    },
+    {
+      "name": "decision_record",
+      "sha256": "7648caf6e6fa896d7aaf873767bc1f4a865e22e3fbbeeb03f68cd8a6e94894f1"
+    },
+    {
+      "name": "well_architected_review",
+      "sha256": "9d0cb617115b96e327e5320ab3cf4e439cb8cf097edc0921671268bf8155db73"
+    },
+    {
+      "name": "threat_model",
+      "sha256": "ff489e71f3de38ad6e3f76e8e3f29fd80d6d063b54a5f35b43ba46f5487a0f9e"
+    },
+    {
+      "name": "failure_rehearsal",
+      "sha256": "acc77cfba4da81c52ece02ddab454584e7abcec8bedf0f4c2bdc6c44432b09c0"
+    },
+    {
+      "name": "capacity_plan",
+      "sha256": "d4b5eb742a66b5d77cb0c62ffd4e07cf094b2660be24a5b6de080f24b2f04ff8"
+    },
+    {
+      "name": "cost_model",
+      "sha256": "25f518e1ad93b4a2a068cec2219eeef7a96168aaa0de4e418fa5796f487c10f3"
+    },
+    {
+      "name": "slo_budget",
+      "sha256": "ecbb6dd6a8eca7afc352cf85c6392cbbcf584405af86562627b4b73b4b8f99a4"
+    },
+    {
+      "name": "migration_plan",
+      "sha256": "d049a2c7d0f25f45418a1cf0c5a7a31e01d9048bcad0ab4fdfed7d048b7f5557"
+    },
+    {
+      "name": "architecture_diagram",
+      "sha256": "3865c58aa3699b3a4bd646ff241f7a51faad8ebea45a94509dcb75384c13cc86"
+    },
+    {
+      "name": "implementation_plan",
+      "sha256": "e068924edea6eeddf26d1ae22560d9ad62eb8f7026ef90d6b9973cc80511f3ac"
+    },
+    {
+      "name": "agent_tool_contract",
+      "sha256": "d20a9435765c55bf6248458583cbc1b9411d636d08576d05b7f7a351d8daeb69"
+    },
+    {
+      "name": "c4_model",
+      "sha256": "6bdff92773ed318f190db0207380384a38b85938c998b75dfc8d44d0f71939e1"
+    },
+    {
+      "name": "sequence_diagram",
+      "sha256": "c7a7dda126cddddc6837e14f4dd587999a8169d1d66aeb42b4ede10e65e95bf0"
+    },
+    {
+      "name": "service_equivalents",
+      "sha256": "cb71bf5c2ae504c67013538d3389485c0bf52968367933531d4087a32eef3d7b"
+    },
+    {
+      "name": "data_classification",
+      "sha256": "5e572fea5993540785e11cb7ade0ccfb65583a838015627fdce50edaf263a05f"
+    },
+    {
+      "name": "openapi_review",
+      "sha256": "6d71eb357c72521d9a5fb3d32618702e50e879be3b30418d255cc3ad7986ae9e"
+    },
+    {
+      "name": "event_contract",
+      "sha256": "4d9dd1cfbce2d55c861a9fd87362fd8f1576ef0d1caeac74be9be35025616bb1"
+    },
+    {
+      "name": "latency_budget",
+      "sha256": "d37ffa7a60c3ceb808cfbcf12affda430a4e38c73d8e28550b0e796bd0b368be"
+    },
+    {
+      "name": "queue_sizing",
+      "sha256": "cd5aa1787b1c923b82bed0d97f9d1be63935d6e744590095c5b194f4ee7a54f6"
+    },
+    {
+      "name": "dr_strategy",
+      "sha256": "9583e9189e2db488e277a3aacf935dea609bbf841a8681313e1acb2834e78162"
+    },
+    {
+      "name": "retry_policy",
+      "sha256": "629693527e1a0fee902a0aab17d609fc071681f6cfbaf7d9edd6dec78d6add19"
+    },
+    {
+      "name": "storage_growth",
+      "sha256": "bf007ba90b9154f700373ae68b074895e427ac808a28a85b05015f41b7544b95"
+    },
+    {
+      "name": "finops_unit_economics",
+      "sha256": "72b25d3586ea211772bc0d405f02a8753bf67f8256169faa712f4ffae6a393cf"
+    },
+    {
+      "name": "postmortem",
+      "sha256": "fe4d8bc04a6812f8df4e446bdaa1554637ef23d5865675bc089d7c80d29841ef"
+    },
+    {
+      "name": "runbook",
+      "sha256": "e3ccc56101ec812619392fd110ef1c01d3facc1182340b9c55a83ec5e50bd75f"
+    },
+    {
+      "name": "agent_eval_plan",
+      "sha256": "c737fb46d7652155d69d9818d3ba4edc8b95a2da15daec21fc44d8d5fe247d06"
+    },
+    {
+      "name": "prompt_injection_checklist",
+      "sha256": "00a0938c2e37dfa2767390ea419ee675cc5d88c48ea43ea7e583360d78536158"
+    },
+    {
+      "name": "rag_pipeline_plan",
+      "sha256": "9ae821c2634b2aad4ae3595a9cee59a64ffecd088908d24f8a1328c93f0455a0"
+    },
+    {
+      "name": "mcp_server_review",
+      "sha256": "104beb4a049a9e611a8d93c9950d3cd4907d0a9f5ed8b6a61de04fc3e3e50d6d"
+    },
+    {
+      "name": "mcp_config_review",
+      "sha256": "f2f2f97b51c2bdd685e5e610dcef02e33bcff4bd64b50b94c4caa4cf65b6f230"
+    },
+    {
+      "name": "iam_policy_review",
+      "sha256": "c18fd20634efb619a68132993466669b97cdd5e9e7db827c5bc8e76cf832246f"
+    },
+    {
+      "name": "cloudformation_review",
+      "sha256": "94c22e604204bf74f96e17d3a3353de0de63832568a7fc90dc57fa387c6bcbcb"
+    },
+    {
+      "name": "terraform_plan_review",
+      "sha256": "cacf8c38721bfb0887327ca230bada892f0c94ef1b669aad9b8f4684e7d48bba"
+    },
+    {
+      "name": "kubernetes_manifest_review",
+      "sha256": "72f11a91542996bb2c96242680887fe81f5e0a181207b816ae709712014d9bd2"
+    },
+    {
+      "name": "aws_knowledge_search",
+      "sha256": "ae407d2b91b7a602d1347238a46454273e89e6665156f9cf2c862d542c5818c4"
+    },
+    {
+      "name": "aws_knowledge_read",
+      "sha256": "21d0452537e51e1cee53deb7613384fd965ccc3a87650bf2e8119a69eb3ff476"
+    },
+    {
+      "name": "aws_regions",
+      "sha256": "fe4f6318550cd5e7d4062396e0b41eac68a056855873be044594c60372545aa2"
+    },
+    {
+      "name": "aws_regional_availability",
+      "sha256": "b1088e57f2840e8495b072837b2273723e7fea7e79fcd26a32593a7a17a3bae7"
+    },
+    {
+      "name": "aws_skill",
+      "sha256": "c461c99fa69024aa87816ff3830490a42bf652465a7127b7c81673d897713fec"
+    },
+    {
+      "name": "integration_catalog",
+      "sha256": "9785d8d9c5051afbff0dcf8fc7281bec70fc1eb05180340fed0dc7f643542598"
+    },
+    {
+      "name": "integration_config",
+      "sha256": "c895582ed1a89acdc6c0d9c84226f102b082a58bef4cbc50b71d18425e562d42"
+    },
+    {
+      "name": "github_public_repository",
+      "sha256": "747c2783f448c2a775a8aa27ef8b1a5a315cd4509ee002b48e245ebfaf49539b"
+    }
+  ]
+}

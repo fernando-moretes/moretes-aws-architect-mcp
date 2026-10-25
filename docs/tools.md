@@ -2571,7 +2571,7 @@ External call: false. Potentially mutating: false.
 
 ### iam_policy_review
 
-Inspect an IAM JSON document for broad Allow statements. Heuristic only; use IAM Access Analyzer for authoritative validation.
+Inspect an IAM document for broad grants: AWS policy JSON (default), Azure custom role definition or Google Cloud IAM policy bindings (provider). Heuristic only; the provider analyzers are authoritative.
 
 External call: false. Potentially mutating: false.
 
@@ -2586,10 +2586,20 @@ External call: false. Potentially mutating: false.
         "type": "string"
       },
       "additionalProperties": {}
+    },
+    "provider": {
+      "default": "aws",
+      "type": "string",
+      "enum": [
+        "aws",
+        "azure",
+        "gcp"
+      ]
     }
   },
   "required": [
-    "policy"
+    "policy",
+    "provider"
   ],
   "additionalProperties": false
 }

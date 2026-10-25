@@ -1,0 +1,2698 @@
+{
+  "agent_eval_plan": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "agent": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "goldenSet": {
+        "type": "object",
+        "properties": {
+          "perCapability": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "total": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "composition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "labeling": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "metrics": {
+        "type": "array"
+      },
+      "judgeRubric": {
+        "type": "array"
+      },
+      "redTeam": {
+        "type": "array"
+      },
+      "mutatingTools": {
+        "type": "array"
+      },
+      "requirements": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "agent_tool_contract": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "operation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "resourceScope": {
+        "type": "array"
+      },
+      "approvalRequired": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "maxDurationSeconds": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "reversible": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "contract": {
+        "type": "object",
+        "properties": {
+          "identity": {
+            "type": "array"
+          },
+          "authorization": {
+            "type": "array"
+          },
+          "execution": {
+            "type": "array"
+          },
+          "recovery": {
+            "type": "array"
+          },
+          "audit": {
+            "type": "array"
+          },
+          "prohibited": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "additionalProperties": true
+  },
+  "architect_panel": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "subject": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "artifactType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "knownFacts": {
+        "type": "array"
+      },
+      "panel": {
+        "type": "array"
+      },
+      "synthesis": {
+        "type": "array"
+      },
+      "availableRoles": {
+        "type": "array"
+      },
+      "howToUse": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "architecture_diagram": {
+    "type": "object",
+    "properties": {
+      "mermaid": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "architecture_pattern": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "workload": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "services": {
+        "type": "array"
+      },
+      "fit": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tradeoffs": {
+        "type": "array"
+      },
+      "nodes": {
+        "type": "array"
+      },
+      "questions": {
+        "type": "array"
+      },
+      "provider": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "serviceMapping": {
+        "type": "array"
+      },
+      "mermaid": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "c4_model": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "level": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "mermaid": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "elements": {
+        "type": "object",
+        "properties": {
+          "people": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "externalSystems": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "containers": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "relations": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "unreferenced": {
+        "type": "array"
+      },
+      "nextLevel": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "capacity_plan": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "assumptions": {
+        "type": "object",
+        "properties": {
+          "requestsPerSecond": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "durationMs": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "payloadKB": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "headroom": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "averageConcurrency": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "plannedConcurrency": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "dailyRequests": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "dailyPayloadGB": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "cloudformation_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "resourceCount": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "findings": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "code_review_architecture": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "filename": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "lines": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "nonEmptyLines": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "longestLine": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "functionsApprox": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "todoCount": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "findings": {
+        "type": "array"
+      },
+      "truncated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "architectureQuestions": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "cost_model": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "items": {
+        "type": "array"
+      },
+      "subtotal": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "totalWithContingency": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "contingencyPercent": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "excluded": {
+        "type": "array"
+      },
+      "creditWarning": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "data_classification": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "system": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jurisdictions": {
+        "type": "array"
+      },
+      "highestSensitivity": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "items": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "public": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "internal": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "personal": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "sensitive-personal": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "financial-card": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "health": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "credential": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "children": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "decision_record": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "markdown": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "dependency_manifest_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "filename": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "dependencies": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "rules": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "dr_strategy": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "workload": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "objectives": {
+        "type": "object",
+        "properties": {
+          "rtoMinutes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "rpoMinutes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "tiers": {
+        "type": "array"
+      },
+      "recommendedStartingPoint": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "initialFullCopyHours": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "checks": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "event_contract": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "eventName": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "envelope": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "$schema": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "required": {
+            "type": "array"
+          },
+          "properties": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "rules": {
+        "type": "object",
+        "properties": {
+          "idempotency": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ordering": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evolution": {
+            "type": "array"
+          },
+          "failure": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      },
+      "warnings": {
+        "type": "array"
+      },
+      "consumers": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "failure_rehearsal": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "operation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "failure": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "preconditions": {
+        "type": "array"
+      },
+      "steps": {
+        "type": "array"
+      },
+      "acceptance": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "finops_unit_economics": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "period": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "totals": {
+        "type": "object",
+        "properties": {
+          "fixed": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "variable": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "total": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "fixedSharePercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "perUnit": {
+        "type": "array"
+      },
+      "marginalCostPerPrimaryUnit": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "breakEvenVolumeForTarget": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "reading": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "iam_policy_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "provider": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "findings": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "implementation_plan": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "decision": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "deliverables": {
+        "type": "array"
+      },
+      "stages": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "integration_catalog": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "retrievedAt": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "total": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "servers": {
+        "type": "array"
+      },
+      "boundary": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "integration_config": {
+    "type": "object",
+    "properties": {
+      "configuration": {
+        "type": "object",
+        "properties": {
+          "mcpServers": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "python": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "next": {
+        "type": "array"
+      },
+      "warning": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "kubernetes_manifest_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "objects": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "kinds": {
+        "type": "array"
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "latency_budget": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "percentile": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "targetMs": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "estimatedTotalMs": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "remainingMs": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "withinBudget": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "utilizationPercent": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "hops": {
+        "type": "array"
+      },
+      "parallelGroups": {
+        "type": "object",
+        "properties": {
+          "pre": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "suggestions": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "mcp_config_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "servers": {
+        "type": "array"
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "rules": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "mcp_server_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "server": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "tools": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "approxContextTokens": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "recommendedAllowlist": {
+        "type": "array"
+      },
+      "verdict": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "migration_plan": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "strategy": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "constraints": {
+        "type": "array"
+      },
+      "phases": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      },
+      "integration": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "openapi_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "openapi": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "paths": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "operations": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "securitySchemes": {
+        "type": "array"
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "postmortem": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "timeToDetectMinutes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "timeToMitigateMinutes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "timeToResolveMinutes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "coverage": {
+        "type": "object",
+        "properties": {
+          "prevent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "detect": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "mitigate": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "process": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "warnings": {
+        "type": "array"
+      },
+      "markdown": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "prompt_injection_checklist": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "agent": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "paths": {
+        "type": "array"
+      },
+      "controls": {
+        "type": "array"
+      },
+      "blockers": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "queue_sizing": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "formulas": {
+        "type": "array"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "arrivalsPerSecond": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "serviceTimeMs": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "consumers": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "backlogMessages": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "targetUtilizationPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxConcurrencyPerConsumer": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "offeredLoadErlangs": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "totalCapacity": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "utilizationPercent": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "stable": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "waitProbability": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "meanInSystem": {},
+      "backlogDrainSeconds": {},
+      "consumersForTargetUtilization": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "visibilityTimeoutHintSeconds": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "warnings": {
+        "type": "array"
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "rag_pipeline_plan": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "useCase": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sizing": {
+        "type": "object",
+        "properties": {
+          "estimatedTokens": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "chunkTokens": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "overlapPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "estimatedChunks": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "vectorsAtDim1024Bytes": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "limitation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "stages": {
+        "type": "array"
+      },
+      "costDrivers": {
+        "type": "array"
+      },
+      "openQuestions": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "requirements_check": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "workload": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "requirements": {
+        "type": "array"
+      },
+      "constraints": {
+        "type": "array"
+      },
+      "decisionsToClarify": {
+        "type": "array"
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "retry_policy": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "baseDelayMs": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "factor": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "capMs": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxAttempts": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "jitter": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "deadlineMs": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "operationIdempotent": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "retriesAfterFirstAttempt": {
+        "type": "array"
+      },
+      "worstCaseWaitMs": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "attemptsThatFitDeadline": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "guidance": {
+        "type": "array"
+      },
+      "sources": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "runbook": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "missing": {
+        "type": "array"
+      },
+      "markdown": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "nextTools": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "sequence_diagram": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "mermaid": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "messages": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "service_compare": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "constraints": {
+        "type": "array"
+      },
+      "options": {
+        "type": "array"
+      },
+      "decisionRequired": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "service_equivalents": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "snapshotDate": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "from": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rows": {
+        "type": "array"
+      },
+      "categories": {
+        "type": "array"
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "slo_budget": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "availabilityPercent": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "periodDays": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "usedDowntimeMinutes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "allowedDowntimeMinutes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "remainingMinutes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "exhausted": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  },
+  "storage_growth": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "assumptions": {
+        "type": "object",
+        "properties": {
+          "dailyIngestGB": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "retentionDays": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "monthlyGrowthPercent": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "compressionRatio": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "replicationFactor": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "months": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "hotTierPricePerGBMonth": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "coldTierPricePerGBMonth": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "hotDays": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "steadyState": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "finalStoredGB": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "finalStoredTB": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "series": {
+        "type": "array"
+      },
+      "tiering": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "terraform_plan_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "terraformVersion": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "resources": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "actions": {
+        "type": "object",
+        "properties": {
+          "create": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "update": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "delete": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "replace": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "no-op": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "read": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "findings": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "high": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "info": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "gate": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "limitations": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "threat_model": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "assets": {
+        "type": "array"
+      },
+      "boundaries": {
+        "type": "array"
+      },
+      "dataClassification": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "threats": {
+        "type": "array"
+      }
+    },
+    "additionalProperties": true
+  },
+  "well_architected_review": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
+      "workload": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "controls": {
+        "type": "array"
+      },
+      "summary": {
+        "type": "object",
+        "properties": {
+          "met": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "gaps": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unknown": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "missingPillars": {
+        "type": "array"
+      },
+      "next": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  }
+}
