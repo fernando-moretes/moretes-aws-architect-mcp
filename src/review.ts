@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { tool, provenance } from './definition.js';
+import { reviewCloudIam, summarize } from './iac.js';
 type Finding = {severity:'high'|'medium'|'info'; path:string; message:string};
 function object(v:unknown):Record<string,unknown>{return v!==null&&typeof v==='object'&&!Array.isArray(v)?v as Record<string,unknown>:{};}
 function arr(v:unknown):unknown[]{return Array.isArray(v)?v:[v];}
@@ -17,7 +18,9 @@ export function reviewPolicy(policy:unknown):Finding[]{
   });return results;
 }
 export const reviewTools=[
-  tool('iam_policy_review','Inspect an IAM JSON document for broad Allow statements. Heuristic only; use IAM Access Analyzer for authoritative validation.',{policy:z.record(z.string(),z.unknown())},a=>({...provenance,findings:reviewPolicy(a.policy),sources:['https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html'],limitations:['No effective permission or condition evaluation','Cannot prove policy safety','No account calls or policy changes']})),
+  tool('iam_policy_review','Inspect an IAM document for broad grants: AWS policy JSON (default), Azure custom role definition or Google Cloud IAM policy bindings (provider). Heuristic only; the provider analyzers are authoritative.',{policy:z.record(z.string(),z.unknown()),provider:z.enum(['aws','azure','gcp']).default('aws')},a=>{
+    if(a.provider!=='aws'){const findings=reviewCloudIam(a.provider,a.policy);return {...provenance,provider:a.provider,findings,summary:summarize(findings),sources:a.provider==='azure'?['https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions']:['https://cloud.google.com/iam/docs/roles-overview'],limitations:['Static reading of one document; inherited assignments, deny policies, org policies and group membership are not visible',a.provider==='azure'?'Use Azure Policy, Entra PIM and access reviews for enforcement':'Use IAM Recommender, Policy Analyzer and Organization Policy for enforcement','Cannot prove least privilege']};}
+    return {...provenance,provider:'aws',findings:reviewPolicy(a.policy),sources:['https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html'],limitations:['No effective permission or condition evaluation','Cannot prove policy safety','No account calls or policy changes']};}),
   tool('cloudformation_review','Review a CloudFormation JSON template for selected risky configuration patterns. Intrinsic functions are flagged for human review.',{template:z.record(z.string(),z.unknown())},a=>{
     const resources=object(a.template.Resources);if(!Object.keys(resources).length)throw new Error('CloudFormation Resources is required');
     if(Object.keys(resources).length>200)throw new Error('Maximum 200 resources');

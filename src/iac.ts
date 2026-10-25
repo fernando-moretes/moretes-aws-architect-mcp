@@ -107,7 +107,48 @@ export function reviewKubernetesManifests(manifests: Record<string, unknown>[]):
   return findings;
 }
 
-const summarize = (f: Finding[]) => ({ high: f.filter(x => x.severity === 'high').length, medium: f.filter(x => x.severity === 'medium').length, info: f.filter(x => x.severity === 'info').length });
+
+/** Azure custom role definition (properties or flat) and GCP IAM policy bindings. */
+export function reviewCloudIam(provider: 'azure' | 'gcp', doc: Record<string, unknown>): Finding[] {
+  const findings: Finding[] = [];
+  if (provider === 'azure') {
+    const props = object(doc.properties ?? doc);
+    const perms = arr(props.permissions ?? [{ actions: props.Actions ?? props.actions, notActions: props.NotActions ?? props.notActions, dataActions: props.DataActions ?? props.dataActions }]).map(object);
+    const scopes = arr(props.assignableScopes ?? props.AssignableScopes).map(String);
+    if (!perms.length) throw new Error('Azure role definition needs permissions (actions/notActions/dataActions)');
+    perms.forEach((p, i) => {
+      const at = `permissions[${i}]`;
+      const actions = arr(p.actions ?? p.Actions).map(String), notActions = arr(p.notActions ?? p.NotActions).map(String), dataActions = arr(p.dataActions ?? p.DataActions).map(String);
+      if (actions.includes('*')) findings.push({ severity: 'high', target: at, message: notActions.length ? 'actions "*" with notActions grants everything except the exclusions; new resource providers are allowed automatically.' : 'actions "*" is Owner-equivalent control plane access.' });
+      for (const a of actions) if (a !== '*' && /\/\*$|\*\/(write|delete|action)$/i.test(a)) findings.push({ severity: 'medium', target: at, message: `Wildcard action ${a}; enumerate the operations the workload needs.` });
+      if (actions.some(a => /Microsoft\.Authorization\/(\*|roleAssignments\/write|roleDefinitions\/write)/i.test(a))) findings.push({ severity: 'high', target: at, message: 'Can create role assignments or definitions: privilege escalation path.' });
+      if (dataActions.includes('*')) findings.push({ severity: 'high', target: at, message: 'dataActions "*" reads and writes data in every data plane the role reaches.' });
+      if (actions.some(a => /listKeys|listkeys|regenerateKey/i.test(a))) findings.push({ severity: 'medium', target: at, message: 'Can list or regenerate access keys, which bypass RBAC on the data plane.' });
+    });
+    if (!scopes.length) findings.push({ severity: 'info', target: 'assignableScopes', message: 'No assignableScopes; the definition cannot be assigned and scope cannot be assessed.' });
+    for (const sc of scopes) if (sc === '/' || /^\/providers\/Microsoft\.Management\/managementGroups\//i.test(sc)) findings.push({ severity: 'medium', target: 'assignableScopes', message: `Broad assignable scope ${sc}; prefer subscription or resource group.` });
+  } else {
+    const bindings = arr(doc.bindings).map(object);
+    if (!bindings.length) throw new Error('GCP IAM policy needs bindings[] (gcloud ... get-iam-policy --format=json)');
+    bindings.forEach((b, i) => {
+      const role = String(b.role ?? ''), members = arr(b.members).map(String), at = `bindings[${i}] ${role}`;
+      if (/^roles\/(owner|editor)$/.test(role)) findings.push({ severity: 'high', target: at, message: 'Basic role (owner/editor) grants thousands of permissions; use predefined or custom roles.' });
+      else if (/\.admin$|^roles\/iam\.|securityAdmin/i.test(role)) findings.push({ severity: 'medium', target: at, message: 'Administrative role; confirm who needs it and add a condition or time bound.' });
+      if (/serviceAccountTokenCreator|serviceAccountUser|serviceAccountKeyAdmin|workloadIdentityUser/.test(role)) findings.push({ severity: 'high', target: at, message: 'Allows impersonating service accounts or minting their keys: privilege escalation path.' });
+      for (const m of members) {
+        if (m === 'allUsers' || m === 'allAuthenticatedUsers') findings.push({ severity: 'high', target: at, message: `${m} makes this binding public.` });
+        else if (/^domain:/.test(m)) findings.push({ severity: 'info', target: at, message: `Whole domain ${m.slice(7)} is a member; confirm the blast radius.` });
+        else if (/^user:.*@gmail\.com$/.test(m)) findings.push({ severity: 'medium', target: at, message: `Consumer account ${m} outside the organization's identity governance.` });
+        else if (/^deleted:/.test(m)) findings.push({ severity: 'info', target: at, message: `Stale member ${m}; remove it.` });
+      }
+      if (!b.condition && /admin|owner|editor|TokenCreator/i.test(role)) findings.push({ severity: 'info', target: at, message: 'No IAM condition on a privileged role; consider resource or time conditions.' });
+    });
+    if (!doc.etag) findings.push({ severity: 'info', target: 'etag', message: 'No etag; when writing the policy back, use the etag to avoid overwriting concurrent changes.' });
+  }
+  return findings;
+}
+
+export const summarize = (f: Finding[]) => ({ high: f.filter(x => x.severity === 'high').length, medium: f.filter(x => x.severity === 'medium').length, info: f.filter(x => x.severity === 'info').length });
 
 export const iacTools = [
   tool('terraform_plan_review',

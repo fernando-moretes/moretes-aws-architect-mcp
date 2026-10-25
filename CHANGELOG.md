@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 — 2026-10-25
+
+Trust and contracts release. Same 48 tools.
+
+- `iam_policy_review` gains `provider`: Azure custom role definitions (wildcard actions, notActions complements, dataActions, role-assignment escalation, key listing, broad scopes) and Google Cloud IAM bindings (basic roles, public members, service account impersonation, consumer accounts, missing conditions and etag).
+- `outputSchema` published for every calculation and review tool, inferred from the real outputs and tolerant by design; the SDK client validates `structuredContent` against it.
+- Contract tests: every `docs/examples` output must reproduce exactly; `docs/tools.lock.json` pins a sha256 of name, description and input schema per tool.
+- CI: contracts up to date, coverage summary; CodeQL (security-and-quality), Dependabot, CycloneDX SBOM artifact on each release; MCP Registry publication via OIDC.
+- README: one-click install for Cursor and VS Code, CI/CodeQL/Registry badges.
+
 ## 0.2.0 — 2026-10-24
 
 Cloud-agnostic workbench release. 48 public tools (was 24), 20 prompts, 18 resources, a pipeline CLI and a fairer public quota.

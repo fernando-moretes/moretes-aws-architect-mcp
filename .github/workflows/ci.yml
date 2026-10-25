@@ -20,4 +20,13 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Contracts are up to date (output schemas, tools lock)
+        run: |
+          node scripts/contracts.mjs
+          git diff --exit-code -- src/data/output-schemas.json docs/tools.lock.json
+      - name: Coverage summary
+        if: matrix.node == 22
+        run: |
+          npm run coverage 2>&1 | sed -n '/start of coverage report/,/end of coverage report/p' > coverage.txt
+          { echo '### Test coverage'; echo '```'; cat coverage.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - run: npm audit --omit=dev --audit-level=high

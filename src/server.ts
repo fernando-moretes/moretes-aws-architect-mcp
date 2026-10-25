@@ -13,6 +13,8 @@ import { aiTools } from './ai.js';
 import { iacTools } from './iac.js';
 import { personaTools, PERSONAS, personaPrompt } from './personas.js';
 import skillsData from './data/skills.json' with { type: 'json' };
+import outputSchemas from './data/output-schemas.json' with { type: 'json' };
+const OUTPUT_SCHEMAS = outputSchemas as Record<string, { type: 'object'; [k: string]: unknown }>;
 import type { Definition } from './definition.js';
 import { VERSION } from './version.js';
 export { VERSION } from './version.js';
@@ -75,6 +77,7 @@ export function createServer(local = false) {
       name: t.name,
       description: t.description,
       inputSchema: z.toJSONSchema(t.schema) as { type: 'object' },
+      ...(OUTPUT_SCHEMAS[t.name] ? { outputSchema: OUTPUT_SCHEMAS[t.name] } : {}),
       annotations: { readOnlyHint: !t.mutating, destructiveHint: !!t.mutating, idempotentHint: !t.mutating, openWorldHint: t.external }
     }))
   }));

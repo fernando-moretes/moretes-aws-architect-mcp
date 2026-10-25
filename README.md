@@ -6,8 +6,11 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml/badge.svg"></a>
+  <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.fernando-moretes/moretes-aws-architect-mcp"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-listado-ff9900"></a>
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff9900"></a>
-  <img alt="Versão 0.2.0" src="https://img.shields.io/badge/vers%C3%A3o-0.2.0-0f1b2d">
+  <img alt="Versão 0.3.0" src="https://img.shields.io/badge/vers%C3%A3o-0.3.0-0f1b2d">
   <img alt="48 ferramentas" src="https://img.shields.io/badge/ferramentas-48-0f1b2d">
   <img alt="Sem chamadas a modelo" src="https://img.shields.io/badge/chamadas%20a%20modelo-0-10b981">
   <img alt="Sem chave de API" src="https://img.shields.io/badge/chave%20de%20API-nenhuma-10b981">
@@ -55,6 +58,11 @@ Feito por [Fernando Azevedo](https://fernando.moretes.com), Arquiteto de Tecnolo
 > Os GIFs são trechos dos vídeos do [curso gratuito](https://fernando.moretes.com/courses/mcp-architect-workbench), narrados na minha voz, com as chamadas e as respostas reais do servidor. Os JSON completos estão em [docs/examples](docs/examples).
 
 ## Conecte em 30 segundos
+
+<p>
+  <a href="https://cursor.com/en/install-mcp?name=moretes-architect&config=eyJ1cmwiOiJodHRwczovL205b2QzN3ZtNDEuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbWNwIn0="><img alt="Instalar no Cursor" src="https://img.shields.io/badge/Cursor-instalar%20em%20um%20clique-0f1b2d?logo=cursor"></a>
+  <a href="https://insiders.vscode.dev/redirect/mcp/install?name=moretes-architect&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fm9od37vm41.execute-api.us-east-1.amazonaws.com%2Fmcp%22%7D"><img alt="Instalar no VS Code" src="https://img.shields.io/badge/VS%20Code-instalar%20em%20um%20clique-007ACC?logo=visualstudiocode"></a>
+</p>
 
 Sem chave, sem cadastro:
 
@@ -130,6 +138,8 @@ Depois de conectar, peça ao agente:
 | **Revisão de IaC** | `iam_policy_review`, `cloudformation_review`, `terraform_plan_review`, `kubernetes_manifest_review` | Plano Terraform/OpenTofu em JSON, CloudFormation, manifestos Kubernetes, políticas IAM |
 | **AWS Knowledge ao vivo** | `aws_knowledge_search`, `aws_knowledge_read`, `aws_regions`, `aws_regional_availability`, `aws_skill` | Documentação oficial atual, regiões e disponibilidade, pelo MCP oficial da AWS |
 | **Integrações oficiais e GitHub** | `integration_catalog`, `integration_config`, `github_public_repository` | Catálogo dos 61 servidores oficiais awslabs com versão fixada; metadados públicos de repositórios |
+
+`iam_policy_review` lê política IAM da AWS, role definition do Azure e bindings do Google Cloud (`provider`). Toda ferramenta de cálculo e revisão publica `outputSchema`, e o cliente valida a saída.
 
 Mais **20 prompts** (10 fluxos e um `architect_<papel>` por persona), **18 resources** (`moretes://guide`, `moretes://boundaries`, `moretes://tools`, `moretes://personas/<id>`, `moretes://skills/<id>`) e, só no modo local, **5 ferramentas opcionais** de conta AWS e federação com os servidores oficiais.
 
@@ -283,7 +293,7 @@ npm run smoke -- https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp   # 
 node scripts/examples.mjs    # regenera docs/examples com as saídas reais
 ```
 
-37 testes offline cobrem protocolo, cálculos, revisões, isolamento entre público e local, limites de entrada e federação. CI em Node 22 e 24.
+41 testes offline, 99% das linhas cobertas, cobrem protocolo, cálculos, revisões, isolamento entre público e local, limites de entrada e federação. CI em Node 22 e 24, CodeQL, Dependabot e SBOM CycloneDX a cada release. Cada saída documentada em `docs/examples` é um teste: se uma ferramenta mudar de comportamento, o CI acusa. `docs/tools.lock.json` guarda o hash do nome, da descrição e do schema de cada ferramenta, então qualquer mudança no que o modelo do cliente lê aparece no diff.
 
 ## Contribua
 

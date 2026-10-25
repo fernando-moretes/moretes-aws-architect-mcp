@@ -34,6 +34,7 @@
     "sources": [
       "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
     ],
+    "provider": "aws",
     "findings": [
       {
         "severity": "high",

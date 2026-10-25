@@ -121,3 +121,11 @@ test('agent tools produce plans with gates and blockers',async()=>{
  const rag=await run('rag_pipeline_plan',{useCase:'internal policy Q&A',corpus:{documents:1000,averagePages:10,formats:['pdf','tables'],updateFrequency:'daily'},authorization:'per-document-acl'});
  assert.equal((rag.sizing as {estimatedChunks:number}).estimatedChunks,Math.ceil(1000*10*500/400*1.15));
 });
+test('iam_policy_review covers Azure role definitions and GCP bindings',async()=>{
+ const az=await run('iam_policy_review',{provider:'azure',policy:{properties:{permissions:[{actions:['*'],notActions:['Microsoft.Authorization/*/Delete'],dataActions:['*']}],assignableScopes:['/']}}});
+ const am=findings(az).map(f=>f.message).join('|');for(const s of ['notActions grants everything','dataActions "*"','Broad assignable scope'])assert.ok(am.includes(s),s);
+ const gcp=await run('iam_policy_review',{provider:'gcp',policy:{bindings:[{role:'roles/editor',members:['user:dev@gmail.com']},{role:'roles/storage.objectViewer',members:['allUsers']},{role:'roles/iam.serviceAccountTokenCreator',members:['group:ops@example.com']}]}});
+ const gm=findings(gcp).map(f=>f.message).join('|');for(const s of ['Basic role','public','impersonating','Consumer account','etag'])assert.ok(gm.includes(s),s);
+ await assert.rejects(run('iam_policy_review',{provider:'gcp',policy:{}}),/bindings/);
+ const aws=await run('iam_policy_review',{policy:{Statement:{Effect:'Allow',Action:'*',Resource:'*'}}});assert.equal(aws.provider,'aws');
+});

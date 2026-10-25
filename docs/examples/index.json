@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T01:22:36.203Z",
+  "generatedAt": "2026-10-25T18:20:45.666Z",
   "note": "Real outputs of dist/ tools for the arguments shown in each file. Regenerate with node scripts/examples.mjs after changing a tool.",
   "examples": [
     {
