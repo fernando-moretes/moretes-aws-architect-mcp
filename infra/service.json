@@ -112,7 +112,10 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": "dynamodb:UpdateItem",
+                  "Action": [
+                    "dynamodb:UpdateItem",
+                    "dynamodb:BatchGetItem"
+                  ],
                   "Resource": {
                     "Fn::GetAtt": [
                       "Quota",
