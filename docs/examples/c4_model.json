@@ -1,0 +1,94 @@
+{
+  "tool": "c4_model",
+  "arguments": {
+    "level": "container",
+    "system": "Orders platform",
+    "people": [
+      {
+        "id": "buyer",
+        "name": "Buyer",
+        "description": "Places and tracks orders"
+      }
+    ],
+    "externalSystems": [
+      {
+        "id": "psp",
+        "name": "Payment provider",
+        "technology": "REST + webhooks"
+      }
+    ],
+    "containers": [
+      {
+        "id": "web",
+        "name": "Storefront",
+        "technology": "Next.js"
+      },
+      {
+        "id": "api",
+        "name": "Orders API",
+        "technology": "Node.js on Fargate"
+      },
+      {
+        "id": "db",
+        "name": "Orders DB",
+        "technology": "PostgreSQL"
+      },
+      {
+        "id": "bus",
+        "name": "Order events",
+        "technology": "EventBridge"
+      }
+    ],
+    "relations": [
+      {
+        "from": "buyer",
+        "to": "web",
+        "label": "uses"
+      },
+      {
+        "from": "web",
+        "to": "api",
+        "label": "calls",
+        "technology": "HTTPS/JSON"
+      },
+      {
+        "from": "api",
+        "to": "db",
+        "label": "reads and writes"
+      },
+      {
+        "from": "api",
+        "to": "psp",
+        "label": "authorizes payment"
+      },
+      {
+        "from": "psp",
+        "to": "api",
+        "label": "webhook: payment captured"
+      },
+      {
+        "from": "api",
+        "to": "bus",
+        "label": "publishes OrderPlaced"
+      }
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Logical model supplied by the caller. C4 notation: https://c4model.com/",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "level": "container",
+    "mermaid": "flowchart TB\n  buyer([\"Buyer<br/>Places and tracks orders\"])\n  subgraph system_Orders_platform[\"Orders platform\"]\n    web[\"Storefront [Next.js]\"]\n    api[\"Orders API [Node.js on Fargate]\"]\n    db[\"Orders DB [PostgreSQL]\"]\n    bus[\"Order events [EventBridge]\"]\n  end\n  psp[[\"Payment provider [REST + webhooks]\"]]\n  buyer -->|\"uses\"| web\n  web -->|\"calls (HTTPS/JSON)\"| api\n  api -->|\"reads and writes\"| db\n  api -->|\"authorizes payment\"| psp\n  psp -->|\"webhook: payment captured\"| api\n  api -->|\"publishes OrderPlaced\"| bus\n  classDef person fill:#1f3b63,stroke:#5b9bd5,color:#fff\n  class buyer person\n  classDef external fill:#4a4a4a,stroke:#9a9a9a,color:#fff\n  class psp external",
+    "elements": {
+      "people": 1,
+      "externalSystems": 1,
+      "containers": 4,
+      "relations": 6
+    },
+    "unreferenced": [],
+    "nextLevel": "Describe components per container in architecture_diagram or sequence_diagram."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "tool": "architecture_diagram",
+  "arguments": {
+    "nodes": [
+      {
+        "id": "web",
+        "label": "Storefront"
+      },
+      {
+        "id": "api",
+        "label": "Orders API"
+      },
+      {
+        "id": "q",
+        "label": "OrderPlaced queue"
+      },
+      {
+        "id": "bill",
+        "label": "Billing"
+      },
+      {
+        "id": "inv",
+        "label": "Inventory"
+      }
+    ],
+    "edges": [
+      {
+        "from": "web",
+        "to": "api",
+        "label": "HTTPS"
+      },
+      {
+        "from": "api",
+        "to": "q",
+        "label": "publish"
+      },
+      {
+        "from": "q",
+        "to": "bill"
+      },
+      {
+        "from": "q",
+        "to": "inv"
+      }
+    ]
+  },
+  "result": {
+    "mermaid": "flowchart LR\n  web[\"Storefront\"]\n  api[\"Orders API\"]\n  q[\"OrderPlaced queue\"]\n  bill[\"Billing\"]\n  inv[\"Inventory\"]\n  web -->|\"HTTPS\"| api\n  api -->|\"publish\"| q\n  q --> bill\n  q --> inv",
+    "limitation": "Logical diagram supplied by caller; not discovered infrastructure."
+  }
+}

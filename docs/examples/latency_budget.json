@@ -1,0 +1,114 @@
+{
+  "tool": "latency_budget",
+  "arguments": {
+    "targetMs": 2000,
+    "percentile": "p95",
+    "hops": [
+      {
+        "name": "TLS + gateway",
+        "estimatedMs": 60
+      },
+      {
+        "name": "auth token validation",
+        "estimatedMs": 40,
+        "cacheable": true
+      },
+      {
+        "name": "inventory check",
+        "estimatedMs": 120,
+        "parallelGroup": "pre"
+      },
+      {
+        "name": "fraud score",
+        "estimatedMs": 350,
+        "parallelGroup": "pre"
+      },
+      {
+        "name": "payment authorization",
+        "estimatedMs": 900
+      },
+      {
+        "name": "write order",
+        "estimatedMs": 80
+      },
+      {
+        "name": "publish event",
+        "estimatedMs": 30
+      }
+    ]
+  },
+  "result": {
+    "kind": "calculation",
+    "percentile": "p95",
+    "targetMs": 2000,
+    "estimatedTotalMs": 1460,
+    "remainingMs": 540,
+    "withinBudget": true,
+    "utilizationPercent": 73,
+    "hops": [
+      {
+        "name": "payment authorization",
+        "estimatedMs": 900,
+        "cacheable": false,
+        "sharePercent": 61.6,
+        "overEqualShare": true
+      },
+      {
+        "name": "fraud score",
+        "estimatedMs": 350,
+        "parallelGroup": "pre",
+        "cacheable": false,
+        "sharePercent": 24,
+        "overEqualShare": true
+      },
+      {
+        "name": "inventory check",
+        "estimatedMs": 120,
+        "parallelGroup": "pre",
+        "cacheable": false,
+        "sharePercent": 8.2,
+        "overEqualShare": false
+      },
+      {
+        "name": "write order",
+        "estimatedMs": 80,
+        "cacheable": false,
+        "sharePercent": 5.5,
+        "overEqualShare": false
+      },
+      {
+        "name": "TLS + gateway",
+        "estimatedMs": 60,
+        "cacheable": false,
+        "sharePercent": 4.1,
+        "overEqualShare": false
+      },
+      {
+        "name": "auth token validation",
+        "estimatedMs": 40,
+        "cacheable": true,
+        "sharePercent": 2.7,
+        "overEqualShare": false
+      },
+      {
+        "name": "publish event",
+        "estimatedMs": 30,
+        "cacheable": false,
+        "sharePercent": 2.1,
+        "overEqualShare": false
+      }
+    ],
+    "parallelGroups": {
+      "pre": {
+        "criticalPathMs": 350
+      }
+    },
+    "suggestions": [
+      "More than six serial hops; consider aggregating calls or an async path"
+    ],
+    "limitations": [
+      "Percentiles do not add linearly; summing p95 values overestimates the end-to-end p95 and is used here as a conservative budget",
+      "Queueing, retries and cold starts are excluded unless modeled as hops"
+    ]
+  }
+}

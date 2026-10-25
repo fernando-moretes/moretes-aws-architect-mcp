@@ -1,0 +1,157 @@
+{
+  "tool": "dr_strategy",
+  "arguments": {
+    "workload": "Orders platform",
+    "rtoMinutes": 60,
+    "rpoMinutes": 5,
+    "dataGB": 120,
+    "replicationBandwidthMbps": 200,
+    "regulatoryResidency": "Brazil",
+    "statefulComponents": [
+      "Orders DB (PostgreSQL)",
+      "Order events queue",
+      "Object storage for invoices"
+    ]
+  },
+  "result": {
+    "kind": "decision-table",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    ],
+    "workload": "Orders platform",
+    "objectives": {
+      "rtoMinutes": 60,
+      "rpoMinutes": 5
+    },
+    "tiers": [
+      {
+        "tier": "backup-and-restore",
+        "rtoHours": [
+          4,
+          72
+        ],
+        "rpoHours": [
+          1,
+          24
+        ],
+        "relativeCost": "lowest",
+        "requires": [
+          "Automated, tested backups in the recovery region",
+          "IaC that recreates the stack from zero",
+          "Documented restore order and data validation"
+        ],
+        "meetsRto": false,
+        "meetsRpo": false,
+        "feasible": false,
+        "typicalRtoHours": [
+          4,
+          72
+        ],
+        "typicalRpoHours": [
+          1,
+          24
+        ]
+      },
+      {
+        "tier": "pilot-light",
+        "rtoHours": [
+          0.5,
+          4
+        ],
+        "rpoHours": [
+          0.1,
+          1
+        ],
+        "relativeCost": "low",
+        "requires": [
+          "Continuous data replication",
+          "Core infrastructure provisioned but scaled to zero",
+          "Scripted scale-up and DNS or traffic switch"
+        ],
+        "meetsRto": true,
+        "meetsRpo": false,
+        "feasible": false,
+        "typicalRtoHours": [
+          0.5,
+          4
+        ],
+        "typicalRpoHours": [
+          0.1,
+          1
+        ]
+      },
+      {
+        "tier": "warm-standby",
+        "rtoHours": [
+          0.1,
+          0.5
+        ],
+        "rpoHours": [
+          0.01,
+          0.1
+        ],
+        "relativeCost": "medium",
+        "requires": [
+          "Scaled-down full copy serving synthetic traffic",
+          "Health-based failover with a tested runbook",
+          "Capacity to scale to production within RTO"
+        ],
+        "meetsRto": true,
+        "meetsRpo": true,
+        "feasible": true,
+        "typicalRtoHours": [
+          0.1,
+          0.5
+        ],
+        "typicalRpoHours": [
+          0.01,
+          0.1
+        ]
+      },
+      {
+        "tier": "multi-site-active-active",
+        "rtoHours": [
+          0,
+          0.05
+        ],
+        "rpoHours": [
+          0,
+          0.01
+        ],
+        "relativeCost": "highest",
+        "requires": [
+          "Active traffic in every region",
+          "Conflict-free or partitioned data model",
+          "Regional isolation of failures and deploys"
+        ],
+        "meetsRto": true,
+        "meetsRpo": true,
+        "feasible": true,
+        "typicalRtoHours": [
+          0,
+          0.05
+        ],
+        "typicalRpoHours": [
+          0,
+          0.01
+        ]
+      }
+    ],
+    "recommendedStartingPoint": "warm-standby: the lowest-cost tier whose typical range covers the objectives; confirm with a timed rehearsal",
+    "initialFullCopyHours": 1.37,
+    "checks": [
+      "Rehearse the failover end to end and measure real RTO; typical ranges are not evidence",
+      "RPO is bounded by replication lag, not by the backup schedule alone",
+      "Each stateful component needs its own replication and consistency plan: Orders DB (PostgreSQL), Order events queue, Object storage for invoices",
+      "Recovery region must satisfy residency: Brazil",
+      "Dependencies (identity, DNS, secrets, CI/CD) must also exist in the recovery region"
+    ],
+    "nextTools": [
+      "failure_rehearsal",
+      "cost_model",
+      "decision_record"
+    ]
+  }
+}

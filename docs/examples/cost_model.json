@@ -1,0 +1,76 @@
+{
+  "tool": "cost_model",
+  "arguments": {
+    "currency": "USD",
+    "items": [
+      {
+        "name": "Fargate vCPU-hours",
+        "quantity": 1460,
+        "unit": "vCPU-hour",
+        "pricePerUnit": 0.04048,
+        "source": "https://aws.amazon.com/fargate/pricing/",
+        "priceDate": "2026-10-20"
+      },
+      {
+        "name": "Fargate GB-hours",
+        "quantity": 2920,
+        "unit": "GB-hour",
+        "pricePerUnit": 0.004445,
+        "source": "https://aws.amazon.com/fargate/pricing/",
+        "priceDate": "2026-10-20"
+      },
+      {
+        "name": "RDS db.t4g.medium",
+        "quantity": 730,
+        "unit": "hour",
+        "pricePerUnit": 0.065,
+        "source": "https://aws.amazon.com/rds/postgresql/pricing/",
+        "priceDate": "2026-10-20"
+      }
+    ],
+    "contingencyPercent": 20
+  },
+  "result": {
+    "kind": "scenario-not-quote",
+    "currency": "USD",
+    "items": [
+      {
+        "name": "Fargate vCPU-hours",
+        "quantity": 1460,
+        "unit": "vCPU-hour",
+        "pricePerUnit": 0.04048,
+        "source": "https://aws.amazon.com/fargate/pricing/",
+        "priceDate": "2026-10-20",
+        "subtotal": 59.1008
+      },
+      {
+        "name": "Fargate GB-hours",
+        "quantity": 2920,
+        "unit": "GB-hour",
+        "pricePerUnit": 0.004445,
+        "source": "https://aws.amazon.com/fargate/pricing/",
+        "priceDate": "2026-10-20",
+        "subtotal": 12.9794
+      },
+      {
+        "name": "RDS db.t4g.medium",
+        "quantity": 730,
+        "unit": "hour",
+        "pricePerUnit": 0.065,
+        "source": "https://aws.amazon.com/rds/postgresql/pricing/",
+        "priceDate": "2026-10-20",
+        "subtotal": 47.45
+      }
+    ],
+    "subtotal": 119.53020000000001,
+    "totalWithContingency": 143.43624,
+    "contingencyPercent": 20,
+    "excluded": [
+      "Taxes",
+      "Exchange rate",
+      "Unlisted data transfer, logs and support",
+      "Credits, discounts and free tiers unless explicitly modeled"
+    ],
+    "creditWarning": "Credits depend on your billing eligibility and expiration; budgets are not hard spending caps."
+  }
+}

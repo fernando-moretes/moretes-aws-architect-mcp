@@ -1,0 +1,169 @@
+{
+  "tool": "openapi_review",
+  "arguments": {
+    "document": {
+      "openapi": "3.1.0",
+      "info": {
+        "title": "Orders API",
+        "version": "1.0.0"
+      },
+      "servers": [
+        {
+          "url": "https://api.example.com/v1"
+        }
+      ],
+      "components": {
+        "securitySchemes": {
+          "bearer": {
+            "type": "http",
+            "scheme": "bearer"
+          }
+        }
+      },
+      "security": [
+        {
+          "bearer": []
+        }
+      ],
+      "paths": {
+        "/orders": {
+          "get": {
+            "operationId": "listOrders",
+            "responses": {
+              "200": {
+                "description": "ok"
+              }
+            }
+          },
+          "post": {
+            "operationId": "createOrder",
+            "requestBody": {
+              "content": {
+                "application/json": {}
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "created"
+              },
+              "400": {
+                "description": "invalid"
+              }
+            }
+          }
+        },
+        "/orders/{id}": {
+          "get": {
+            "operationId": "getOrder",
+            "responses": {
+              "200": {
+                "description": "ok"
+              },
+              "404": {
+                "description": "not found"
+              }
+            }
+          },
+          "delete": {
+            "operationId": "cancelOrder",
+            "responses": {
+              "204": {
+                "description": "cancelled"
+              },
+              "404": {
+                "description": "not found"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "result": {
+    "kind": "openapi-heuristic-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://spec.openapis.org/oas/v3.1.0",
+      "https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header"
+    ],
+    "openapi": "3.1.0",
+    "paths": 2,
+    "operations": 4,
+    "securitySchemes": [
+      "bearer"
+    ],
+    "findings": [
+      {
+        "severity": "medium",
+        "path": "GET /orders",
+        "message": "No 4xx or default error response documented."
+      },
+      {
+        "severity": "info",
+        "path": "GET /orders",
+        "message": "No 429 response; document rate limiting behavior."
+      },
+      {
+        "severity": "medium",
+        "path": "GET /orders",
+        "message": "Collection GET without pagination parameters; unbounded responses grow with data."
+      },
+      {
+        "severity": "info",
+        "path": "GET /orders",
+        "message": "No summary or description."
+      },
+      {
+        "severity": "info",
+        "path": "POST /orders",
+        "message": "No 429 response; document rate limiting behavior."
+      },
+      {
+        "severity": "info",
+        "path": "POST /orders",
+        "message": "POST without an Idempotency-Key header; retries may duplicate side effects."
+      },
+      {
+        "severity": "info",
+        "path": "POST /orders",
+        "message": "No summary or description."
+      },
+      {
+        "severity": "info",
+        "path": "GET /orders/{id}",
+        "message": "No 429 response; document rate limiting behavior."
+      },
+      {
+        "severity": "info",
+        "path": "GET /orders/{id}",
+        "message": "No summary or description."
+      },
+      {
+        "severity": "info",
+        "path": "DELETE /orders/{id}",
+        "message": "No 429 response; document rate limiting behavior."
+      },
+      {
+        "severity": "info",
+        "path": "DELETE /orders/{id}",
+        "message": "Mutation without If-Match/ETag or 409/412; concurrent writes can overwrite each other silently."
+      },
+      {
+        "severity": "info",
+        "path": "DELETE /orders/{id}",
+        "message": "No summary or description."
+      }
+    ],
+    "summary": {
+      "high": 0,
+      "medium": 2,
+      "info": 10
+    },
+    "limitations": [
+      "Static subset of checks; use Spectral or vendor linters for style rules",
+      "Cannot evaluate authorization logic or runtime behavior",
+      "Empty findings is not an API approval"
+    ]
+  }
+}

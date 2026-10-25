@@ -1,0 +1,69 @@
+{
+  "tool": "sequence_diagram",
+  "arguments": {
+    "title": "Place order with idempotency",
+    "participants": [
+      {
+        "id": "web",
+        "label": "Storefront"
+      },
+      {
+        "id": "api",
+        "label": "Orders API"
+      },
+      {
+        "id": "db",
+        "label": "Orders DB"
+      },
+      {
+        "id": "psp",
+        "label": "Payment provider"
+      }
+    ],
+    "messages": [
+      {
+        "from": "web",
+        "to": "api",
+        "text": "POST /orders (Idempotency-Key)",
+        "activate": true
+      },
+      {
+        "from": "api",
+        "to": "db",
+        "text": "INSERT order status=pending"
+      },
+      {
+        "from": "api",
+        "to": "psp",
+        "text": "authorize(amount, orderId)"
+      },
+      {
+        "from": "psp",
+        "to": "api",
+        "text": "authorized",
+        "style": "reply"
+      },
+      {
+        "from": "api",
+        "to": "db",
+        "text": "UPDATE status=authorized"
+      },
+      {
+        "from": "api",
+        "to": "web",
+        "text": "201 Created",
+        "style": "reply"
+      }
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Illustrates the intended interaction; it is not a trace of a real system.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "mermaid": "sequenceDiagram\n  title Place order with idempotency\n  autonumber\n  participant web as Storefront\n  participant api as Orders API\n  participant db as Orders DB\n  participant psp as Payment provider\n  web->>api: POST /orders (Idempotency-Key)\n  activate api\n  api->>db: INSERT order status=pending\n  api->>psp: authorize(amount, orderId)\n  psp-->>api: authorized\n  api->>db: UPDATE status=authorized\n  api-->>web: 201 Created\n  deactivate api",
+    "messages": 6
+  }
+}

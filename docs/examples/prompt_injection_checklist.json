@@ -1,0 +1,141 @@
+{
+  "tool": "prompt_injection_checklist",
+  "arguments": {
+    "agent": "Order support agent",
+    "untrustedSources": [
+      "emails",
+      "documents",
+      "tool-results"
+    ],
+    "tools": [
+      {
+        "name": "get_order",
+        "mutating": false
+      },
+      {
+        "name": "issue_refund",
+        "mutating": true
+      },
+      {
+        "name": "send_email",
+        "mutating": true,
+        "external": true
+      }
+    ],
+    "humanInLoop": true
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "https://modelcontextprotocol.io/specification/draft/basic/security_best_practices"
+    ],
+    "agent": "Order support agent",
+    "paths": [
+      {
+        "source": "emails",
+        "risk": "Instructions embedded in content the agent reads"
+      },
+      {
+        "source": "documents",
+        "risk": "Instructions embedded in content the agent reads"
+      },
+      {
+        "source": "tool-results",
+        "risk": "Instructions embedded in results of trusted tools"
+      }
+    ],
+    "controls": [
+      {
+        "id": "C1",
+        "control": "Separate instructions from data: wrap every untrusted source in delimiters and label it as data in the prompt",
+        "covers": [
+          "emails",
+          "documents",
+          "tool-results"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C2",
+        "control": "Allowlist tools per task; the model cannot discover or call tools outside the allowlist",
+        "covers": [
+          "get_order",
+          "issue_refund",
+          "send_email"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C3",
+        "control": "Per-operation approval for mutating tools (issue_refund, send_email)",
+        "covers": [
+          "issue_refund",
+          "send_email"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C4",
+        "control": "Bind authorization to operation + resource + input digest; model output is never authorization",
+        "covers": [
+          "issue_refund",
+          "send_email"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C5",
+        "control": "Egress allowlist for tools that reach the network (send_email); block arbitrary URLs",
+        "covers": [
+          "send_email"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C6",
+        "control": "Output filtering: scan answers and tool arguments for secrets, canary tokens and URLs not present in sources",
+        "covers": [
+          "answers",
+          "tool arguments"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C7",
+        "control": "Canary strings in private data; alert if they appear in outbound calls",
+        "covers": [
+          "data-leak"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C8",
+        "control": "Bounded steps, tokens and cost per task; stop on loops",
+        "covers": [
+          "cost-runaway"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C9",
+        "control": "Log tool name, argument digest and outcome; never raw private prompts",
+        "covers": [
+          "audit"
+        ],
+        "status": "to-verify"
+      },
+      {
+        "id": "C10",
+        "control": "Adversarial eval set re-run on every change (agent_eval_plan)",
+        "covers": [
+          "regression"
+        ],
+        "status": "to-verify"
+      }
+    ],
+    "blockers": []
+  }
+}

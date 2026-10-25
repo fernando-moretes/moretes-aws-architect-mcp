@@ -1,7 +1,7 @@
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 const url=process.argv[2];if(!url)throw new Error('Usage: npm run smoke -- https://endpoint/mcp');
-const c=new Client({name:'moretes-smoke',version:'0.1.0'});
+const c=new Client({name:'moretes-smoke',version:'0.2.0'});
 try{
  await c.connect(new StreamableHTTPClientTransport(new URL(url)));
  const tools=await c.listTools();

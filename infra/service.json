@@ -1,29 +1,432 @@
 {
- "AWSTemplateFormatVersion":"2010-09-09",
- "Description":"Public Moretes AWS Architect MCP: no account resource access or model invocation",
- "Parameters":{
-  "ArtifactBucket":{"Type":"String"},"ArtifactKey":{"Type":"String"},
-  "DailyRequestLimit":{"Type":"Number","Default":1000,"MinValue":10,"MaxValue":10000},
-  "AlertEmail":{"Type":"String"},
-  "MonthlyBudget":{"Type":"Number","Default":30,"MinValue":1,"MaxValue":30}
- },
- "Resources":{
-  "Quota":{"Type":"AWS::DynamoDB::Table","Properties":{"BillingMode":"PAY_PER_REQUEST","AttributeDefinitions":[{"AttributeName":"pk","AttributeType":"S"}],"KeySchema":[{"AttributeName":"pk","KeyType":"HASH"}],"TimeToLiveSpecification":{"AttributeName":"expiresAt","Enabled":true},"SSESpecification":{"SSEEnabled":true},"Tags":[{"Key":"Project","Value":"moretes-aws-architect-mcp"}]}},
-  "Logs":{"Type":"AWS::Logs::LogGroup","Properties":{"LogGroupName":"/aws/lambda/moretes-aws-architect-mcp","RetentionInDays":7,"Tags":[{"Key":"Project","Value":"moretes-aws-architect-mcp"}]}},
-  "ExecutionRole":{"Type":"AWS::IAM::Role","Properties":{"AssumeRolePolicyDocument":{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}]},"Policies":[{"PolicyName":"OwnLogsAndQuotaOnly","PolicyDocument":{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["logs:CreateLogStream","logs:PutLogEvents"],"Resource":{"Fn::GetAtt":["Logs","Arn"]}},{"Effect":"Allow","Action":"dynamodb:UpdateItem","Resource":{"Fn::GetAtt":["Quota","Arn"]}}]}}],"Tags":[{"Key":"Project","Value":"moretes-aws-architect-mcp"}]}},
-  "Function":{"Type":"AWS::Lambda::Function","Properties":{"FunctionName":"moretes-aws-architect-mcp","Runtime":"nodejs22.x","Architectures":["arm64"],"Handler":"index.handler","Role":{"Fn::GetAtt":["ExecutionRole","Arn"]},"MemorySize":256,"Timeout":25,"Code":{"S3Bucket":{"Ref":"ArtifactBucket"},"S3Key":{"Ref":"ArtifactKey"}},"Environment":{"Variables":{"QUOTA_TABLE":{"Ref":"Quota"},"DAILY_REQUEST_LIMIT":{"Ref":"DailyRequestLimit"},"SERVICE_ENABLED":"true","PUBLIC_MCP_URL":{"Fn::Sub":"https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"},"ENABLE_AWS_ACCOUNT_TOOLS":"false"}},"Tags":[{"Key":"Project","Value":"moretes-aws-architect-mcp"}]}},
-  "Api":{"Type":"AWS::ApiGatewayV2::Api","Properties":{"Name":"moretes-aws-architect-mcp","ProtocolType":"HTTP","Tags":{"Project":"moretes-aws-architect-mcp"}}},
-  "Integration":{"Type":"AWS::ApiGatewayV2::Integration","Properties":{"ApiId":{"Ref":"Api"},"IntegrationType":"AWS_PROXY","IntegrationUri":{"Fn::GetAtt":["Function","Arn"]},"PayloadFormatVersion":"2.0","TimeoutInMillis":29000}},
-  "McpRoute":{"Type":"AWS::ApiGatewayV2::Route","Properties":{"ApiId":{"Ref":"Api"},"RouteKey":"ANY /mcp","Target":{"Fn::Join":["/",["integrations",{"Ref":"Integration"}]]}}},
-  "HealthRoute":{"Type":"AWS::ApiGatewayV2::Route","Properties":{"ApiId":{"Ref":"Api"},"RouteKey":"GET /health","Target":{"Fn::Join":["/",["integrations",{"Ref":"Integration"}]]}}},
-  "HomeRoute":{"Type":"AWS::ApiGatewayV2::Route","Properties":{"ApiId":{"Ref":"Api"},"RouteKey":"GET /","Target":{"Fn::Join":["/",["integrations",{"Ref":"Integration"}]]}}},
-  "Stage":{"Type":"AWS::ApiGatewayV2::Stage","Properties":{"ApiId":{"Ref":"Api"},"StageName":"$default","AutoDeploy":true,"DefaultRouteSettings":{"ThrottlingBurstLimit":5,"ThrottlingRateLimit":1},"Tags":{"Project":"moretes-aws-architect-mcp"}}},
-  "InvokePermission":{"Type":"AWS::Lambda::Permission","Properties":{"Action":"lambda:InvokeFunction","FunctionName":{"Ref":"Function"},"Principal":"apigateway.amazonaws.com","SourceAccount":{"Ref":"AWS::AccountId"},"SourceArn":{"Fn::Sub":"arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*"}}},
-  "Budget":{"Type":"AWS::Budgets::Budget","Properties":{"Budget":{"BudgetName":"moretes-architect-mcp-gross-cost","BudgetType":"COST","TimeUnit":"MONTHLY","BudgetLimit":{"Amount":{"Ref":"MonthlyBudget"},"Unit":"USD"},"CostTypes":{"IncludeCredit":false,"IncludeRefund":false},"CostFilters":{"TagKeyValue":["user:Project$moretes-aws-architect-mcp"]}},"NotificationsWithSubscribers":[{"Notification":{"NotificationType":"ACTUAL","ComparisonOperator":"GREATER_THAN","Threshold":50,"ThresholdType":"PERCENTAGE"},"Subscribers":[{"SubscriptionType":"EMAIL","Address":{"Ref":"AlertEmail"}}]},{"Notification":{"NotificationType":"ACTUAL","ComparisonOperator":"GREATER_THAN","Threshold":80,"ThresholdType":"PERCENTAGE"},"Subscribers":[{"SubscriptionType":"EMAIL","Address":{"Ref":"AlertEmail"}}]},{"Notification":{"NotificationType":"FORECASTED","ComparisonOperator":"GREATER_THAN","Threshold":100,"ThresholdType":"PERCENTAGE"},"Subscribers":[{"SubscriptionType":"EMAIL","Address":{"Ref":"AlertEmail"}}]}]}}
- },
- "Outputs":{
-  "Endpoint":{"Value":{"Fn::Sub":"https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"}},
-  "Home":{"Value":{"Fn::Sub":"https://${Api}.execute-api.${AWS::Region}.amazonaws.com/"}},
-  "FunctionName":{"Value":{"Ref":"Function"}},"QuotaTable":{"Value":{"Ref":"Quota"}},"RoleArn":{"Value":{"Fn::GetAtt":["ExecutionRole","Arn"]}}
- }
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Public Moretes AWS Architect MCP: no account resource access or model invocation",
+  "Parameters": {
+    "ArtifactBucket": {
+      "Type": "String"
+    },
+    "ArtifactKey": {
+      "Type": "String"
+    },
+    "DailyRequestLimit": {
+      "Type": "Number",
+      "Default": 3000,
+      "MinValue": 10,
+      "MaxValue": 10000
+    },
+    "AlertEmail": {
+      "Type": "String"
+    },
+    "MonthlyBudget": {
+      "Type": "Number",
+      "Default": 30,
+      "MinValue": 1,
+      "MaxValue": 30
+    },
+    "ClientDailyRequestLimit": {
+      "Type": "Number",
+      "Default": 300,
+      "MinValue": 10,
+      "MaxValue": 10000,
+      "Description": "Daily MCP requests per pseudonymous caller (sha256 of day + source IP)."
+    }
+  },
+  "Resources": {
+    "Quota": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH"
+          }
+        ],
+        "TimeToLiveSpecification": {
+          "AttributeName": "expiresAt",
+          "Enabled": true
+        },
+        "SSESpecification": {
+          "SSEEnabled": true
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "moretes-aws-architect-mcp"
+          }
+        ]
+      }
+    },
+    "Logs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/moretes-aws-architect-mcp",
+        "RetentionInDays": 7,
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "moretes-aws-architect-mcp"
+          }
+        ]
+      }
+    },
+    "ExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "OwnLogsAndQuotaOnly",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Logs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "dynamodb:UpdateItem",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Quota",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "moretes-aws-architect-mcp"
+          }
+        ]
+      }
+    },
+    "Function": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": "moretes-aws-architect-mcp",
+        "Runtime": "nodejs22.x",
+        "Architectures": [
+          "arm64"
+        ],
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "ExecutionRole",
+            "Arn"
+          ]
+        },
+        "MemorySize": 256,
+        "Timeout": 25,
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ArtifactBucket"
+          },
+          "S3Key": {
+            "Ref": "ArtifactKey"
+          }
+        },
+        "Environment": {
+          "Variables": {
+            "QUOTA_TABLE": {
+              "Ref": "Quota"
+            },
+            "DAILY_REQUEST_LIMIT": {
+              "Ref": "DailyRequestLimit"
+            },
+            "SERVICE_ENABLED": "true",
+            "PUBLIC_MCP_URL": {
+              "Fn::Sub": "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"
+            },
+            "ENABLE_AWS_ACCOUNT_TOOLS": "false",
+            "CLIENT_DAILY_REQUEST_LIMIT": {
+              "Ref": "ClientDailyRequestLimit"
+            }
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "moretes-aws-architect-mcp"
+          }
+        ]
+      }
+    },
+    "Api": {
+      "Type": "AWS::ApiGatewayV2::Api",
+      "Properties": {
+        "Name": "moretes-aws-architect-mcp",
+        "ProtocolType": "HTTP",
+        "Tags": {
+          "Project": "moretes-aws-architect-mcp"
+        }
+      }
+    },
+    "Integration": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "Function",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 29000
+      }
+    },
+    "McpRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "ANY /mcp",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "Integration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "HealthRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "GET /health",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "Integration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "HomeRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "GET /",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "Integration"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "Stage": {
+      "Type": "AWS::ApiGatewayV2::Stage",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "StageName": "$default",
+        "AutoDeploy": true,
+        "DefaultRouteSettings": {
+          "ThrottlingBurstLimit": 20,
+          "ThrottlingRateLimit": 5
+        },
+        "Tags": {
+          "Project": "moretes-aws-architect-mcp"
+        }
+      }
+    },
+    "InvokePermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "Function"
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceAccount": {
+          "Ref": "AWS::AccountId"
+        },
+        "SourceArn": {
+          "Fn::Sub": "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*"
+        }
+      }
+    },
+    "Budget": {
+      "Type": "AWS::Budgets::Budget",
+      "Properties": {
+        "Budget": {
+          "BudgetName": "moretes-architect-mcp-gross-cost",
+          "BudgetType": "COST",
+          "TimeUnit": "MONTHLY",
+          "BudgetLimit": {
+            "Amount": {
+              "Ref": "MonthlyBudget"
+            },
+            "Unit": "USD"
+          },
+          "CostTypes": {
+            "IncludeCredit": false,
+            "IncludeRefund": false
+          },
+          "CostFilters": {
+            "TagKeyValue": [
+              "user:Project$moretes-aws-architect-mcp"
+            ]
+          }
+        },
+        "NotificationsWithSubscribers": [
+          {
+            "Notification": {
+              "NotificationType": "ACTUAL",
+              "ComparisonOperator": "GREATER_THAN",
+              "Threshold": 50,
+              "ThresholdType": "PERCENTAGE"
+            },
+            "Subscribers": [
+              {
+                "SubscriptionType": "EMAIL",
+                "Address": {
+                  "Ref": "AlertEmail"
+                }
+              }
+            ]
+          },
+          {
+            "Notification": {
+              "NotificationType": "ACTUAL",
+              "ComparisonOperator": "GREATER_THAN",
+              "Threshold": 80,
+              "ThresholdType": "PERCENTAGE"
+            },
+            "Subscribers": [
+              {
+                "SubscriptionType": "EMAIL",
+                "Address": {
+                  "Ref": "AlertEmail"
+                }
+              }
+            ]
+          },
+          {
+            "Notification": {
+              "NotificationType": "FORECASTED",
+              "ComparisonOperator": "GREATER_THAN",
+              "Threshold": 100,
+              "ThresholdType": "PERCENTAGE"
+            },
+            "Subscribers": [
+              {
+                "SubscriptionType": "EMAIL",
+                "Address": {
+                  "Ref": "AlertEmail"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ProxyRoute": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "RouteKey": "GET /{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "Integration"
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "Endpoint": {
+      "Value": {
+        "Fn::Sub": "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"
+      }
+    },
+    "Home": {
+      "Value": {
+        "Fn::Sub": "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/"
+      }
+    },
+    "FunctionName": {
+      "Value": {
+        "Ref": "Function"
+      }
+    },
+    "QuotaTable": {
+      "Value": {
+        "Ref": "Quota"
+      }
+    },
+    "RoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "ExecutionRole",
+          "Arn"
+        ]
+      }
+    }
+  }
 }

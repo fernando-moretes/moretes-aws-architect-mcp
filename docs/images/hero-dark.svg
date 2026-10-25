@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-label="Moretes Architect MCP">
+  <rect width="1280" height="360" rx="20" fill="#0f1b2d"/>
+  <circle cx="1180" cy="-40" r="260" fill="#ff9900" opacity="0.10"/>
+  <circle cx="60" cy="400" r="220" fill="#3b82f6" opacity="0.08"/>
+  <text x="64" y="84" font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3" fill="#ff9900">OPEN SOURCE · MCP · v0.2.0</text>
+  <text x="64" y="150" font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif" font-size="54" font-weight="800" fill="#ffffff">Moretes Architect MCP</text>
+  <text x="64" y="198" font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif" font-size="24" fill="#94a3b8">Arquitetura com evidências, para qualquer nuvem, dentro do seu agente de código.</text>
+  <g font-family="JetBrains Mono,Menlo,Consolas,monospace" font-size="18" fill="#ffffff">
+    <rect x="64" y="236" width="196" height="64" rx="12" fill="#1e293b" stroke="#243247"/><text x="84" y="276"><tspan fill="#ff9900" font-weight="700">48</tspan> ferramentas</text>
+    <rect x="276" y="236" width="196" height="64" rx="12" fill="#1e293b" stroke="#243247"/><text x="296" y="276"><tspan fill="#ff9900" font-weight="700">10</tspan> personas</text>
+    <rect x="488" y="236" width="236" height="64" rx="12" fill="#1e293b" stroke="#243247"/><text x="508" y="276"><tspan fill="#ff9900" font-weight="700">0</tspan> chamadas a modelo</text>
+    <rect x="740" y="236" width="236" height="64" rx="12" fill="#1e293b" stroke="#243247"/><text x="760" y="276">AWS · Azure · GCP · OCI</text>
+    <rect x="992" y="236" width="224" height="64" rx="12" fill="#1e293b" stroke="#243247"/><text x="1012" y="276">HTTP · stdio · CLI</text>
+  </g>
+</svg>

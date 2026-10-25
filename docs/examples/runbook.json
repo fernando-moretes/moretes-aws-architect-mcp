@@ -1,0 +1,49 @@
+{
+  "tool": "runbook",
+  "arguments": {
+    "service": "Orders API",
+    "owner": "orders-team",
+    "alerts": [
+      {
+        "name": "HighErrorRate",
+        "meaning": "5xx above 2% of requests for 5 minutes",
+        "threshold": "2% / 5 min"
+      },
+      {
+        "name": "QueueBacklog",
+        "meaning": "OrderPlaced queue older than 10 minutes",
+        "threshold": "oldest message > 600 s"
+      }
+    ],
+    "diagnostics": [
+      "Check the last deploy and compare error start time",
+      "Inspect DB connection pool metrics",
+      "Check payment provider status page"
+    ],
+    "remediation": [
+      "Roll back to the previous image if errors began at deploy time",
+      "Scale consumers if backlog grows with healthy errors",
+      "Enable the payment degraded mode flag"
+    ],
+    "rollback": [
+      "Deploy previous image tag",
+      "Verify /health and error ratio for 10 minutes"
+    ],
+    "escalation": [
+      "After 15 min: page the orders on-call lead",
+      "After 30 min: incident commander"
+    ],
+    "dashboards": [
+      "https://grafana.example.com/d/orders"
+    ]
+  },
+  "result": {
+    "kind": "document",
+    "missing": [],
+    "markdown": "# Runbook: Orders API\n\nOwner: orders-team\n\n## Alerts\n- **HighErrorRate** (2% / 5 min): 5xx above 2% of requests for 5 minutes\n- **QueueBacklog** (oldest message > 600 s): OrderPlaced queue older than 10 minutes\n\n## First 10 minutes\n1. Acknowledge the alert and open an incident channel.\n2. Check dashboards: https://grafana.example.com/d/orders\n3. Confirm scope: which customers, regions and operations are affected.\n\n## Diagnostics\n1. Check the last deploy and compare error start time\n2. Inspect DB connection pool metrics\n3. Check payment provider status page\n\n## Remediation\n1. Roll back to the previous image if errors began at deploy time\n2. Scale consumers if backlog grows with healthy errors\n3. Enable the payment degraded mode flag\n\n## Rollback\n1. Deploy previous image tag\n2. Verify /health and error ratio for 10 minutes\n\n## Escalation\n- After 15 min: page the orders on-call lead\n- After 30 min: incident commander\n\n## Verification\n- Error rate and latency back to baseline for 15 minutes\n- No growing backlog or retries\n- Customer-facing confirmation where applicable\n\n## After the incident\n- Record timeline and open a postmortem (tool: postmortem)\n- Update this runbook with what was missing\n",
+    "nextTools": [
+      "postmortem",
+      "failure_rehearsal"
+    ]
+  }
+}

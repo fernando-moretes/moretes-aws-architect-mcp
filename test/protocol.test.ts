@@ -15,8 +15,8 @@ test('MCP client initializes, discovers and invokes tools/resources/prompts',asy
   const r=await client.callTool({name:'capacity_plan',arguments:{requestsPerSecond:10,durationMs:500,payloadKB:2}});assert.equal(r.structuredContent?.averageConcurrency,5);
   const invalid=await client.callTool({name:'capacity_plan',arguments:{requestsPerSecond:-10,durationMs:500,payloadKB:2}});assert.equal(invalid.isError,true);
   const denied=await client.callTool({name:'aws_account_identity'});assert.equal(denied.isError,true);
-  assert.equal((await client.listResources()).resources.length,3);assert.ok((await client.readResource({uri:'moretes://boundaries'})).contents.length);
-  assert.equal((await client.listPrompts()).prompts.length,4);assert.ok((await client.getPrompt({name:'architecture_discovery'})).messages.length);
+  assert.ok((await client.listResources()).resources.length>=3);assert.ok((await client.readResource({uri:'moretes://skills/architecture-review'})).contents.length);assert.ok((await client.readResource({uri:'moretes://boundaries'})).contents.length);
+  assert.ok((await client.listPrompts()).prompts.length>=14);assert.ok((await client.getPrompt({name:'architect_security'})).messages.length);assert.ok((await client.getPrompt({name:'architecture_discovery'})).messages.length);
  }finally{await client.close();await server.close();}
 });
 test('real SDK Streamable HTTP client works across stateless requests',async()=>{
@@ -28,6 +28,8 @@ test('real SDK Streamable HTTP client works across stateless requests',async()=>
 test('HTTP rejects cross-origin, unsupported verbs, invalid types, batches and oversized requests',async()=>{
  assert.equal((await handleRequest(new Request('https://t/mcp',{method:'POST',headers:{Origin:'https://evil.example'}}))).status,403);
  assert.equal((await handleRequest(new Request('https://t/mcp'))).status,405);
+ assert.equal((await handleRequest(new Request('https://t/.well-known/mcp/server-card.json'))).status,200);
+ assert.equal((await handleRequest(new Request('https://t/tools.json'))).status,200);
  assert.equal((await handleRequest(new Request('https://t/mcp',{method:'POST',body:'{}'}))).status,415);
  const headers={'Content-Type':'application/json',Accept:'application/json, text/event-stream'};
  const big=await handleRequest(new Request('https://t/mcp',{method:'POST',headers,body:'x'.repeat(131073)}));assert.equal(big.status,413);

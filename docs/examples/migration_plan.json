@@ -1,0 +1,55 @@
+{
+  "tool": "migration_plan",
+  "arguments": {
+    "source": "On-premises Java monolith with Oracle",
+    "target": "Containers on AWS with PostgreSQL",
+    "strategy": "replatform",
+    "constraints": [
+      "Cutover window of 4 hours",
+      "Oracle license ends 2027-03"
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "source": "On-premises Java monolith with Oracle",
+    "target": "Containers on AWS with PostgreSQL",
+    "strategy": "replatform",
+    "constraints": [
+      "Cutover window of 4 hours",
+      "Oracle license ends 2027-03"
+    ],
+    "phases": [
+      {
+        "name": "discover",
+        "exit": "Inventory dependencies, licenses, data classification, owners and baseline costs"
+      },
+      {
+        "name": "pilot",
+        "exit": "Representative workload passes functional, security and recovery tests"
+      },
+      {
+        "name": "migrate",
+        "exit": "Reconciliation proves data completeness; rollback window remains open"
+      },
+      {
+        "name": "cutover",
+        "exit": "Business owner accepts measured SLOs; traffic and rollback controls are ready"
+      },
+      {
+        "name": "optimize",
+        "exit": "Cost/performance baseline compared and decommissioning explicitly approved"
+      }
+    ],
+    "nextTools": [
+      "integration_catalog",
+      "decision_record",
+      "failure_rehearsal"
+    ],
+    "integration": "Search aws-transform-mcp-server in the catalog; tenant permissions are required."
+  }
+}

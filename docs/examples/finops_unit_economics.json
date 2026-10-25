@@ -1,0 +1,74 @@
+{
+  "tool": "finops_unit_economics",
+  "arguments": {
+    "period": "2026-09",
+    "currency": "USD",
+    "fixedCosts": [
+      {
+        "name": "Fargate baseline",
+        "amount": 420
+      },
+      {
+        "name": "RDS",
+        "amount": 95
+      }
+    ],
+    "variableCosts": [
+      {
+        "name": "API Gateway requests",
+        "amount": 38
+      },
+      {
+        "name": "Data transfer",
+        "amount": 22
+      }
+    ],
+    "units": [
+      {
+        "name": "order",
+        "count": 410000
+      },
+      {
+        "name": "active customer",
+        "count": 52000
+      }
+    ],
+    "targetCostPerPrimaryUnit": 0.001
+  },
+  "result": {
+    "kind": "calculation",
+    "period": "2026-09",
+    "currency": "USD",
+    "totals": {
+      "fixed": 515,
+      "variable": 60,
+      "total": 575,
+      "fixedSharePercent": 89.6
+    },
+    "perUnit": [
+      {
+        "unit": "order",
+        "count": 410000,
+        "costPerUnit": 0.001402,
+        "fixedPerUnit": 0.001256,
+        "variablePerUnit": 0.000146
+      },
+      {
+        "unit": "active customer",
+        "count": 52000,
+        "costPerUnit": 0.011058,
+        "fixedPerUnit": 0.009904,
+        "variablePerUnit": 0.001154
+      }
+    ],
+    "marginalCostPerPrimaryUnit": 0.000146,
+    "breakEvenVolumeForTarget": 603286,
+    "reading": [
+      "Mostly fixed: unit cost falls with volume; idle capacity is the lever"
+    ],
+    "limitations": [
+      "Allocation is proportional and ignores shared-cost attribution rules",
+      "Use dated invoices or cost reports as the source for every amount"
+    ]
+  }
+}

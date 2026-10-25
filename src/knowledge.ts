@@ -2,11 +2,12 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { z } from 'zod';
 import { tool, short } from './definition.js';
+import { VERSION } from './version.js';
 const endpoint='https://knowledge-mcp.global.api.aws';
 const allowed = new Set(['aws___search_documentation','aws___read_documentation','aws___list_regions','aws___get_regional_availability','aws___retrieve_skill']);
 export async function knowledgeCall(name:string,args:Record<string,unknown>):Promise<Record<string,unknown>>{
   if(!allowed.has(name))throw new Error('Unknown upstream tool');
-  const client=new Client({name:'moretes-aws-architect-mcp',version:'0.1.0'});
+  const client=new Client({name:'moretes-aws-architect-mcp',version:VERSION});
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),18000);
   const transport=new StreamableHTTPClientTransport(new URL(endpoint),{

@@ -1,0 +1,40 @@
+{
+  "tool": "integration_catalog",
+  "arguments": {
+    "query": "pricing",
+    "limit": 3
+  },
+  "result": {
+    "source": "https://raw.githubusercontent.com/awslabs/mcp/main/docusaurus/static/assets/server-cards.json",
+    "retrievedAt": "2026-10-25T00:14:23.017Z",
+    "total": 61,
+    "servers": [
+      {
+        "id": "aws-pricing-mcp-server",
+        "name": "AWS Pricing MCP Server",
+        "category": "Cost & Operations",
+        "tags": [
+          "pricing",
+          "cost-operations",
+          "cost-analysis",
+          "estimation",
+          "optimization",
+          "pre-deployment",
+          "conversational",
+          "business-services"
+        ],
+        "sourcePath": "src/aws-pricing-mcp-server/",
+        "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-pricing-mcp-server/",
+        "status": "discovery-only",
+        "pinnedPackage": {
+          "package": "awslabs.aws-pricing-mcp-server",
+          "version": "1.1.1",
+          "python": ">=3.10",
+          "status": "configuration-only",
+          "source": "https://github.com/awslabs/mcp/tree/main/src/aws-pricing-mcp-server/"
+        }
+      }
+    ],
+    "boundary": "Only the five AWS Knowledge adapters run through the public endpoint. Other servers require explicit local setup and their own IAM/service permissions."
+  }
+}

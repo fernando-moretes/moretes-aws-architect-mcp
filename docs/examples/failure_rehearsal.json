@@ -1,0 +1,37 @@
+{
+  "tool": "failure_rehearsal",
+  "arguments": {
+    "operation": "Capture payment after order persisted",
+    "target": "payment provider",
+    "failure": "after-write-crash"
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "operation": "Capture payment after order persisted",
+    "target": "payment provider",
+    "failure": "after-write-crash",
+    "preconditions": [
+      "Use a disposable environment or synthetic target",
+      "Define authorized operator, cost limit, stop condition and recovery owner",
+      "Capture input digest, target version and execution ID"
+    ],
+    "steps": [
+      "Record expected state and independent success evidence",
+      "Inject after-write-crash at a documented boundary",
+      "Observe target state independently of orchestration state",
+      "Reconcile before any retry; block unknown outcomes",
+      "Record outcome and restore the test environment"
+    ],
+    "acceptance": [
+      "No unauthorized change",
+      "No duplicate side effect",
+      "Uncertain outcomes are visible and block blind replay",
+      "Evidence identifies the tested version and limitations"
+    ]
+  }
+}
