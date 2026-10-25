@@ -1,0 +1,128 @@
+{
+  "tool": "terraform_plan_review",
+  "arguments": {
+    "plan": {
+      "format_version": "1.2",
+      "terraform_version": "1.9.5",
+      "resource_changes": [
+        {
+          "address": "aws_db_instance.orders",
+          "type": "aws_db_instance",
+          "change": {
+            "actions": [
+              "delete",
+              "create"
+            ],
+            "replace_paths": [
+              [
+                "engine_version"
+              ]
+            ],
+            "after": {
+              "publicly_accessible": false,
+              "storage_encrypted": true,
+              "skip_final_snapshot": true
+            }
+          }
+        },
+        {
+          "address": "aws_security_group_rule.api_ingress",
+          "type": "aws_security_group_rule",
+          "change": {
+            "actions": [
+              "create"
+            ],
+            "after": {
+              "type": "ingress",
+              "from_port": 443,
+              "to_port": 443,
+              "cidr_blocks": [
+                "0.0.0.0/0"
+              ]
+            }
+          }
+        },
+        {
+          "address": "aws_s3_bucket.invoices",
+          "type": "aws_s3_bucket",
+          "change": {
+            "actions": [
+              "update"
+            ],
+            "after": {
+              "versioning": [
+                {
+                  "enabled": false
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "configuration": {
+        "provider_config": {
+          "aws": {
+            "name": "aws",
+            "version_constraint": "~> 5.70"
+          }
+        }
+      }
+    }
+  },
+  "result": {
+    "kind": "terraform-plan-heuristic-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://developer.hashicorp.com/terraform/internals/json-format"
+    ],
+    "terraformVersion": "1.9.5",
+    "resources": 3,
+    "actions": {
+      "create": 1,
+      "update": 1,
+      "delete": 0,
+      "replace": 1,
+      "no-op": 0,
+      "read": 0
+    },
+    "findings": [
+      {
+        "severity": "high",
+        "target": "aws_db_instance.orders",
+        "message": "replace of a stateful resource (aws_db_instance); confirm backups, data migration and whether a moved block or lifecycle prevent_destroy was intended."
+      },
+      {
+        "severity": "high",
+        "target": "aws_db_instance.orders",
+        "message": "Replacement forced by: engine_version; expect downtime for this resource."
+      },
+      {
+        "severity": "medium",
+        "target": "aws_db_instance.orders",
+        "message": "skip_final_snapshot=true: a destroy will not keep a snapshot."
+      },
+      {
+        "severity": "medium",
+        "target": "aws_security_group_rule.api_ingress",
+        "message": "Ingress from the entire internet; verify ports and intent."
+      },
+      {
+        "severity": "info",
+        "target": "aws_s3_bucket.invoices",
+        "message": "Versioning disabled on storage."
+      }
+    ],
+    "summary": {
+      "high": 2,
+      "medium": 2,
+      "info": 1
+    },
+    "gate": "Block: high findings need a human decision before apply",
+    "limitations": [
+      "Pattern matching on planned attribute values; unknown-after-apply values are invisible",
+      "Not a replacement for policy as code (OPA/Conftest, Sentinel, Checkov, tfsec) or for reading the plan diff",
+      "A clean result is not an approval to apply"
+    ]
+  }
+}

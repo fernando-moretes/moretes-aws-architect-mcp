@@ -1,0 +1,133 @@
+{
+  "tool": "data_classification",
+  "arguments": {
+    "system": "Orders platform",
+    "elements": [
+      {
+        "name": "customer CPF",
+        "category": "personal",
+        "purpose": "invoice issuance",
+        "retentionDays": 1825,
+        "residency": "BR (sa-east-1)",
+        "sharedWith": [
+          "tax authority"
+        ]
+      },
+      {
+        "name": "card PAN",
+        "category": "financial-card",
+        "purpose": "payment",
+        "sharedWith": [
+          "payment provider"
+        ]
+      },
+      {
+        "name": "order history",
+        "category": "personal",
+        "purpose": "customer service"
+      }
+    ],
+    "jurisdictions": [
+      "BR"
+    ]
+  },
+  "result": {
+    "kind": "data-classification-review",
+    "validated": false,
+    "limitation": "Regulation references are pointers for a legal or privacy review, not legal advice. Article numbers may change; verify the current text.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "system": "Orders platform",
+    "jurisdictions": [
+      "BR"
+    ],
+    "highestSensitivity": "financial-card",
+    "items": [
+      {
+        "name": "customer CPF",
+        "category": "personal",
+        "purpose": "invoice issuance",
+        "retentionDays": 1825,
+        "residency": "BR (sa-east-1)",
+        "sharedWith": [
+          "tax authority"
+        ],
+        "controls": [
+          "Lawful basis documented",
+          "Purpose limitation",
+          "Access control by role and tenant",
+          "Encryption at rest and in transit",
+          "Data subject rights workflow (access, correction, deletion)",
+          "Retention and deletion evidence",
+          "Processor agreements for every sharedWith party"
+        ],
+        "regulationHints": {
+          "BR": "LGPD art. 5 I (dado pessoal), art. 7 (bases legais), art. 18 (direitos do titular)"
+        },
+        "questions": [
+          "Confirm processor or controller agreements with: tax authority"
+        ]
+      },
+      {
+        "name": "card PAN",
+        "category": "financial-card",
+        "purpose": "payment",
+        "sharedWith": [
+          "payment provider"
+        ],
+        "controls": [
+          "Do not store PAN unless in PCI DSS scope; prefer tokenization by the payment provider",
+          "Never store CVV after authorization",
+          "Segmented network and scope documentation",
+          "Key management with rotation"
+        ],
+        "regulationHints": {
+          "BR": "PCI DSS v4.0.1 (contractual) and BCB regulation for payment institutions"
+        },
+        "questions": [
+          "Retention period and deletion trigger are undefined",
+          "Storage residency and cross-border transfer path are undefined",
+          "Confirm processor or controller agreements with: payment provider"
+        ]
+      },
+      {
+        "name": "order history",
+        "category": "personal",
+        "purpose": "customer service",
+        "sharedWith": [],
+        "controls": [
+          "Lawful basis documented",
+          "Purpose limitation",
+          "Access control by role and tenant",
+          "Encryption at rest and in transit",
+          "Data subject rights workflow (access, correction, deletion)",
+          "Retention and deletion evidence",
+          "Processor agreements for every sharedWith party"
+        ],
+        "regulationHints": {
+          "BR": "LGPD art. 5 I (dado pessoal), art. 7 (bases legais), art. 18 (direitos do titular)"
+        },
+        "questions": [
+          "Retention period and deletion trigger are undefined",
+          "Storage residency and cross-border transfer path are undefined"
+        ]
+      }
+    ],
+    "summary": {
+      "public": 0,
+      "internal": 0,
+      "personal": 2,
+      "sensitive-personal": 0,
+      "financial-card": 1,
+      "health": 0,
+      "credential": 0,
+      "children": 0
+    },
+    "nextTools": [
+      "threat_model",
+      "well_architected_review",
+      "decision_record"
+    ]
+  }
+}

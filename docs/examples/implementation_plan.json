@@ -1,0 +1,69 @@
+{
+  "tool": "implementation_plan",
+  "arguments": {
+    "decision": "Adopt SQS FIFO per tenant for order events with idempotent consumers",
+    "deliverables": [
+      "Queue and DLQ in IaC",
+      "Consumer idempotency store",
+      "Replay runbook",
+      "Alerting on backlog age"
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "decision": "Adopt SQS FIFO per tenant for order events with idempotent consumers",
+    "deliverables": [
+      "Queue and DLQ in IaC",
+      "Consumer idempotency store",
+      "Replay runbook",
+      "Alerting on backlog age"
+    ],
+    "stages": [
+      {
+        "stage": "design",
+        "evidence": [
+          "ADR",
+          "Threat model",
+          "Dated cost scenario"
+        ]
+      },
+      {
+        "stage": "build",
+        "evidence": [
+          "Versioned IaC",
+          "Least-privilege policies",
+          "Unit and contract tests"
+        ]
+      },
+      {
+        "stage": "verify",
+        "evidence": [
+          "Integration tests",
+          "Failure rehearsal",
+          "Accessibility and operational checks where applicable"
+        ]
+      },
+      {
+        "stage": "release",
+        "evidence": [
+          "Reviewed change set",
+          "Rollback procedure",
+          "Monitoring and cost limits"
+        ]
+      },
+      {
+        "stage": "operate",
+        "evidence": [
+          "SLO owner",
+          "Incident runbook",
+          "Review date and sunset criteria"
+        ]
+      }
+    ]
+  }
+}

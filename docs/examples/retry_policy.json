@@ -1,0 +1,62 @@
+{
+  "tool": "retry_policy",
+  "arguments": {
+    "baseDelayMs": 200,
+    "factor": 2,
+    "capMs": 5000,
+    "maxAttempts": 5,
+    "jitter": "full",
+    "deadlineMs": 15000,
+    "operationIdempotent": true
+  },
+  "result": {
+    "kind": "calculation",
+    "inputs": {
+      "baseDelayMs": 200,
+      "factor": 2,
+      "capMs": 5000,
+      "maxAttempts": 5,
+      "jitter": "full",
+      "deadlineMs": 15000,
+      "operationIdempotent": true
+    },
+    "retriesAfterFirstAttempt": [
+      {
+        "attempt": 1,
+        "delayMs": 200,
+        "jitterMinMs": 0,
+        "jitterMaxMs": 200
+      },
+      {
+        "attempt": 2,
+        "delayMs": 400,
+        "jitterMinMs": 0,
+        "jitterMaxMs": 400
+      },
+      {
+        "attempt": 3,
+        "delayMs": 800,
+        "jitterMinMs": 0,
+        "jitterMaxMs": 800
+      },
+      {
+        "attempt": 4,
+        "delayMs": 1600,
+        "jitterMinMs": 0,
+        "jitterMaxMs": 1600
+      }
+    ],
+    "worstCaseWaitMs": 3000,
+    "attemptsThatFitDeadline": 5,
+    "guidance": [
+      "Idempotent operation: retries are safe when the server deduplicates by key",
+      "Jitter spreads retries across clients",
+      "Retry only on transient errors (timeouts, 429, 5xx); never on validation or authorization errors",
+      "Circuit breaker: open after consecutive failures (e.g. 5) or error ratio above 50% in a window; half-open probes every cap interval",
+      "Propagate the remaining deadline downstream so nested retries do not multiply"
+    ],
+    "sources": [
+      "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/"
+    ]
+  }
+}

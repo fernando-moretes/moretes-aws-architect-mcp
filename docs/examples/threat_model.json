@@ -1,0 +1,145 @@
+{
+  "tool": "threat_model",
+  "arguments": {
+    "assets": [
+      "Orders API",
+      "Orders DB",
+      "Payment webhook endpoint"
+    ],
+    "boundaries": [
+      "Internet to API Gateway",
+      "API to payment provider",
+      "Webhook from provider to API"
+    ],
+    "dataClassification": "personal + financial-card (tokenized)"
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "assets": [
+      "Orders API",
+      "Orders DB",
+      "Payment webhook endpoint"
+    ],
+    "boundaries": [
+      "Internet to API Gateway",
+      "API to payment provider",
+      "Webhook from provider to API"
+    ],
+    "dataClassification": "personal + financial-card (tokenized)",
+    "threats": [
+      {
+        "asset": "Orders API",
+        "category": "Spoofing",
+        "mitigation": "Verify issuer, audience and caller identity",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders API",
+        "category": "Tampering",
+        "mitigation": "Bind authorization to operation, target and version",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders API",
+        "category": "Repudiation",
+        "mitigation": "Record minimal operation identity and outcome",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders API",
+        "category": "Information disclosure",
+        "mitigation": "Apply tenant authorization and redact secrets",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders API",
+        "category": "Denial of service",
+        "mitigation": "Bound requests, retries, payload size and costs",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders API",
+        "category": "Elevation of privilege",
+        "mitigation": "Use least privilege and separate approval from execution",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Spoofing",
+        "mitigation": "Verify issuer, audience and caller identity",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Tampering",
+        "mitigation": "Bind authorization to operation, target and version",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Repudiation",
+        "mitigation": "Record minimal operation identity and outcome",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Information disclosure",
+        "mitigation": "Apply tenant authorization and redact secrets",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Denial of service",
+        "mitigation": "Bound requests, retries, payload size and costs",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Orders DB",
+        "category": "Elevation of privilege",
+        "mitigation": "Use least privilege and separate approval from execution",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Spoofing",
+        "mitigation": "Verify issuer, audience and caller identity",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Tampering",
+        "mitigation": "Bind authorization to operation, target and version",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Repudiation",
+        "mitigation": "Record minimal operation identity and outcome",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Information disclosure",
+        "mitigation": "Apply tenant authorization and redact secrets",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Denial of service",
+        "mitigation": "Bound requests, retries, payload size and costs",
+        "status": "to-assess"
+      },
+      {
+        "asset": "Payment webhook endpoint",
+        "category": "Elevation of privilege",
+        "mitigation": "Use least privilege and separate approval from execution",
+        "status": "to-assess"
+      }
+    ]
+  }
+}

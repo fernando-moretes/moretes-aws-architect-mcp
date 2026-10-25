@@ -1,0 +1,63 @@
+{
+  "tool": "architecture_pattern",
+  "arguments": {
+    "pattern": "event-driven",
+    "workload": "Order events feeding billing, inventory and notifications",
+    "provider": "azure"
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "workload": "Order events feeding billing, inventory and notifications",
+    "services": [
+      "EventBridge",
+      "SQS",
+      "Lambda",
+      "DynamoDB",
+      "CloudWatch"
+    ],
+    "fit": "Asynchronous business events with decoupled consumers",
+    "tradeoffs": [
+      "Eventual consistency",
+      "Ordering, duplication and schema evolution"
+    ],
+    "nodes": [
+      "Producer",
+      "EventBridge",
+      "SQS",
+      "Consumer"
+    ],
+    "questions": [
+      "What is the deduplication scope?",
+      "Who owns DLQ recovery and replay authorization?"
+    ],
+    "provider": "azure",
+    "serviceMapping": [
+      {
+        "aws": "EventBridge",
+        "azure": "Azure Event Grid"
+      },
+      {
+        "aws": "SQS",
+        "azure": "Azure Service Bus queues / Queue Storage"
+      },
+      {
+        "aws": "Lambda",
+        "azure": "Azure Functions"
+      },
+      {
+        "aws": "DynamoDB",
+        "azure": "Azure Cosmos DB"
+      },
+      {
+        "aws": "CloudWatch",
+        "azure": "Azure Monitor / Application Insights"
+      }
+    ],
+    "mermaid": "flowchart LR\n  n0[\"Producer\"]\n  n1[\"EventBridge\"]\n  n2[\"SQS\"]\n  n3[\"Consumer\"]\n  n0 --> n1\n  n1 --> n2\n  n2 --> n3"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "tool": "architect_panel",
+  "arguments": {
+    "subject": "Checkout API for a marketplace: 300 orders/minute at peak, card payments, pt-BR customers, team of 4",
+    "artifactType": "design",
+    "roles": [
+      "solution",
+      "security",
+      "data",
+      "finops"
+    ],
+    "knownFacts": [
+      "Budget: USD 1,500/month",
+      "SLO: 99.9% monthly"
+    ]
+  },
+  "result": {
+    "kind": "architect-panel",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "subject": "Checkout API for a marketplace: 300 orders/minute at peak, card payments, pt-BR customers, team of 4",
+    "artifactType": "design",
+    "knownFacts": [
+      "Budget: USD 1,500/month",
+      "SLO: 99.9% monthly"
+    ],
+    "panel": [
+      {
+        "role": "solution",
+        "title": "Solution Architect",
+        "titlePt": "Arquiteto de Soluções",
+        "mandate": "Turn a business problem into a deployable design with explicit trade-offs, numbers and a decision record.",
+        "askFirst": [
+          "What outcome and who owns it?",
+          "Normal and peak traffic, payload sizes, growth?",
+          "SLO, p95 latency, RTO and RPO?",
+          "Data classification, residency and retention?",
+          "Team skills and existing platform constraints?"
+        ],
+        "checks": [
+          "Every component has a reason that maps to a requirement",
+          "Two alternatives compared with evidence, not one option justified",
+          "Failure modes and recovery are designed, not assumed",
+          "Costs are a dated scenario with sources"
+        ],
+        "toolsToCall": [
+          "service_compare",
+          "c4_model",
+          "cost_model",
+          "requirements_check",
+          "architecture_pattern",
+          "service_equivalents"
+        ],
+        "deliverables": [
+          "Context and container diagrams",
+          "ADR with alternatives and consequences",
+          "Capacity and cost scenario",
+          "Implementation plan with validation gates"
+        ],
+        "antiPatterns": [
+          "Choosing services before requirements",
+          "Diagram without data flows or trust boundaries",
+          "Single-region by accident"
+        ]
+      },
+      {
+        "role": "security",
+        "title": "Security Architect",
+        "titlePt": "Arquiteto de Segurança",
+        "mandate": "Make trust boundaries, identities, secrets and detection explicit; assume compromise and bound the blast radius.",
+        "askFirst": [
+          "Who or what authenticates to each component and with which lifetime?",
+          "Where are the trust boundaries and what crosses them?",
+          "How are secrets issued, rotated and revoked?",
+          "What is detected, by whom, in how long?"
+        ],
+        "checks": [
+          "STRIDE applied per boundary",
+          "Least privilege verified in policies, not assumed",
+          "No long-lived static credentials",
+          "Logging excludes secrets and includes identity and outcome"
+        ],
+        "toolsToCall": [
+          "threat_model",
+          "iam_policy_review",
+          "cloudformation_review",
+          "terraform_plan_review",
+          "kubernetes_manifest_review",
+          "data_classification"
+        ],
+        "deliverables": [
+          "Threat model",
+          "IAM and IaC policy findings",
+          "Data classification controls",
+          "Detection and response expectations"
+        ],
+        "antiPatterns": [
+          "Wildcard IAM to make it work",
+          "Secrets in environment files",
+          "Security review after the design is frozen"
+        ]
+      },
+      {
+        "role": "data",
+        "title": "Data Architect",
+        "titlePt": "Arquiteto de Dados",
+        "mandate": "Design how data is modeled, stored, moved, governed and retired, with ownership and quality explicit.",
+        "askFirst": [
+          "Who owns each dataset and its quality?",
+          "Access patterns: reads, writes, analytics, retention?",
+          "Consistency and freshness requirements per consumer?",
+          "Lineage, classification and deletion obligations?"
+        ],
+        "checks": [
+          "Storage chosen from access patterns, not habit",
+          "Schemas versioned with evolution rules",
+          "Classification drives encryption, residency and retention",
+          "Growth and cost projected with tiering"
+        ],
+        "toolsToCall": [
+          "service_compare",
+          "service_equivalents",
+          "data_classification",
+          "event_contract",
+          "storage_growth",
+          "rag_pipeline_plan"
+        ],
+        "deliverables": [
+          "Logical data model and ownership",
+          "Event or API contracts",
+          "Classification and retention matrix",
+          "Storage growth and cost projection"
+        ],
+        "antiPatterns": [
+          "One database for every access pattern",
+          "PII copied into analytics without classification",
+          "Schema changes without consumers knowing"
+        ]
+      },
+      {
+        "role": "finops",
+        "title": "FinOps Architect",
+        "titlePt": "Arquiteto FinOps",
+        "mandate": "Make cost a design input: unit economics, allocation, commitments, waste and the levers per component.",
+        "askFirst": [
+          "What is the unit of value and its target cost?",
+          "Which costs are fixed versus variable with traffic?",
+          "How is cost allocated to teams and products?",
+          "Which levers exist: rightsizing, tiering, commitments, architecture change?"
+        ],
+        "checks": [
+          "Every cost line has a dated source",
+          "Budgets and alerts exist before launch",
+          "Storage tiering and retention decided",
+          "Idle capacity measured"
+        ],
+        "toolsToCall": [
+          "cost_model",
+          "finops_unit_economics",
+          "storage_growth",
+          "capacity_plan",
+          "queue_sizing",
+          "service_equivalents"
+        ],
+        "deliverables": [
+          "Dated cost scenario",
+          "Unit economics and break-even",
+          "Storage growth projection",
+          "Allocation and tagging requirements"
+        ],
+        "antiPatterns": [
+          "Cost reviewed only at invoice time",
+          "Commitments bought before rightsizing",
+          "Untagged resources"
+        ]
+      }
+    ],
+    "synthesis": [
+      "Resolve conflicts between roles explicitly (e.g. cost versus resilience) in a decision_record",
+      "Every finding needs an owner, evidence and a validation criterion",
+      "Unknown stays unknown; do not fill gaps with assumptions"
+    ],
+    "availableRoles": [
+      {
+        "id": "solution",
+        "title": "Solution Architect"
+      },
+      {
+        "id": "enterprise",
+        "title": "Enterprise Architect"
+      },
+      {
+        "id": "business",
+        "title": "Business Architect"
+      },
+      {
+        "id": "data",
+        "title": "Data Architect"
+      },
+      {
+        "id": "infrastructure",
+        "title": "Infrastructure and Platform Architect"
+      },
+      {
+        "id": "software",
+        "title": "Software Architect"
+      },
+      {
+        "id": "ai",
+        "title": "AI Architect"
+      },
+      {
+        "id": "security",
+        "title": "Security Architect"
+      },
+      {
+        "id": "governance",
+        "title": "Corporate Governance and Compliance Architect"
+      },
+      {
+        "id": "finops",
+        "title": "FinOps Architect"
+      }
+    ],
+    "howToUse": "Use the matching MCP prompt (architect_<role>) to make the client model adopt one lens, then call the listed tools with real inputs."
+  }
+}

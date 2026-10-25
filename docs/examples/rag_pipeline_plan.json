@@ -1,0 +1,108 @@
+{
+  "tool": "rag_pipeline_plan",
+  "arguments": {
+    "useCase": "Answer internal policy questions for 2,000 employees with citations",
+    "corpus": {
+      "documents": 3500,
+      "averagePages": 12,
+      "formats": [
+        "pdf",
+        "docx",
+        "html",
+        "tables"
+      ],
+      "updateFrequency": "daily",
+      "languages": [
+        "pt-BR",
+        "en"
+      ]
+    },
+    "authorization": "per-document-acl",
+    "latencyBudgetMs": 4000,
+    "citationsRequired": true
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "useCase": "Answer internal policy questions for 2,000 employees with citations",
+    "sizing": {
+      "estimatedTokens": 21000000,
+      "chunkTokens": 400,
+      "overlapPercent": 15,
+      "estimatedChunks": 60375,
+      "vectorsAtDim1024Bytes": 247296000,
+      "limitation": "500 tokens per page and 15% overlap are planning assumptions; measure on a sample"
+    },
+    "stages": [
+      {
+        "stage": "ingest",
+        "decisions": [
+          "Parsers per format: pdf, docx, html, tables",
+          "Tables: keep as structured text or Markdown, never flatten into prose",
+          "Refresh: scheduled incremental upsert"
+        ]
+      },
+      {
+        "stage": "chunk",
+        "decisions": [
+          "Structure-aware chunking (headings, sections) before fixed windows",
+          "Attach metadata: source, section, date, tenant, ACL, language"
+        ]
+      },
+      {
+        "stage": "embed",
+        "decisions": [
+          "Multilingual model if languages include pt-BR, en",
+          "Version the embedding model; re-embed on change",
+          "Hybrid retrieval (BM25 + vector) for exact terms, ids and acronyms"
+        ]
+      },
+      {
+        "stage": "retrieve",
+        "decisions": [
+          "Authorization before retrieval: filter by ACL in the index query, never after the top-k",
+          "Top-k 20 then rerank to 5; measure recall on the eval set",
+          "Latency budget 4000 ms: retrieval + rerank should stay under 30% of it"
+        ]
+      },
+      {
+        "stage": "generate",
+        "decisions": [
+          "Citations mandatory: answer must reference chunk ids; refuse when no chunk supports the claim",
+          "Grounding instruction + untrusted-content delimiters (prompt injection)"
+        ]
+      },
+      {
+        "stage": "evaluate",
+        "decisions": [
+          "Golden Q&A set of at least 100 items with expected sources",
+          "Metrics: context recall, faithfulness, answer relevance, p95 latency, cost per answer",
+          "Regression on every model, prompt or chunking change"
+        ]
+      }
+    ],
+    "costDrivers": [
+      "Embedding tokens at ingest and re-index",
+      "Vector store capacity (chunks × dimensions)",
+      "Reranker calls",
+      "Generation tokens per answer (context size)",
+      "Egress and storage of source documents"
+    ],
+    "openQuestions": [
+      "Who owns corpus quality and deletion requests?",
+      "What is the acceptable staleness?",
+      "Which answers are high-stakes enough to require human review?"
+    ],
+    "nextTools": [
+      "service_equivalents",
+      "data_classification",
+      "latency_budget",
+      "cost_model",
+      "agent_eval_plan"
+    ]
+  }
+}

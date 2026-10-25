@@ -1,0 +1,68 @@
+{
+  "tool": "agent_tool_contract",
+  "arguments": {
+    "operation": "issue_refund",
+    "resourceScope": [
+      "orders owned by the authenticated customer",
+      "amount <= R$ 200"
+    ],
+    "approvalRequired": true,
+    "maxDurationSeconds": 30,
+    "reversible": false
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "operation": "issue_refund",
+    "resourceScope": [
+      "orders owned by the authenticated customer",
+      "amount <= R$ 200"
+    ],
+    "approvalRequired": true,
+    "maxDurationSeconds": 30,
+    "reversible": false,
+    "contract": {
+      "identity": [
+        "issuer",
+        "audience",
+        "subject",
+        "tenant"
+      ],
+      "authorization": [
+        "operation",
+        "resource IDs",
+        "input digest",
+        "policy version",
+        "expiresAt"
+      ],
+      "execution": [
+        "executionId",
+        "idempotencyKey",
+        "expectedTargetVersion",
+        "timeout",
+        "boundedRetries"
+      ],
+      "recovery": [
+        "independent target receipt",
+        "reconcile before retry",
+        "manual review for unknown outcome"
+      ],
+      "audit": [
+        "time",
+        "actor",
+        "operation",
+        "outcome",
+        "correlationId"
+      ],
+      "prohibited": [
+        "Model output as authorization",
+        "Unbounded tools or wildcard credentials",
+        "Logging tokens or raw private prompts"
+      ]
+    }
+  }
+}

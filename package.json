@@ -1,13 +1,51 @@
 {
   "name": "moretes-aws-architect-mcp",
-  "version": "0.1.0",
-  "description": "Evidence-first AWS solution architecture MCP by Fernando Azevedo: architecture tools, official knowledge federation and scoped integration profiles.",
+  "version": "0.2.0",
+  "description": "Evidence-first architecture workbench MCP by Fernando Azevedo: architect personas, cloud-agnostic design tools, IaC/code/API reviews, AI-agent and MCP safety, live AWS knowledge. Deterministic, no model calls. CLI for pipelines.",
   "type": "module",
   "private": true,
   "license": "MIT",
+  "mcpName": "io.github.fernando-moretes/moretes-aws-architect-mcp",
+  "homepage": "https://fernando.moretes.com/mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernando-moretes/moretes-aws-architect-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fernando-moretes/moretes-aws-architect-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "architecture",
+    "aws",
+    "azure",
+    "gcp",
+    "well-architected",
+    "adr",
+    "terraform",
+    "kubernetes",
+    "finops",
+    "ai-agents",
+    "security",
+    "solution-architect"
+  ],
   "engines": {
     "node": ">=22.13"
   },
+  "bin": {
+    "moretes-architect": "dist/cli.js",
+    "moretes-aws-architect-mcp": "dist/stdio.js"
+  },
+  "files": [
+    "dist",
+    "src/data",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "PRIVACY.md",
+    "SECURITY.md"
+  ],
   "scripts": {
     "build": "tsc && node scripts/bundle.mjs",
     "typecheck": "tsc --noEmit",
@@ -16,7 +54,10 @@
     "dev": "tsx src/stdio.ts",
     "http": "tsx src/http.ts",
     "smoke": "tsx scripts/smoke.ts",
-    "catalog:refresh": "node scripts/refresh-catalog.mjs"
+    "catalog:refresh": "node scripts/refresh-catalog.mjs",
+    "cli": "node dist/cli.js",
+    "prepare": "tsc",
+    "docs:tools": "node scripts/tool-docs.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-cost-explorer": "^3.1156.0",

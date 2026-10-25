@@ -1,0 +1,44 @@
+{
+  "tool": "queue_sizing",
+  "arguments": {
+    "arrivalsPerSecond": 5,
+    "serviceTimeMs": 800,
+    "consumers": 4,
+    "backlogMessages": 2000,
+    "targetUtilizationPercent": 60
+  },
+  "result": {
+    "kind": "calculation",
+    "formulas": [
+      "offeredLoad = arrivals × serviceTime (Little's law)",
+      "utilization = offeredLoad / (consumers × concurrency)",
+      "P(wait) = Erlang C(servers, offeredLoad)",
+      "drainSeconds = backlog / (capacity/serviceTime − arrivals)"
+    ],
+    "inputs": {
+      "arrivalsPerSecond": 5,
+      "serviceTimeMs": 800,
+      "consumers": 4,
+      "backlogMessages": 2000,
+      "targetUtilizationPercent": 60,
+      "maxConcurrencyPerConsumer": 1
+    },
+    "offeredLoadErlangs": 4,
+    "totalCapacity": 4,
+    "utilizationPercent": 100,
+    "stable": false,
+    "waitProbability": 1,
+    "meanInSystem": null,
+    "backlogDrainSeconds": null,
+    "consumersForTargetUtilization": 7,
+    "visibilityTimeoutHintSeconds": 30,
+    "warnings": [
+      "Unstable: arrivals exceed capacity; backlog grows without bound",
+      "Backlog never drains at current capacity"
+    ],
+    "limitations": [
+      "Assumes Poisson arrivals and exponential service times (M/M/c); bursty traffic waits longer",
+      "Ignores batch receive, broker limits, retries and failures"
+    ]
+  }
+}

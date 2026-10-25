@@ -1,0 +1,37 @@
+{
+  "tool": "integration_config",
+  "arguments": {
+    "serverId": "aws-pricing-mcp-server",
+    "awsProfile": "readonly-profile",
+    "region": "us-east-1"
+  },
+  "result": {
+    "configuration": {
+      "mcpServers": {
+        "aws-pricing-mcp-server": {
+          "command": "uvx",
+          "args": [
+            "awslabs.aws-pricing-mcp-server@1.1.1"
+          ],
+          "env": {
+            "AWS_PROFILE": "readonly-profile",
+            "AWS_REGION": "us-east-1",
+            "FASTMCP_LOG_LEVEL": "ERROR"
+          },
+          "disabled": true,
+          "autoApprove": []
+        }
+      }
+    },
+    "status": "configuration-only-not-executed",
+    "source": "https://github.com/awslabs/mcp/tree/main/src/aws-pricing-mcp-server/",
+    "python": ">=3.10",
+    "next": [
+      "Read official server-specific prerequisites and arguments",
+      "Use a dedicated least-privilege role; confirm STS account identity",
+      "Some servers can create/delete resources or incur charges",
+      "Enable only selected servers and keep per-tool approval in the client"
+    ],
+    "warning": "disabled/autoApprove are Kiro-style controls. Other clients may ignore them; do not import unreviewed configs."
+  }
+}

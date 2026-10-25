@@ -1,0 +1,26 @@
+{
+  "tool": "capacity_plan",
+  "arguments": {
+    "requestsPerSecond": 5,
+    "durationMs": 400,
+    "payloadKB": 4,
+    "headroom": 1.5
+  },
+  "result": {
+    "kind": "calculation",
+    "assumptions": {
+      "requestsPerSecond": 5,
+      "durationMs": 400,
+      "payloadKB": 4,
+      "headroom": 1.5
+    },
+    "averageConcurrency": 2,
+    "plannedConcurrency": 3,
+    "dailyRequests": 432000,
+    "dailyPayloadGB": 1.728,
+    "limitations": [
+      "Assumes sustained rate all day; separate burst and average inputs",
+      "Validate quotas, tail latency, downstream capacity, storage overhead and retries"
+    ]
+  }
+}

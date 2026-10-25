@@ -3,6 +3,7 @@ import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 import {z} from 'zod';
 import {tool,short} from './definition.js';
+import { VERSION } from './version.js';
 import {verifyAccount} from './account.js';
 import packageData from './data/packages.json' with {type:'json'};
 const settings=z.object({servers:z.array(z.object({id:short,allowTools:z.array(short).min(1).max(80)}).strict()).max(20)}).strict();
@@ -21,7 +22,7 @@ async function callIntegration(id:string,name?:string,args?:Record<string,unknow
  // Do not inherit process secrets into third-party servers. HOME is required for the user's SDK credential chain.
  const env:Record<string,string>={AWS_PROFILE:process.env.AWS_PROFILE??'default',AWS_REGION:'us-east-1',AWS_DEFAULT_REGION:'us-east-1',FASTMCP_LOG_LEVEL:'ERROR'};
  for(const k of ['PATH','HOME','USERPROFILE','SYSTEMROOT','TMPDIR'])if(process.env[k])env[k]=process.env[k]!;
- const client=new Client({name:'moretes-local-federation',version:'0.1.0'});
+ const client=new Client({name:'moretes-local-federation',version:VERSION});
  const transport=new StdioClientTransport({command:'uvx',args:['--offline',`${config.package}@${config.version}`],env,stderr:'pipe'});
  // Drain stderr without exposing provider logs, which can include private data.
  transport.stderr?.on('data',()=>{});

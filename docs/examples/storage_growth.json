@@ -1,0 +1,231 @@
+{
+  "tool": "storage_growth",
+  "arguments": {
+    "dailyIngestGB": 25,
+    "retentionDays": 365,
+    "monthlyGrowthPercent": 3,
+    "compressionRatio": 2.5,
+    "replicationFactor": 1,
+    "months": 24,
+    "hotTierPricePerGBMonth": 0.023,
+    "coldTierPricePerGBMonth": 0.004,
+    "hotDays": 30
+  },
+  "result": {
+    "kind": "projection-not-quote",
+    "assumptions": {
+      "dailyIngestGB": 25,
+      "retentionDays": 365,
+      "monthlyGrowthPercent": 3,
+      "compressionRatio": 2.5,
+      "replicationFactor": 1,
+      "months": 24,
+      "hotTierPricePerGBMonth": 0.023,
+      "coldTierPricePerGBMonth": 0.004,
+      "hotDays": 30
+    },
+    "steadyState": false,
+    "finalStoredGB": 6139.5,
+    "finalStoredTB": 6,
+    "series": [
+      {
+        "month": 1,
+        "dailyIngestGB": 25,
+        "storedGB": 300,
+        "hotGB": 300,
+        "coldGB": 0,
+        "estimatedCost": 6.9
+      },
+      {
+        "month": 2,
+        "dailyIngestGB": 25.75,
+        "storedGB": 609,
+        "hotGB": 309,
+        "coldGB": 300,
+        "estimatedCost": 8.31
+      },
+      {
+        "month": 3,
+        "dailyIngestGB": 26.523,
+        "storedGB": 927.3,
+        "hotGB": 318.3,
+        "coldGB": 609,
+        "estimatedCost": 9.76
+      },
+      {
+        "month": 4,
+        "dailyIngestGB": 27.318,
+        "storedGB": 1255.1,
+        "hotGB": 327.8,
+        "coldGB": 927.3,
+        "estimatedCost": 11.25
+      },
+      {
+        "month": 5,
+        "dailyIngestGB": 28.138,
+        "storedGB": 1592.7,
+        "hotGB": 337.7,
+        "coldGB": 1255.1,
+        "estimatedCost": 12.79
+      },
+      {
+        "month": 6,
+        "dailyIngestGB": 28.982,
+        "storedGB": 1940.5,
+        "hotGB": 347.8,
+        "coldGB": 1592.7,
+        "estimatedCost": 14.37
+      },
+      {
+        "month": 7,
+        "dailyIngestGB": 29.851,
+        "storedGB": 2298.7,
+        "hotGB": 358.2,
+        "coldGB": 1940.5,
+        "estimatedCost": 16
+      },
+      {
+        "month": 8,
+        "dailyIngestGB": 30.747,
+        "storedGB": 2667.7,
+        "hotGB": 369,
+        "coldGB": 2298.7,
+        "estimatedCost": 17.68
+      },
+      {
+        "month": 9,
+        "dailyIngestGB": 31.669,
+        "storedGB": 3047.7,
+        "hotGB": 380,
+        "coldGB": 2667.7,
+        "estimatedCost": 19.41
+      },
+      {
+        "month": 10,
+        "dailyIngestGB": 32.619,
+        "storedGB": 3439.2,
+        "hotGB": 391.4,
+        "coldGB": 3047.7,
+        "estimatedCost": 21.19
+      },
+      {
+        "month": 11,
+        "dailyIngestGB": 33.598,
+        "storedGB": 3842.3,
+        "hotGB": 403.2,
+        "coldGB": 3439.2,
+        "estimatedCost": 23.03
+      },
+      {
+        "month": 12,
+        "dailyIngestGB": 34.606,
+        "storedGB": 4257.6,
+        "hotGB": 415.3,
+        "coldGB": 3842.3,
+        "estimatedCost": 24.92
+      },
+      {
+        "month": 13,
+        "dailyIngestGB": 35.644,
+        "storedGB": 4435.3,
+        "hotGB": 427.7,
+        "coldGB": 4007.6,
+        "estimatedCost": 25.87
+      },
+      {
+        "month": 14,
+        "dailyIngestGB": 36.713,
+        "storedGB": 4568.4,
+        "hotGB": 440.6,
+        "coldGB": 4127.8,
+        "estimatedCost": 26.64
+      },
+      {
+        "month": 15,
+        "dailyIngestGB": 37.815,
+        "storedGB": 4705.4,
+        "hotGB": 453.8,
+        "coldGB": 4251.7,
+        "estimatedCost": 27.44
+      },
+      {
+        "month": 16,
+        "dailyIngestGB": 38.949,
+        "storedGB": 4846.6,
+        "hotGB": 467.4,
+        "coldGB": 4379.2,
+        "estimatedCost": 28.27
+      },
+      {
+        "month": 17,
+        "dailyIngestGB": 40.118,
+        "storedGB": 4992,
+        "hotGB": 481.4,
+        "coldGB": 4510.6,
+        "estimatedCost": 29.11
+      },
+      {
+        "month": 18,
+        "dailyIngestGB": 41.321,
+        "storedGB": 5141.8,
+        "hotGB": 495.9,
+        "coldGB": 4645.9,
+        "estimatedCost": 29.99
+      },
+      {
+        "month": 19,
+        "dailyIngestGB": 42.561,
+        "storedGB": 5296,
+        "hotGB": 510.7,
+        "coldGB": 4785.3,
+        "estimatedCost": 30.89
+      },
+      {
+        "month": 20,
+        "dailyIngestGB": 43.838,
+        "storedGB": 5454.9,
+        "hotGB": 526.1,
+        "coldGB": 4928.9,
+        "estimatedCost": 31.81
+      },
+      {
+        "month": 21,
+        "dailyIngestGB": 45.153,
+        "storedGB": 5618.6,
+        "hotGB": 541.8,
+        "coldGB": 5076.7,
+        "estimatedCost": 32.77
+      },
+      {
+        "month": 22,
+        "dailyIngestGB": 46.507,
+        "storedGB": 5787.1,
+        "hotGB": 558.1,
+        "coldGB": 5229,
+        "estimatedCost": 33.75
+      },
+      {
+        "month": 23,
+        "dailyIngestGB": 47.903,
+        "storedGB": 5960.7,
+        "hotGB": 574.8,
+        "coldGB": 5385.9,
+        "estimatedCost": 34.76
+      },
+      {
+        "month": 24,
+        "dailyIngestGB": 49.34,
+        "storedGB": 6139.5,
+        "hotGB": 592.1,
+        "coldGB": 5547.5,
+        "estimatedCost": 35.81
+      }
+    ],
+    "tiering": "Move objects older than 30 days to a colder tier; 90.4% of data would be cold at month 24",
+    "limitations": [
+      "30-day months; ignores metadata, versioning, request costs and retrieval fees",
+      "Growth compounds monthly on ingest, not on stored volume",
+      "Prices are caller-supplied; no provider rates are embedded"
+    ]
+  }
+}

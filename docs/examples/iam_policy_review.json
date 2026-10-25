@@ -1,0 +1,60 @@
+{
+  "tool": "iam_policy_review",
+  "arguments": {
+    "policy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:*"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem"
+          ],
+          "Resource": "arn:aws:dynamodb:us-east-1:123456789012:table/orders",
+          "Condition": {
+            "StringEquals": {
+              "aws:RequestedRegion": "us-east-1"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
+    ],
+    "findings": [
+      {
+        "severity": "high",
+        "path": "Statement[0]",
+        "message": "Broad allowed action; enumerate operations and justify scope."
+      },
+      {
+        "severity": "medium",
+        "path": "Statement[0]",
+        "message": "Wildcard resource; verify whether each action supports resource-level restrictions."
+      },
+      {
+        "severity": "info",
+        "path": "Statement[0]",
+        "message": "No conditions; evaluate source account, source ARN, region and organization boundaries where supported."
+      }
+    ],
+    "limitations": [
+      "No effective permission or condition evaluation",
+      "Cannot prove policy safety",
+      "No account calls or policy changes"
+    ]
+  }
+}

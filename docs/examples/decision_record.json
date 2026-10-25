@@ -1,0 +1,28 @@
+{
+  "tool": "decision_record",
+  "arguments": {
+    "title": "Use SQS FIFO per tenant for order events",
+    "context": "Order events must be processed in order per customer; peak 300 orders/min; consumers are billing and inventory services owned by two teams.",
+    "options": [
+      "SQS FIFO with message group per customer",
+      "Kinesis Data Streams with partition key",
+      "Direct synchronous calls between services"
+    ],
+    "decision": "SQS FIFO with one message group per customer: ordering where it matters, bounded operational surface, dead-letter queue per consumer.",
+    "consequences": [
+      "FIFO throughput limit per message group must be monitored",
+      "Consumers must be idempotent on event id",
+      "Replay requires an authorized runbook"
+    ],
+    "status": "proposed"
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "markdown": "# ADR: Use SQS FIFO per tenant for order events\n\nStatus: proposed\n\n## Context\nOrder events must be processed in order per customer; peak 300 orders/min; consumers are billing and inventory services owned by two teams.\n\n## Options\n- SQS FIFO with message group per customer\n- Kinesis Data Streams with partition key\n- Direct synchronous calls between services\n\n## Decision\nSQS FIFO with one message group per customer: ordering where it matters, bounded operational surface, dead-letter queue per consumer.\n\n## Consequences\n- FIFO throughput limit per message group must be monitored\n- Consumers must be idempotent on event id\n- Replay requires an authorized runbook\n\n## Validation\nRecord owner, test evidence, pricing date and review date before adoption.\n"
+  }
+}

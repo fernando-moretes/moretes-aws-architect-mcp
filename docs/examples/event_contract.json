@@ -1,0 +1,189 @@
+{
+  "tool": "event_contract",
+  "arguments": {
+    "eventName": "orders.OrderPlaced",
+    "producer": "orders-api",
+    "consumers": [
+      "billing",
+      "inventory",
+      "notifications"
+    ],
+    "payloadFields": [
+      {
+        "name": "orderId",
+        "type": "id"
+      },
+      {
+        "name": "customerId",
+        "type": "id"
+      },
+      {
+        "name": "total",
+        "type": "money"
+      },
+      {
+        "name": "placedAt",
+        "type": "timestamp"
+      },
+      {
+        "name": "customerEmail",
+        "type": "string",
+        "required": false,
+        "pii": true
+      }
+    ],
+    "ordering": "per-key",
+    "deliveryGuarantee": "at-least-once"
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md"
+    ],
+    "eventName": "orders.OrderPlaced",
+    "envelope": "CloudEvents 1.0 attributes (id, type, source, time, subject, dataschema) plus traceparent",
+    "jsonSchema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "orders.OrderPlaced",
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "specversion",
+        "source",
+        "time",
+        "data"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique event id; consumers deduplicate on it"
+        },
+        "type": {
+          "const": "orders.OrderPlaced"
+        },
+        "specversion": {
+          "const": "1.0"
+        },
+        "source": {
+          "type": "string",
+          "description": "Producer URI, e.g. /orders-api"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Aggregate or partition key for ordering"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataschema": {
+          "type": "string",
+          "description": "URI of the versioned data schema"
+        },
+        "traceparent": {
+          "type": "string",
+          "description": "W3C trace context for correlation"
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "orderId",
+            "customerId",
+            "total",
+            "placedAt"
+          ],
+          "properties": {
+            "orderId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "customerId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "total": {
+              "type": "object",
+              "required": [
+                "amount",
+                "currency"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "string",
+                  "description": "Decimal as string; never float"
+                },
+                "currency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$"
+                }
+              }
+            },
+            "placedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "customerEmail": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "idempotency": "Consumers keep an idempotency store keyed by event id (TTL >= max redelivery window) and make side effects conditional.",
+      "ordering": "Partition by subject; a single consumer per partition preserves order per key only.",
+      "evolution": [
+        "Additive changes only within a major version (new optional fields)",
+        "Breaking change = new type suffix or dataschema major version, dual-publish during migration",
+        "Consumers ignore unknown fields",
+        "Never reuse a field name with a different meaning"
+      ],
+      "failure": [
+        "Dead-letter after bounded retries with the original event and error metadata",
+        "Replay is an authorized operation with a time window and a target consumer, never a blind re-send",
+        "Poison messages are quarantined, not dropped silently"
+      ]
+    },
+    "warnings": [
+      "Money fields (total) use decimal strings plus currency; floats are rejected.",
+      "PII fields (customerEmail): consider referencing by id instead of embedding, define retention in the broker and in every consumer."
+    ],
+    "consumers": [
+      {
+        "consumer": "billing",
+        "mustDefine": [
+          "idempotency key handling",
+          "retry and DLQ policy",
+          "schema version tolerated",
+          "owner"
+        ]
+      },
+      {
+        "consumer": "inventory",
+        "mustDefine": [
+          "idempotency key handling",
+          "retry and DLQ policy",
+          "schema version tolerated",
+          "owner"
+        ]
+      },
+      {
+        "consumer": "notifications",
+        "mustDefine": [
+          "idempotency key handling",
+          "retry and DLQ policy",
+          "schema version tolerated",
+          "owner"
+        ]
+      }
+    ],
+    "nextTools": [
+      "architecture_diagram",
+      "failure_rehearsal",
+      "decision_record"
+    ]
+  }
+}

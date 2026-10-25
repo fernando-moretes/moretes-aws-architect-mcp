@@ -1,0 +1,63 @@
+{
+  "tool": "cloudformation_review",
+  "arguments": {
+    "template": {
+      "Resources": {
+        "Invoices": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+            "PublicAccessBlockConfiguration": {
+              "BlockPublicAcls": true,
+              "IgnorePublicAcls": true,
+              "BlockPublicPolicy": true,
+              "RestrictPublicBuckets": false
+            }
+          }
+        },
+        "Api": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Runtime": "nodejs22.x"
+          }
+        },
+        "Db": {
+          "Type": "AWS::RDS::DBInstance",
+          "Properties": {
+            "PubliclyAccessible": true
+          }
+        }
+      }
+    }
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "resourceCount": 3,
+    "findings": [
+      {
+        "severity": "medium",
+        "path": "Resources.Invoices.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets",
+        "message": "Not explicitly true; resolve inherited/account settings and intrinsic functions before judging exposure."
+      },
+      {
+        "severity": "medium",
+        "path": "Resources.Api",
+        "message": "No explicit concurrency budget; evaluate account limits and workload isolation."
+      },
+      {
+        "severity": "high",
+        "path": "Resources.Db",
+        "message": "Database public accessibility enabled; validate network and security group intent."
+      }
+    ],
+    "limitations": [
+      "Static subset of checks, not cfn-lint, Guard or Access Analyzer",
+      "No intrinsic evaluation or deployment",
+      "Empty findings is not a security approval"
+    ]
+  }
+}

@@ -4,6 +4,167 @@ Generated from the registered schemas. Public tools are read-only; local provide
 
 ## Public HTTP / stdio
 
+### architect_panel
+
+Convene architect personas (solution, enterprise, business, data, infrastructure, software, AI, security, governance, FinOps) on a subject: each returns its questions, checks, deliverables and the workbench tools to call. Lens, not a verdict.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "artifactType": {
+      "type": "string",
+      "enum": [
+        "requirements",
+        "design",
+        "code",
+        "iac",
+        "api-contract",
+        "data-model",
+        "pipeline",
+        "incident"
+      ]
+    },
+    "roles": {
+      "default": [
+        "solution",
+        "security",
+        "finops"
+      ],
+      "minItems": 1,
+      "maxItems": 10,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "solution",
+          "enterprise",
+          "business",
+          "data",
+          "infrastructure",
+          "software",
+          "ai",
+          "security",
+          "governance",
+          "finops"
+        ]
+      }
+    },
+    "knownFacts": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    }
+  },
+  "required": [
+    "subject",
+    "artifactType",
+    "roles",
+    "knownFacts"
+  ],
+  "additionalProperties": false
+}
+```
+
+### code_review_architecture
+
+Heuristic architecture and security scan of source code pasted as text (any language): secrets, insecure calls, SQL built by concatenation, disabled TLS, hardcoded endpoints, missing timeouts and retry hazards. Not a linter or SAST replacement.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "default": "snippet",
+      "type": "string",
+      "maxLength": 200
+    },
+    "language": {
+      "default": "auto",
+      "type": "string",
+      "enum": [
+        "auto",
+        "typescript",
+        "javascript",
+        "python",
+        "java",
+        "go",
+        "csharp",
+        "kotlin",
+        "ruby",
+        "php",
+        "rust",
+        "shell",
+        "yaml",
+        "json",
+        "hcl",
+        "sql"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60000
+    }
+  },
+  "required": [
+    "filename",
+    "language",
+    "code"
+  ],
+  "additionalProperties": false
+}
+```
+
+### dependency_manifest_review
+
+Review a dependency manifest (package.json, requirements.txt, pyproject, go.mod, pom.xml, Gemfile, Cargo.toml as text) for unpinned ranges, git or URL sources, wildcard versions and missing lockfile hints.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60000
+    },
+    "lockfilePresent": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "filename",
+    "content"
+  ],
+  "additionalProperties": false
+}
+```
+
 ### requirements_check
 
 Turn a workload brief into explicit requirements, gaps and research questions. No inferred SLA or budget.
@@ -52,7 +213,7 @@ External call: false. Potentially mutating: false.
 
 ### architecture_pattern
 
-Select a reference architecture by explicit workload pattern; returns tradeoffs, questions and Mermaid.
+Select a reference architecture by explicit workload pattern; returns tradeoffs, questions and Mermaid. provider maps the AWS services to Azure, GCP, OCI or open source equivalents.
 
 External call: false. Potentially mutating: false.
 
@@ -75,11 +236,23 @@ External call: false. Potentially mutating: false.
       "type": "string",
       "minLength": 1,
       "maxLength": 4000
+    },
+    "provider": {
+      "default": "aws",
+      "type": "string",
+      "enum": [
+        "aws",
+        "azure",
+        "gcp",
+        "oci",
+        "oss"
+      ]
     }
   },
   "required": [
     "pattern",
-    "workload"
+    "workload",
+    "provider"
   ],
   "additionalProperties": false
 }
@@ -722,6 +895,1680 @@ External call: false. Potentially mutating: false.
 }
 ```
 
+### c4_model
+
+Build C4 context or container diagrams (Mermaid) from explicit people, systems, containers and relations. Validates endpoints; no infrastructure discovery.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "level": {
+      "type": "string",
+      "enum": [
+        "context",
+        "container"
+      ]
+    },
+    "system": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "people": {
+      "default": [],
+      "maxItems": 15,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "description": {
+            "default": "",
+            "type": "string",
+            "maxLength": 200
+          },
+          "technology": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "externalSystems": {
+      "default": [],
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "description": {
+            "default": "",
+            "type": "string",
+            "maxLength": 200
+          },
+          "technology": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "containers": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "description": {
+            "default": "",
+            "type": "string",
+            "maxLength": 200
+          },
+          "technology": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "default": [],
+      "maxItems": 80,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "label": {
+            "default": "uses",
+            "type": "string",
+            "maxLength": 120
+          },
+          "technology": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "level",
+    "system",
+    "people",
+    "externalSystems",
+    "containers",
+    "relations"
+  ],
+  "additionalProperties": false
+}
+```
+
+### sequence_diagram
+
+Build a Mermaid sequence diagram from participants and ordered messages, with optional activation, notes and alt/loop blocks. Rejects unknown participants.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "participants": {
+      "minItems": 2,
+      "maxItems": 15,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "kind": {
+            "default": "participant",
+            "type": "string",
+            "enum": [
+              "actor",
+              "participant"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "kind"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "messages": {
+      "minItems": 1,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "to": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 140
+          },
+          "style": {
+            "default": "sync",
+            "type": "string",
+            "enum": [
+              "sync",
+              "async",
+              "reply",
+              "reply-async"
+            ]
+          },
+          "activate": {
+            "default": false,
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 140
+          },
+          "block": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "alt",
+                  "else",
+                  "loop",
+                  "opt",
+                  "par",
+                  "end"
+                ]
+              },
+              "label": {
+                "default": "",
+                "type": "string",
+                "maxLength": 80
+              }
+            },
+            "required": [
+              "kind",
+              "label"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "text",
+          "style",
+          "activate"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "title",
+    "participants",
+    "messages"
+  ],
+  "additionalProperties": false
+}
+```
+
+### service_equivalents
+
+Map a cloud capability to equivalent managed services on AWS, Azure, Google Cloud, OCI and open source. Names as of the snapshot date; verify current naming, regions and pricing before deciding.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "categories": {
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 60
+      }
+    },
+    "from": {
+      "default": "aws",
+      "type": "string",
+      "enum": [
+        "aws",
+        "azure",
+        "gcp",
+        "oci",
+        "oss"
+      ]
+    },
+    "to": {
+      "default": [
+        "azure",
+        "gcp",
+        "oci",
+        "oss"
+      ],
+      "minItems": 1,
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "aws",
+          "azure",
+          "gcp",
+          "oci",
+          "oss"
+        ]
+      }
+    },
+    "query": {
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "required": [
+    "from",
+    "to"
+  ],
+  "additionalProperties": false
+}
+```
+
+### data_classification
+
+Classify data elements, map them to regulation hints (LGPD, GDPR, PCI DSS, HIPAA) and list handling controls and open questions. Review aid, not legal advice.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "system": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "elements": {
+      "minItems": 1,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "public",
+              "internal",
+              "personal",
+              "sensitive-personal",
+              "financial-card",
+              "health",
+              "credential",
+              "children"
+            ]
+          },
+          "purpose": {
+            "default": "",
+            "type": "string",
+            "maxLength": 200
+          },
+          "retentionDays": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 36500
+          },
+          "residency": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "sharedWith": {
+            "default": [],
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        },
+        "required": [
+          "name",
+          "category",
+          "purpose",
+          "sharedWith"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "jurisdictions": {
+      "default": [
+        "BR"
+      ],
+      "minItems": 1,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "BR",
+          "EU",
+          "US",
+          "other"
+        ]
+      }
+    }
+  },
+  "required": [
+    "system",
+    "elements",
+    "jurisdictions"
+  ],
+  "additionalProperties": false
+}
+```
+
+### openapi_review
+
+Heuristic review of an OpenAPI 3.x document (JSON): security, pagination, error responses, idempotency, versioning and documentation gaps. Not a linter replacement.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "document"
+  ],
+  "additionalProperties": false
+}
+```
+
+### event_contract
+
+Design an event contract: envelope fields, schema evolution rules, idempotency, ordering, DLQ and replay decisions for a named business event. Deterministic template with open questions.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "eventName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*(\\.[A-Za-z][A-Za-z0-9]*)+$"
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "consumers": {
+      "minItems": 1,
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "payloadFields": {
+      "minItems": 1,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "timestamp",
+              "object",
+              "array",
+              "id",
+              "money"
+            ]
+          },
+          "required": {
+            "default": true,
+            "type": "boolean"
+          },
+          "pii": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "required",
+          "pii"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "ordering": {
+      "default": "per-key",
+      "type": "string",
+      "enum": [
+        "none",
+        "per-key",
+        "global"
+      ]
+    },
+    "deliveryGuarantee": {
+      "default": "at-least-once",
+      "type": "string",
+      "enum": [
+        "at-least-once",
+        "at-most-once",
+        "effectively-once"
+      ]
+    }
+  },
+  "required": [
+    "eventName",
+    "producer",
+    "consumers",
+    "payloadFields",
+    "ordering",
+    "deliveryGuarantee"
+  ],
+  "additionalProperties": false
+}
+```
+
+### latency_budget
+
+Split an end-to-end latency objective across hops and show which hops exceed their share. Pure arithmetic over caller-supplied estimates.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "targetMs": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 600000
+    },
+    "percentile": {
+      "default": "p95",
+      "type": "string",
+      "enum": [
+        "p50",
+        "p95",
+        "p99"
+      ]
+    },
+    "hops": {
+      "minItems": 1,
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "estimatedMs": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 600000
+          },
+          "parallelGroup": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "cacheable": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "estimatedMs",
+          "cacheable"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "targetMs",
+    "percentile",
+    "hops"
+  ],
+  "additionalProperties": false
+}
+```
+
+### queue_sizing
+
+Size consumers for a queue with Little's law and Erlang C: utilization, wait probability, backlog drain time and consumers needed for a target utilization.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "arrivalsPerSecond": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10000000
+    },
+    "serviceTimeMs": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 3600000
+    },
+    "consumers": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 100000
+    },
+    "backlogMessages": {
+      "default": 0,
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "targetUtilizationPercent": {
+      "default": 70,
+      "type": "number",
+      "minimum": 10,
+      "maximum": 95
+    },
+    "maxConcurrencyPerConsumer": {
+      "default": 1,
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 10000
+    }
+  },
+  "required": [
+    "arrivalsPerSecond",
+    "serviceTimeMs",
+    "consumers",
+    "backlogMessages",
+    "targetUtilizationPercent",
+    "maxConcurrencyPerConsumer"
+  ],
+  "additionalProperties": false
+}
+```
+
+### dr_strategy
+
+Compare disaster recovery tiers (backup-and-restore, pilot light, warm standby, active-active) against RTO, RPO and data constraints; returns feasible tiers and required capabilities, not a guarantee.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "workload": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "rtoMinutes": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10080
+    },
+    "rpoMinutes": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10080
+    },
+    "dataGB": {
+      "default": 0,
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "replicationBandwidthMbps": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1000000
+    },
+    "regulatoryResidency": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "statefulComponents": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    }
+  },
+  "required": [
+    "workload",
+    "rtoMinutes",
+    "rpoMinutes",
+    "dataGB",
+    "statefulComponents"
+  ],
+  "additionalProperties": false
+}
+```
+
+### retry_policy
+
+Compute an exponential backoff schedule with jitter, the worst-case wait and whether it fits a deadline; adds idempotency and circuit-breaker guidance.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "baseDelayMs": {
+      "default": 100,
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 60000
+    },
+    "factor": {
+      "default": 2,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "capMs": {
+      "default": 20000,
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 600000
+    },
+    "maxAttempts": {
+      "default": 5,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "jitter": {
+      "default": "full",
+      "type": "string",
+      "enum": [
+        "none",
+        "full",
+        "equal"
+      ]
+    },
+    "deadlineMs": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 3600000
+    },
+    "operationIdempotent": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "baseDelayMs",
+    "factor",
+    "capMs",
+    "maxAttempts",
+    "jitter",
+    "operationIdempotent"
+  ],
+  "additionalProperties": false
+}
+```
+
+### storage_growth
+
+Project storage volume and relative cost over time from ingest, retention, compression, replication and growth; suggests tiering thresholds.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "dailyIngestGB": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "retentionDays": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 36500
+    },
+    "monthlyGrowthPercent": {
+      "default": 0,
+      "type": "number",
+      "minimum": -50,
+      "maximum": 100
+    },
+    "compressionRatio": {
+      "default": 1,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "replicationFactor": {
+      "default": 1,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "months": {
+      "default": 24,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 120
+    },
+    "hotTierPricePerGBMonth": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "coldTierPricePerGBMonth": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "hotDays": {
+      "default": 30,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 36500
+    }
+  },
+  "required": [
+    "dailyIngestGB",
+    "retentionDays",
+    "monthlyGrowthPercent",
+    "compressionRatio",
+    "replicationFactor",
+    "months",
+    "hotDays"
+  ],
+  "additionalProperties": false
+}
+```
+
+### finops_unit_economics
+
+Compute cost per unit (request, customer, transaction), fixed versus variable split and the volume at which the marginal cost crosses a target. Caller supplies costs; no provider prices are guessed.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "period": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "currency": {
+      "default": "USD",
+      "type": "string",
+      "enum": [
+        "USD",
+        "BRL",
+        "EUR"
+      ]
+    },
+    "fixedCosts": {
+      "default": [],
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000000000000
+          }
+        },
+        "required": [
+          "name",
+          "amount"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "variableCosts": {
+      "default": [],
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000000000000
+          }
+        },
+        "required": [
+          "name",
+          "amount"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "units": {
+      "minItems": 1,
+      "maxItems": 10,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "count": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 1000000000000000
+          }
+        },
+        "required": [
+          "name",
+          "count"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "targetCostPerPrimaryUnit": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1000000000
+    }
+  },
+  "required": [
+    "period",
+    "currency",
+    "fixedCosts",
+    "variableCosts",
+    "units"
+  ],
+  "additionalProperties": false
+}
+```
+
+### postmortem
+
+Generate a blameless postmortem document from incident facts: timeline, impact, detection, contributing factors and owned action items. Rejects action items without owner and due date.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "sev1",
+        "sev2",
+        "sev3",
+        "sev4"
+      ]
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "detectedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "mitigatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "resolvedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "impact": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "timeline": {
+      "minItems": 2,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "event": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "required": [
+          "at",
+          "event"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "contributingFactors": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "whatWentWell": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "actionItems": {
+      "minItems": 1,
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "due": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "prevent",
+              "detect",
+              "mitigate",
+              "process"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "owner",
+          "due",
+          "kind"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "title",
+    "severity",
+    "startedAt",
+    "detectedAt",
+    "mitigatedAt",
+    "resolvedAt",
+    "impact",
+    "timeline",
+    "contributingFactors",
+    "whatWentWell",
+    "actionItems"
+  ],
+  "additionalProperties": false
+}
+```
+
+### runbook
+
+Generate an operational runbook from service facts: alerts, diagnostic steps, remediation, rollback, escalation and verification. Template with explicit placeholders for what the caller did not provide.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "alerts": {
+      "minItems": 1,
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "meaning": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "threshold": {
+            "type": "string",
+            "maxLength": 120
+          }
+        },
+        "required": [
+          "name",
+          "meaning"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "diagnostics": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "remediation": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "rollback": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "escalation": {
+      "default": [],
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000
+      }
+    },
+    "dashboards": {
+      "default": [],
+      "maxItems": 10,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    }
+  },
+  "required": [
+    "service",
+    "owner",
+    "alerts",
+    "diagnostics",
+    "remediation",
+    "rollback",
+    "escalation",
+    "dashboards"
+  ],
+  "additionalProperties": false
+}
+```
+
+### agent_eval_plan
+
+Design an evaluation plan for an AI agent: golden set sizing, metrics, judge rubric, red-team cases and regression cadence from explicit capabilities and risks.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "capabilities": {
+      "minItems": 1,
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "tools": {
+      "default": [],
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "mutating": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "mutating"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "risks": {
+      "minItems": 1,
+      "maxItems": 7,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "wrong-action",
+          "data-leak",
+          "prompt-injection",
+          "cost-runaway",
+          "hallucinated-fact",
+          "bias",
+          "latency"
+        ]
+      }
+    },
+    "releaseCadence": {
+      "default": "weekly",
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "monthly"
+      ]
+    }
+  },
+  "required": [
+    "agent",
+    "capabilities",
+    "tools",
+    "risks",
+    "releaseCadence"
+  ],
+  "additionalProperties": false
+}
+```
+
+### prompt_injection_checklist
+
+Enumerate injection paths and controls for an agent from its tools and untrusted data sources; produces a checklist with status to fill, not a scan.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "untrustedSources": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "web-pages",
+          "documents",
+          "emails",
+          "tickets",
+          "database-rows",
+          "tool-results",
+          "user-uploads",
+          "other-agents"
+        ]
+      }
+    },
+    "tools": {
+      "minItems": 1,
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "mutating": {
+            "type": "boolean"
+          },
+          "external": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "mutating",
+          "external"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "humanInLoop": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "agent",
+    "untrustedSources",
+    "tools",
+    "humanInLoop"
+  ],
+  "additionalProperties": false
+}
+```
+
+### rag_pipeline_plan
+
+Plan a retrieval-augmented generation pipeline from corpus facts: chunking, embedding, indexing, authorization, evaluation and cost drivers, with open questions. No vendor is chosen for you.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "useCase": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "corpus": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 1000000000
+        },
+        "averagePages": {
+          "default": 10,
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10000
+        },
+        "formats": {
+          "minItems": 1,
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "pdf",
+              "html",
+              "markdown",
+              "docx",
+              "code",
+              "tables",
+              "images",
+              "transcripts"
+            ]
+          }
+        },
+        "updateFrequency": {
+          "type": "string",
+          "enum": [
+            "static",
+            "daily",
+            "hourly",
+            "realtime"
+          ]
+        },
+        "languages": {
+          "default": [
+            "pt-BR"
+          ],
+          "minItems": 1,
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 10
+          }
+        }
+      },
+      "required": [
+        "documents",
+        "averagePages",
+        "formats",
+        "updateFrequency",
+        "languages"
+      ],
+      "additionalProperties": false
+    },
+    "authorization": {
+      "type": "string",
+      "enum": [
+        "public",
+        "single-tenant",
+        "multi-tenant",
+        "per-document-acl"
+      ]
+    },
+    "latencyBudgetMs": {
+      "default": 3000,
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 60000
+    },
+    "citationsRequired": {
+      "default": true,
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "useCase",
+    "corpus",
+    "authorization",
+    "latencyBudgetMs",
+    "citationsRequired"
+  ],
+  "additionalProperties": false
+}
+```
+
+### mcp_server_review
+
+Heuristic safety review of ANOTHER MCP server from its tools/list output: tool-poisoning text, missing annotations, risky parameters, free-form schemas, name shadowing and context cost. Paste the JSON your client shows.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "serverName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "tools": {
+      "minItems": 1,
+      "maxItems": 300,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "inputSchema": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          },
+          "annotations": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "serverName",
+    "tools"
+  ],
+  "additionalProperties": false
+}
+```
+
+### mcp_config_review
+
+Review an MCP client configuration JSON (mcpServers map) for unpinned packages, inline secrets, plain HTTP, auto-approved tools and unreviewed enablement.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "config"
+  ],
+  "additionalProperties": false
+}
+```
+
 ### iam_policy_review
 
 Inspect an IAM JSON document for broad Allow statements. Heuristic only; use IAM Access Analyzer for authoritative validation.
@@ -769,6 +2616,63 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "template"
+  ],
+  "additionalProperties": false
+}
+```
+
+### terraform_plan_review
+
+Review a Terraform or OpenTofu plan exported as JSON (terraform show -json): deletions and replacements of stateful resources, public exposure, disabled encryption, literal credentials, broad policies and unpinned providers. Any provider; heuristic.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "plan": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "plan"
+  ],
+  "additionalProperties": false
+}
+```
+
+### kubernetes_manifest_review
+
+Review Kubernetes manifests (parsed JSON objects) for probes, resources, security context, image pinning, host access, secrets in env, PDB and NetworkPolicy coverage. No cluster access.
+
+External call: false. Potentially mutating: false.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "manifests": {
+      "minItems": 1,
+      "maxItems": 300,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string"
+        },
+        "additionalProperties": {}
+      }
+    }
+  },
+  "required": [
+    "manifests"
   ],
   "additionalProperties": false
 }

@@ -1,0 +1,47 @@
+{
+  "tool": "service_compare",
+  "arguments": {
+    "family": "messaging",
+    "constraints": [
+      "Ordering per customer",
+      "Two consumer teams",
+      "Replay within 7 days"
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "constraints": [
+      "Ordering per customer",
+      "Two consumer teams",
+      "Replay within 7 days"
+    ],
+    "options": [
+      {
+        "service": "SQS",
+        "fit": "Buffered work delivery",
+        "tradeoff": "Consumer owns idempotency and DLQ"
+      },
+      {
+        "service": "SNS",
+        "fit": "Push fanout",
+        "tradeoff": "Subscriber delivery policy"
+      },
+      {
+        "service": "EventBridge",
+        "fit": "Event routing and integration",
+        "tradeoff": "Event schema governance"
+      },
+      {
+        "service": "Step Functions",
+        "fit": "Explicit workflow state",
+        "tradeoff": "State transitions and execution limits"
+      }
+    ],
+    "decisionRequired": "Collect workload evidence and current pricing before selecting."
+  }
+}

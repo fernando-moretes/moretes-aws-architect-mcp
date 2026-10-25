@@ -1,0 +1,128 @@
+{
+  "tool": "kubernetes_manifest_review",
+  "arguments": {
+    "manifests": [
+      {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+          "name": "orders-api",
+          "namespace": "orders"
+        },
+        "spec": {
+          "replicas": 3,
+          "strategy": {
+            "type": "RollingUpdate"
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "orders-api"
+              }
+            },
+            "spec": {
+              "serviceAccountName": "orders-api",
+              "automountServiceAccountToken": false,
+              "securityContext": {
+                "runAsNonRoot": true
+              },
+              "containers": [
+                {
+                  "name": "api",
+                  "image": "ghcr.io/example/orders-api:1.14.2",
+                  "resources": {
+                    "requests": {
+                      "cpu": "250m",
+                      "memory": "256Mi"
+                    },
+                    "limits": {
+                      "memory": "512Mi"
+                    }
+                  },
+                  "readinessProbe": {
+                    "httpGet": {
+                      "path": "/ready",
+                      "port": 8080
+                    }
+                  },
+                  "livenessProbe": {
+                    "httpGet": {
+                      "path": "/live",
+                      "port": 8080
+                    }
+                  },
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "readOnlyRootFilesystem": true,
+                    "capabilities": {
+                      "drop": [
+                        "ALL"
+                      ]
+                    }
+                  },
+                  "env": [
+                    {
+                      "name": "DB_PASSWORD",
+                      "value": "change-me-please"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "apiVersion": "policy/v1",
+        "kind": "PodDisruptionBudget",
+        "metadata": {
+          "name": "orders-api",
+          "namespace": "orders"
+        },
+        "spec": {
+          "minAvailable": 2,
+          "selector": {
+            "matchLabels": {
+              "app": "orders-api"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "result": {
+    "kind": "kubernetes-heuristic-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://kubernetes.io/docs/concepts/security/pod-security-standards/"
+    ],
+    "objects": 2,
+    "kinds": [
+      "Deployment",
+      "PodDisruptionBudget"
+    ],
+    "findings": [
+      {
+        "severity": "high",
+        "target": "Deployment/orders-api/api",
+        "message": "Literal secret in env DB_PASSWORD; use secretKeyRef or an external secret store."
+      },
+      {
+        "severity": "info",
+        "target": "Deployment/orders-api",
+        "message": "No NetworkPolicy in namespace orders; all pod-to-pod traffic is allowed."
+      }
+    ],
+    "summary": {
+      "high": 1,
+      "medium": 0,
+      "info": 1
+    },
+    "limitations": [
+      "Static checks on the manifests provided; admission policies, cluster defaults and LimitRanges are not visible",
+      "Convert YAML to JSON before calling (one object per document)",
+      "Use Pod Security Admission, Kyverno or kube-linter for enforcement"
+    ]
+  }
+}

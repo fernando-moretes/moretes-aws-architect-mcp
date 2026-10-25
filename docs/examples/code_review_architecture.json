@@ -1,0 +1,74 @@
+{
+  "tool": "code_review_architecture",
+  "arguments": {
+    "filename": "orders-service.ts",
+    "language": "typescript",
+    "code": "const DB_PASSWORD = 'pr0d-sup3r-s3cret';\nasync function getOrder(id: string) {\n  const rows = await db.query(\"SELECT * FROM orders WHERE id = '\" + id + \"'\");\n  return rows[0];\n}\nasync function notify(order) {\n  await fetch('http://notify.internal/send', { method: 'POST', body: JSON.stringify(order) });\n}\ntry { await notify(order); } catch (e) {}\n"
+  },
+  "result": {
+    "kind": "code-heuristic-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "filename": "orders-service.ts",
+    "language": "typescript",
+    "metrics": {
+      "lines": 10,
+      "nonEmptyLines": 9,
+      "longestLine": 94,
+      "functionsApprox": 2,
+      "todoCount": 0
+    },
+    "findings": [
+      {
+        "severity": "high",
+        "line": 1,
+        "rule": "hardcoded-secret",
+        "message": "Credential-like literal assigned in code."
+      },
+      {
+        "severity": "high",
+        "line": 3,
+        "rule": "sql-concat",
+        "message": "SQL statement built by string interpolation; use parameters."
+      },
+      {
+        "severity": "medium",
+        "line": 7,
+        "rule": "plain-http",
+        "message": "Plain HTTP endpoint literal."
+      },
+      {
+        "severity": "medium",
+        "line": 7,
+        "rule": "no-timeout",
+        "message": "Network call without a visible timeout on the same line; verify a client-level timeout exists."
+      },
+      {
+        "severity": "medium",
+        "line": 9,
+        "rule": "swallowed-error",
+        "message": "Empty catch block swallows errors."
+      }
+    ],
+    "truncated": false,
+    "summary": {
+      "high": 2,
+      "medium": 3,
+      "info": 0
+    },
+    "architectureQuestions": [
+      "Where do timeouts, retries and idempotency live for every outbound call?",
+      "Which configuration differs per environment and how is it injected?",
+      "How does this code fail when a dependency is down?",
+      "Which secrets does it need and from where?"
+    ],
+    "limitations": [
+      "Regex heuristics per line; no parsing, data flow or semantic analysis",
+      "Use Semgrep, CodeQL, Bandit, gosec or the language linter for enforcement",
+      "A match may be a false positive (e.g. a documented example)"
+    ]
+  }
+}

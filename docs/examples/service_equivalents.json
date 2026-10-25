@@ -1,0 +1,110 @@
+{
+  "tool": "service_equivalents",
+  "arguments": {
+    "categories": [
+      "queue",
+      "event-bus",
+      "serverless-functions",
+      "relational-db"
+    ],
+    "from": "aws",
+    "to": [
+      "azure",
+      "gcp",
+      "oss"
+    ]
+  },
+  "result": {
+    "kind": "reference-snapshot",
+    "snapshotDate": "2026-10-24",
+    "from": "aws",
+    "rows": [
+      {
+        "category": "serverless-functions",
+        "capability": "Event-driven functions",
+        "aws": "AWS Lambda",
+        "equivalents": {
+          "azure": "Azure Functions",
+          "gcp": "Cloud Run functions",
+          "oss": "Knative Functions / OpenFaaS"
+        }
+      },
+      {
+        "category": "relational-db",
+        "capability": "Managed relational database",
+        "aws": "Amazon RDS / Amazon Aurora",
+        "equivalents": {
+          "azure": "Azure SQL Database / Azure Database for PostgreSQL",
+          "gcp": "Cloud SQL / AlloyDB",
+          "oss": "PostgreSQL / MySQL"
+        }
+      },
+      {
+        "category": "queue",
+        "capability": "Message queue",
+        "aws": "Amazon SQS",
+        "equivalents": {
+          "azure": "Azure Service Bus queues / Queue Storage",
+          "gcp": "Pub/Sub (pull) / Cloud Tasks",
+          "oss": "RabbitMQ / NATS JetStream"
+        }
+      },
+      {
+        "category": "event-bus",
+        "capability": "Event routing bus",
+        "aws": "Amazon EventBridge",
+        "equivalents": {
+          "azure": "Azure Event Grid",
+          "gcp": "Eventarc",
+          "oss": "NATS / Knative Eventing"
+        }
+      }
+    ],
+    "categories": [
+      "serverless-functions",
+      "serverless-containers",
+      "kubernetes",
+      "virtual-machines",
+      "batch",
+      "object-storage",
+      "block-storage",
+      "file-storage",
+      "relational-db",
+      "nosql-kv",
+      "cache",
+      "queue",
+      "streaming",
+      "event-bus",
+      "workflow",
+      "api-gateway",
+      "load-balancer",
+      "cdn",
+      "dns",
+      "network",
+      "waf-ddos",
+      "identity-customer",
+      "identity-workforce",
+      "secrets",
+      "kms",
+      "observability",
+      "iac",
+      "cicd",
+      "container-registry",
+      "vector-search",
+      "llm-platform",
+      "agent-runtime",
+      "ml-platform",
+      "data-warehouse",
+      "etl",
+      "lakehouse-tables",
+      "search",
+      "notifications",
+      "backup",
+      "cost-management",
+      "governance",
+      "iot",
+      "edge-compute"
+    ],
+    "limitation": "Equivalence is functional, not identical: quotas, consistency models, pricing dimensions and regional availability differ. Confirm with each provider's current documentation."
+  }
+}

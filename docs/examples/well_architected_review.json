@@ -1,0 +1,77 @@
+{
+  "tool": "well_architected_review",
+  "arguments": {
+    "workload": "Orders API",
+    "controls": [
+      {
+        "id": "backup-restore-tested",
+        "pillar": "reliability",
+        "status": "met",
+        "evidence": "Restore drill 2026-09-14, 38 minutes, ticket OPS-412"
+      },
+      {
+        "id": "least-privilege-iam",
+        "pillar": "security",
+        "status": "met",
+        "evidence": ""
+      },
+      {
+        "id": "cost-alerts",
+        "pillar": "cost",
+        "status": "gap",
+        "owner": "platform-team"
+      },
+      {
+        "id": "runbooks",
+        "pillar": "operational-excellence",
+        "status": "unknown"
+      }
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "workload": "Orders API",
+    "controls": [
+      {
+        "id": "backup-restore-tested",
+        "pillar": "reliability",
+        "status": "met",
+        "evidence": "Restore drill 2026-09-14, 38 minutes, ticket OPS-412"
+      },
+      {
+        "id": "least-privilege-iam",
+        "pillar": "security",
+        "status": "unknown",
+        "evidence": ""
+      },
+      {
+        "id": "cost-alerts",
+        "pillar": "cost",
+        "status": "gap",
+        "evidence": "",
+        "owner": "platform-team"
+      },
+      {
+        "id": "runbooks",
+        "pillar": "operational-excellence",
+        "status": "unknown",
+        "evidence": ""
+      }
+    ],
+    "summary": {
+      "met": 1,
+      "gaps": 1,
+      "unknown": 2
+    },
+    "missingPillars": [
+      "performance",
+      "sustainability"
+    ],
+    "next": "Assign owners and evidence for each gap. No compliance score is issued."
+  }
+}

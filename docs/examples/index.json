@@ -1,0 +1,183 @@
+{
+  "generatedAt": "2026-10-25T01:22:36.203Z",
+  "note": "Real outputs of dist/ tools for the arguments shown in each file. Regenerate with node scripts/examples.mjs after changing a tool.",
+  "examples": [
+    {
+      "tool": "architect_panel",
+      "file": "docs/examples/architect_panel.json"
+    },
+    {
+      "tool": "requirements_check",
+      "file": "docs/examples/requirements_check.json"
+    },
+    {
+      "tool": "architecture_pattern",
+      "file": "docs/examples/architecture_pattern.json"
+    },
+    {
+      "tool": "service_equivalents",
+      "file": "docs/examples/service_equivalents.json"
+    },
+    {
+      "tool": "c4_model",
+      "file": "docs/examples/c4_model.json"
+    },
+    {
+      "tool": "sequence_diagram",
+      "file": "docs/examples/sequence_diagram.json"
+    },
+    {
+      "tool": "decision_record",
+      "file": "docs/examples/decision_record.json"
+    },
+    {
+      "tool": "well_architected_review",
+      "file": "docs/examples/well_architected_review.json"
+    },
+    {
+      "tool": "threat_model",
+      "file": "docs/examples/threat_model.json"
+    },
+    {
+      "tool": "data_classification",
+      "file": "docs/examples/data_classification.json"
+    },
+    {
+      "tool": "capacity_plan",
+      "file": "docs/examples/capacity_plan.json"
+    },
+    {
+      "tool": "latency_budget",
+      "file": "docs/examples/latency_budget.json"
+    },
+    {
+      "tool": "queue_sizing",
+      "file": "docs/examples/queue_sizing.json"
+    },
+    {
+      "tool": "cost_model",
+      "file": "docs/examples/cost_model.json"
+    },
+    {
+      "tool": "finops_unit_economics",
+      "file": "docs/examples/finops_unit_economics.json"
+    },
+    {
+      "tool": "slo_budget",
+      "file": "docs/examples/slo_budget.json"
+    },
+    {
+      "tool": "dr_strategy",
+      "file": "docs/examples/dr_strategy.json"
+    },
+    {
+      "tool": "retry_policy",
+      "file": "docs/examples/retry_policy.json"
+    },
+    {
+      "tool": "failure_rehearsal",
+      "file": "docs/examples/failure_rehearsal.json"
+    },
+    {
+      "tool": "event_contract",
+      "file": "docs/examples/event_contract.json"
+    },
+    {
+      "tool": "openapi_review",
+      "file": "docs/examples/openapi_review.json",
+      "findings": 12
+    },
+    {
+      "tool": "iam_policy_review",
+      "file": "docs/examples/iam_policy_review.json",
+      "findings": 3
+    },
+    {
+      "tool": "cloudformation_review",
+      "file": "docs/examples/cloudformation_review.json",
+      "findings": 3
+    },
+    {
+      "tool": "terraform_plan_review",
+      "file": "docs/examples/terraform_plan_review.json",
+      "findings": 5
+    },
+    {
+      "tool": "kubernetes_manifest_review",
+      "file": "docs/examples/kubernetes_manifest_review.json",
+      "findings": 2
+    },
+    {
+      "tool": "code_review_architecture",
+      "file": "docs/examples/code_review_architecture.json",
+      "findings": 5
+    },
+    {
+      "tool": "dependency_manifest_review",
+      "file": "docs/examples/dependency_manifest_review.json",
+      "findings": 5
+    },
+    {
+      "tool": "agent_eval_plan",
+      "file": "docs/examples/agent_eval_plan.json"
+    },
+    {
+      "tool": "prompt_injection_checklist",
+      "file": "docs/examples/prompt_injection_checklist.json"
+    },
+    {
+      "tool": "rag_pipeline_plan",
+      "file": "docs/examples/rag_pipeline_plan.json"
+    },
+    {
+      "tool": "mcp_server_review",
+      "file": "docs/examples/mcp_server_review.json",
+      "findings": 6
+    },
+    {
+      "tool": "mcp_config_review",
+      "file": "docs/examples/mcp_config_review.json",
+      "findings": 5
+    },
+    {
+      "tool": "postmortem",
+      "file": "docs/examples/postmortem.json"
+    },
+    {
+      "tool": "runbook",
+      "file": "docs/examples/runbook.json"
+    },
+    {
+      "tool": "implementation_plan",
+      "file": "docs/examples/implementation_plan.json"
+    },
+    {
+      "tool": "agent_tool_contract",
+      "file": "docs/examples/agent_tool_contract.json"
+    },
+    {
+      "tool": "storage_growth",
+      "file": "docs/examples/storage_growth.json"
+    },
+    {
+      "tool": "migration_plan",
+      "file": "docs/examples/migration_plan.json"
+    },
+    {
+      "tool": "service_compare",
+      "file": "docs/examples/service_compare.json"
+    },
+    {
+      "tool": "architecture_diagram",
+      "file": "docs/examples/architecture_diagram.json"
+    },
+    {
+      "tool": "integration_catalog",
+      "file": "docs/examples/integration_catalog.json"
+    },
+    {
+      "tool": "integration_config",
+      "file": "docs/examples/integration_config.json"
+    }
+  ]
+}

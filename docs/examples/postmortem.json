@@ -1,0 +1,81 @@
+{
+  "tool": "postmortem",
+  "arguments": {
+    "title": "Checkout failures after dependency upgrade",
+    "severity": "sev2",
+    "startedAt": "2026-10-02T13:10:00Z",
+    "detectedAt": "2026-10-02T13:42:00Z",
+    "mitigatedAt": "2026-10-02T14:05:00Z",
+    "resolvedAt": "2026-10-02T15:30:00Z",
+    "impact": "11% of checkout attempts returned 500 for 55 minutes; 1,240 orders delayed, none lost.",
+    "timeline": [
+      {
+        "at": "2026-10-02T13:05:00Z",
+        "event": "Deploy 2026.10.02-1 with pg driver upgrade"
+      },
+      {
+        "at": "2026-10-02T13:10:00Z",
+        "event": "Connection pool exhaustion starts"
+      },
+      {
+        "at": "2026-10-02T13:42:00Z",
+        "event": "Customer support reports failures; no alert fired"
+      },
+      {
+        "at": "2026-10-02T14:05:00Z",
+        "event": "Rollback to previous image"
+      },
+      {
+        "at": "2026-10-02T15:30:00Z",
+        "event": "Backlog drained, metrics normal"
+      }
+    ],
+    "contributingFactors": [
+      "Pool size default changed in the driver major version",
+      "No alert on 5xx ratio",
+      "Canary stage skipped for a dependency-only change"
+    ],
+    "whatWentWell": [
+      "Rollback took 4 minutes",
+      "Queue preserved orders"
+    ],
+    "actionItems": [
+      {
+        "action": "Alert on 5xx ratio above 2% for 5 minutes",
+        "owner": "platform-team",
+        "due": "2026-10-16",
+        "kind": "detect"
+      },
+      {
+        "action": "Canary mandatory for every deploy, including dependency bumps",
+        "owner": "orders-team",
+        "due": "2026-10-23",
+        "kind": "prevent"
+      },
+      {
+        "action": "Pin driver major version and add pool-size integration test",
+        "owner": "orders-team",
+        "due": "2026-10-30",
+        "kind": "prevent"
+      }
+    ]
+  },
+  "result": {
+    "kind": "document",
+    "metrics": {
+      "timeToDetectMinutes": 32,
+      "timeToMitigateMinutes": 23,
+      "timeToResolveMinutes": 140
+    },
+    "coverage": {
+      "prevent": 2,
+      "detect": 1,
+      "mitigate": 0,
+      "process": 0
+    },
+    "warnings": [
+      "Detection took more than 30 minutes; prioritize a detect action item"
+    ],
+    "markdown": "# Postmortem: Checkout failures after dependency upgrade\n\nSeverity: SEV2 · Blameless: focus on systems and decisions, not people.\n\n## Impact\n11% of checkout attempts returned 500 for 55 minutes; 1,240 orders delayed, none lost.\n\n## Metrics\n- Time to detect: 32 min\n- Time to mitigate: 23 min\n- Time to resolve: 140 min\n\n## Timeline (UTC)\n- 2026-10-02T13:05:00Z: Deploy 2026.10.02-1 with pg driver upgrade\n- 2026-10-02T13:10:00Z: Connection pool exhaustion starts\n- 2026-10-02T13:42:00Z: Customer support reports failures; no alert fired\n- 2026-10-02T14:05:00Z: Rollback to previous image\n- 2026-10-02T15:30:00Z: Backlog drained, metrics normal\n\n## Contributing factors\n- Pool size default changed in the driver major version\n- No alert on 5xx ratio\n- Canary stage skipped for a dependency-only change\n\n## What went well\n- Rollback took 4 minutes\n- Queue preserved orders\n\n## Action items\n| Kind | Action | Owner | Due |\n|---|---|---|---|\n| detect | Alert on 5xx ratio above 2% for 5 minutes | platform-team | 2026-10-16 |\n| prevent | Canary mandatory for every deploy, including dependency bumps | orders-team | 2026-10-23 |\n| prevent | Pin driver major version and add pool-size integration test | orders-team | 2026-10-30 |\n\n## Review\nSchedule a review of action items at the latest due date. Close this document only with evidence that each action shipped.\n"
+  }
+}

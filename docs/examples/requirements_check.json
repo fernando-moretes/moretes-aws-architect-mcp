@@ -1,0 +1,45 @@
+{
+  "tool": "requirements_check",
+  "arguments": {
+    "workload": "API de pedidos para marketplace com pagamento por cartão, 300 pedidos/minuto no pico, clientes no Brasil",
+    "requirements": [
+      "Confirmação do pedido em menos de 2 segundos (p95)",
+      "Histórico de pedidos por 5 anos"
+    ],
+    "constraints": [
+      "Equipe de 4 pessoas",
+      "Orçamento de USD 1.500/mês"
+    ]
+  },
+  "result": {
+    "kind": "heuristic-design-aid",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "workload": "API de pedidos para marketplace com pagamento por cartão, 300 pedidos/minuto no pico, clientes no Brasil",
+    "requirements": [
+      "Confirmação do pedido em menos de 2 segundos (p95)",
+      "Histórico de pedidos por 5 anos"
+    ],
+    "constraints": [
+      "Equipe de 4 pessoas",
+      "Orçamento de USD 1.500/mês"
+    ],
+    "decisionsToClarify": [
+      "Business outcome and workload owner",
+      "Data classification, residency and retention",
+      "Traffic: normal/peak RPS, payloads and growth",
+      "SLO, p95/p99 latency, RTO and RPO",
+      "Authentication, authorization and tenancy",
+      "Monthly budget, currency and pricing region",
+      "Team skills, dependencies and migration constraints"
+    ],
+    "nextTools": [
+      "architecture_pattern",
+      "aws_knowledge_search",
+      "decision_record"
+    ]
+  }
+}

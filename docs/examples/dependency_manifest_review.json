@@ -1,0 +1,60 @@
+{
+  "tool": "dependency_manifest_review",
+  "arguments": {
+    "filename": "package.json",
+    "content": "{\"name\":\"orders-api\",\"dependencies\":{\"express\":\"^4.19.2\",\"pg\":\"8.11.3\",\"left-pad\":\"*\",\"internal-lib\":\"github:example/internal-lib\"},\"scripts\":{\"postinstall\":\"node scripts/telemetry.js\"}}",
+    "lockfilePresent": true
+  },
+  "result": {
+    "kind": "dependency-heuristic-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "filename": "package.json",
+    "dependencies": 4,
+    "findings": [
+      {
+        "severity": "info",
+        "target": "dependencies.express",
+        "message": "Range \"^4.19.2\"; the lockfile pins it, confirm installs use it (npm ci / pnpm --frozen-lockfile)."
+      },
+      {
+        "severity": "high",
+        "target": "dependencies.left-pad",
+        "message": "Version \"*\" accepts anything."
+      },
+      {
+        "severity": "medium",
+        "target": "dependencies.internal-lib",
+        "message": "Git, URL or file source; pin to a commit hash and review the code."
+      },
+      {
+        "severity": "medium",
+        "target": "scripts.postinstall",
+        "message": "Lifecycle script runs on install: node scripts/telemetry.js"
+      },
+      {
+        "severity": "info",
+        "target": "engines",
+        "message": "No engines field; runtime version drifts between machines."
+      }
+    ],
+    "summary": {
+      "high": 1,
+      "medium": 2,
+      "info": 2
+    },
+    "rules": [
+      "Pin in the lockfile, update on a schedule with a changelog read",
+      "Run a vulnerability audit in CI (npm audit, pip-audit, osv-scanner, govulncheck)",
+      "Review lifecycle scripts and VCS sources before adopting a package",
+      "Generate an SBOM for releases"
+    ],
+    "limitations": [
+      "Text heuristics; no registry lookup, vulnerability data or transitive resolution",
+      "Pair with osv-scanner or the ecosystem audit tool"
+    ]
+  }
+}

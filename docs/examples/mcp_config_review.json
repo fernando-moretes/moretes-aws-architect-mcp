@@ -1,0 +1,83 @@
+{
+  "tool": "mcp_config_review",
+  "arguments": {
+    "config": {
+      "mcpServers": {
+        "moretes-architect": {
+          "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp"
+        },
+        "files": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "some-files-server"
+          ],
+          "env": {
+            "GITHUB_TOKEN": "ghp_exampleexampleexample1234"
+          },
+          "autoApprove": [
+            "*"
+          ]
+        },
+        "legacy": {
+          "url": "http://10.0.0.5:8080/mcp"
+        }
+      }
+    }
+  },
+  "result": {
+    "kind": "mcp-config-review",
+    "validated": false,
+    "limitation": "Validate assumptions and current AWS documentation. This is not an official AWS review, security audit, deployment or price quote.",
+    "sources": [
+      "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html"
+    ],
+    "servers": [
+      "moretes-architect",
+      "files",
+      "legacy"
+    ],
+    "findings": [
+      {
+        "severity": "high",
+        "target": "files.env.GITHUB_TOKEN",
+        "message": "Secret value inline in the configuration file; use a reference or the client's secret store."
+      },
+      {
+        "severity": "medium",
+        "target": "files",
+        "message": "npx package without a pinned version (some-files-server); every start may run different code."
+      },
+      {
+        "severity": "info",
+        "target": "files",
+        "message": "Non-interactive install flag; pair it with a pinned version and a reviewed package."
+      },
+      {
+        "severity": "high",
+        "target": "files",
+        "message": "All tools auto-approved."
+      },
+      {
+        "severity": "high",
+        "target": "legacy",
+        "message": "Remote server over plain HTTP."
+      }
+    ],
+    "summary": {
+      "high": 3,
+      "medium": 1,
+      "info": 1
+    },
+    "rules": [
+      "Pin every package version and review the changelog before upgrading",
+      "Secrets live in the client secret store or environment, never in the file",
+      "Auto-approve only read-only tools of servers you trust and have reviewed",
+      "Prefer remote servers with HTTPS and published privacy notes over local installs you have not read"
+    ],
+    "limitations": [
+      "Field names vary by client (autoApprove is Kiro-style; VS Code uses servers); unknown fields are ignored",
+      "Cannot verify the package contents or the remote server behavior"
+    ]
+  }
+}
