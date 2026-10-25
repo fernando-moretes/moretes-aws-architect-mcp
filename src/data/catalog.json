@@ -1,0 +1,1068 @@
+{
+  "source": "https://raw.githubusercontent.com/awslabs/mcp/main/docusaurus/static/assets/server-cards.json",
+  "retrievedAt": "2026-10-25T00:14:23.017Z",
+  "servers": [
+    {
+      "id": "aws-transform-mcp-server",
+      "name": "AWS Transform MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "aws-transform",
+        "migration",
+        "modernization",
+        "mainframe",
+        "vmware",
+        "dotnet",
+        "hitl",
+        "transformation"
+      ],
+      "sourcePath": "src/aws-transform-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-transform-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-mcp",
+      "name": "AWS MCP (in preview)",
+      "category": "Essential Setup",
+      "tags": [
+        "aws-api",
+        "documentation",
+        "security",
+        "audit-logging",
+        "cloudtrail",
+        "iam",
+        "remote-mcp",
+        "managed-service",
+        "best-practices"
+      ],
+      "sourcePath": "https://docs.aws.amazon.com/aws-mcp/latest/userguide/what-is-mcp-server.html",
+      "sourceUrl": "https://awslabs.github.io/mcp/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-documentation-mcp-server",
+      "name": "AWS Documentation MCP Server",
+      "category": "Documentation",
+      "tags": [
+        "documentation",
+        "real-time-access",
+        "api-reference",
+        "vibe-coding",
+        "conversational",
+        "core-development"
+      ],
+      "sourcePath": "src/aws-documentation-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-knowledge-mcp-server",
+      "name": "AWS Knowledge MCP Server",
+      "category": "Documentation",
+      "tags": [
+        "documentation",
+        "real-time-access",
+        "api-reference",
+        "vibe-coding",
+        "conversational",
+        "core-development"
+      ],
+      "sourcePath": "src/aws-knowledge-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-knowledge-mcp-server/",
+      "status": "remote-adapter"
+    },
+    {
+      "id": "aws-api-mcp-server",
+      "name": "AWS API MCP Server",
+      "category": "Core",
+      "tags": [
+        "documentation",
+        "real-time-access",
+        "api-reference",
+        "vibe-coding",
+        "core-development"
+      ],
+      "sourcePath": "src/aws-api-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-api-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "ccapi-mcp-server",
+      "name": "AWS Cloud Control API MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "infrastructure-as-code",
+        "cloud-control-api",
+        "security-scanning",
+        "resource-management",
+        "crudl-operations",
+        "vibe-coding",
+        "infrastructure-deployment"
+      ],
+      "sourcePath": "src/ccapi-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/ccapi-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "eks-mcp-server",
+      "name": "Amazon EKS MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "containers",
+        "kubernetes",
+        "eks",
+        "cluster-management",
+        "application-deployment",
+        "vibe-coding",
+        "container-platforms"
+      ],
+      "sourcePath": "src/eks-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/eks-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "ecs-mcp-server",
+      "name": "Amazon ECS MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "containers",
+        "ecs",
+        "orchestration",
+        "application-deployment",
+        "vibe-coding",
+        "container-platforms"
+      ],
+      "sourcePath": "src/ecs-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/ecs-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "finch-mcp-server",
+      "name": "Finch MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "containers",
+        "finch",
+        "local-development",
+        "ecr",
+        "container-building",
+        "vibe-coding",
+        "container-platforms"
+      ],
+      "sourcePath": "src/finch-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/finch-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-serverless-mcp-server",
+      "name": "AWS Serverless MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "serverless",
+        "sam-cli",
+        "application-lifecycle",
+        "lambda",
+        "vibe-coding",
+        "serverless-functions"
+      ],
+      "sourcePath": "src/aws-serverless-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-serverless-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "lambda-tool-mcp-server",
+      "name": "AWS Lambda Tool MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "serverless",
+        "lambda",
+        "ai-tools",
+        "private-resources",
+        "autonomous",
+        "serverless-functions"
+      ],
+      "sourcePath": "src/lambda-tool-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/lambda-tool-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-support-mcp-server",
+      "name": "AWS Support MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "support",
+        "case-management",
+        "aws-support",
+        "help-desk",
+        "infrastructure-deployment"
+      ],
+      "sourcePath": "src/aws-support-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-support-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "bedrock-kb-retrieval-mcp-server",
+      "name": "Amazon Bedrock Knowledge Bases Retrieval MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "bedrock",
+        "knowledge-bases",
+        "retrieval",
+        "citations",
+        "conversational",
+        "knowledge-search"
+      ],
+      "sourcePath": "src/bedrock-kb-retrieval-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/bedrock-kb-retrieval-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-kendra-index-mcp-server",
+      "name": "Amazon Kendra Index MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "kendra",
+        "enterprise-search",
+        "rag",
+        "search-enhancement",
+        "conversational",
+        "knowledge-search"
+      ],
+      "sourcePath": "src/amazon-kendra-index-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-kendra-index-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-qbusiness-anonymous-mcp-server",
+      "name": "Amazon Q Business anonymous MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "amazon-q",
+        "amazon-q-business",
+        "ai-assistant",
+        "enterprise-search",
+        "data-access",
+        "conversational",
+        "knowledge-search"
+      ],
+      "sourcePath": "src/amazon-qbusiness-anonymous-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-qbusiness-anonymous-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-qindex-mcp-server",
+      "name": "Amazon Q index MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "amazon-q",
+        "enterprise-search",
+        "data-access",
+        "conversational",
+        "knowledge-search"
+      ],
+      "sourcePath": "src/amazon-qindex-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-qindex-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "document-loader-mcp-server",
+      "name": "Document Loader MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "document-processing",
+        "content-extraction",
+        "pdf-parsing",
+        "office-documents",
+        "image-analysis",
+        "conversational",
+        "content-processing"
+      ],
+      "sourcePath": "src/document-loader-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/document-loader-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-bedrock-custom-model-import-mcp-server",
+      "name": "Amazon Bedrock Custom Model Import MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "bedrock",
+        "vibe-coding",
+        "conversational",
+        "machine-learning",
+        "ai-tools",
+        "serverless"
+      ],
+      "sourcePath": "src/aws-bedrock-custom-model-import-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-bedrock-custom-model-import-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "sagemaker-ai-mcp-server",
+      "name": "Amazon SageMaker AI MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "model-development",
+        "vibe-coding",
+        "conversational",
+        "machine-learning",
+        "ai-tools",
+        "serverless"
+      ],
+      "sourcePath": "src/sagemaker-ai-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/sagemaker-ai-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "dynamodb-mcp-server",
+      "name": "Amazon DynamoDB MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "dynamodb",
+        "nosql",
+        "table-management",
+        "database-operations",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/dynamodb-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/dynamodb-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "postgres-mcp-server",
+      "name": "Amazon Aurora PostgreSQL MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "postgresql",
+        "aurora",
+        "rds-data-api",
+        "sql-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/postgres-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/postgres-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "s3-tables-mcp-server",
+      "name": "AWS S3 Tables MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "s3-tables",
+        "iceberg",
+        "object-storage",
+        "table-bucket",
+        "csv-ingest",
+        "sql",
+        "metadata",
+        "autonomous"
+      ],
+      "sourcePath": "src/s3-tables-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/s3-tables-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "mssql-mcp-server",
+      "name": "Amazon RDS SQL Server MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "mssql",
+        "sql-server",
+        "rds",
+        "secrets-manager",
+        "sql-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/mssql-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/mssql-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "mysql-mcp-server",
+      "name": "Amazon Aurora MySQL MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "mysql",
+        "aurora",
+        "rds-data-api",
+        "sql-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/mysql-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/mysql-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "db2-mcp-server",
+      "name": "Amazon RDS for Db2 MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "db2",
+        "rds",
+        "secrets-manager",
+        "sql-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/db2-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/db2-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "oracle-mcp-server",
+      "name": "Amazon RDS Oracle MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "oracle",
+        "rds",
+        "secrets-manager",
+        "sql-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/oracle-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/oracle-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aurora-dsql-mcp-server",
+      "name": "Amazon Aurora DSQL MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "aurora-dsql",
+        "distributed-sql",
+        "postgresql-compatibility",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/aurora-dsql-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aurora-dsql-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "documentdb-mcp-server",
+      "name": "Amazon DocumentDB MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "documentdb",
+        "mongodb-compatible",
+        "document-database",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/documentdb-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/documentdb-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-neptune-mcp-server",
+      "name": "Amazon Neptune MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "neptune",
+        "graph-database",
+        "opencypher",
+        "gremlin",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/amazon-neptune-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-neptune-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-keyspaces-mcp-server",
+      "name": "Amazon Keyspaces MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "keyspaces",
+        "cassandra-compatible",
+        "nosql",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/amazon-keyspaces-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-keyspaces-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "security-agent-mcp-server",
+      "name": "AWS Security Agent MCP Server",
+      "category": "Developer Tools & Support",
+      "tags": [
+        "developer-tools",
+        "security",
+        "code-review",
+        "scanning",
+        "pentest",
+        "remediation",
+        "agentic"
+      ],
+      "sourcePath": "src/security-agent-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/security-agent-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "timestream-for-influxdb-mcp-server",
+      "name": "Amazon Timestream for InfluxDB MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "timestream",
+        "influxdb-compatible",
+        "time-series",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/timestream-for-influxdb-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/timestream-for-influxdb-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "elasticache-mcp-server",
+      "name": "Amazon ElastiCache MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "elasticache",
+        "caching",
+        "performance",
+        "autonomous",
+        "caching-performance"
+      ],
+      "sourcePath": "src/elasticache-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/elasticache-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "valkey-mcp-server",
+      "name": "Amazon ElastiCache / MemoryDB for Valkey MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "valkey",
+        "caching",
+        "data-structures",
+        "performance",
+        "autonomous",
+        "caching-performance"
+      ],
+      "sourcePath": "src/valkey-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/valkey-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "memcached-mcp-server",
+      "name": "Amazon ElastiCache for Memcached MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "memcached",
+        "caching",
+        "high-speed",
+        "performance",
+        "autonomous",
+        "caching-performance"
+      ],
+      "sourcePath": "src/memcached-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/memcached-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-appsync-mcp-server",
+      "name": "AWS AppSync MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "api",
+        "graphql",
+        "appsync",
+        "api-management",
+        "graphql-operations",
+        "api-operations",
+        "autonomous",
+        "data-operations",
+        "event-based",
+        "real-time-events",
+        "event-notifications"
+      ],
+      "sourcePath": "src/aws-appsync-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-appsync-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-iot-sitewise-mcp-server",
+      "name": "AWS IoT Sitewise MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "autonomous",
+        "data-operations",
+        "event-based",
+        "real-time-events",
+        "event-notifications"
+      ],
+      "sourcePath": "src/aws-iot-sitewise-mcp-server",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-iot-sitewise-mcp-server",
+      "status": "discovery-only"
+    },
+    {
+      "id": "openapi-mcp-server",
+      "name": "OpenAPI MCP Server",
+      "category": "Integration & Messaging",
+      "tags": [
+        "integration-messaging",
+        "openapi",
+        "api-integration",
+        "specifications",
+        "dynamic-integration",
+        "vibe-coding",
+        "application-development"
+      ],
+      "sourcePath": "src/openapi-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/openapi-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-sns-sqs-mcp-server",
+      "name": "Amazon SNS / SQS MCP Server",
+      "category": "Integration & Messaging",
+      "tags": [
+        "integration-messaging",
+        "sns",
+        "sqs",
+        "event-driven",
+        "messaging",
+        "queue-management",
+        "autonomous",
+        "workflow-integration"
+      ],
+      "sourcePath": "src/amazon-sns-sqs-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-sns-sqs-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-mq-mcp-server",
+      "name": "Amazon MQ MCP Server",
+      "category": "Integration & Messaging",
+      "tags": [
+        "integration-messaging",
+        "amazon-mq",
+        "message-broker",
+        "rabbitmq",
+        "activemq",
+        "autonomous",
+        "workflow-integration"
+      ],
+      "sourcePath": "src/amazon-mq-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-mq-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "stepfunctions-tool-mcp-server",
+      "name": "AWS Step Functions MCP Server",
+      "category": "Integration & Messaging",
+      "tags": [
+        "integration-messaging",
+        "step-functions",
+        "workflows",
+        "business-processes",
+        "orchestration",
+        "autonomous",
+        "workflow-integration"
+      ],
+      "sourcePath": "src/stepfunctions-tool-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/stepfunctions-tool-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-location-mcp-server",
+      "name": "Amazon Location Service MCP Server",
+      "category": "Integration & Messaging",
+      "tags": [
+        "integration-messaging",
+        "location-services",
+        "geocoding",
+        "place-search",
+        "route-optimization",
+        "conversational",
+        "business-services"
+      ],
+      "sourcePath": "src/aws-location-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-location-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "billing-cost-management-mcp-server",
+      "name": "AWS Billing and Cost Management MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "billing",
+        "cost-management",
+        "cost-analysis",
+        "cost-optimization",
+        "budgets",
+        "proforma-cost",
+        "chargeback",
+        "showback",
+        "conversational",
+        "business-services",
+        "free-tier"
+      ],
+      "sourcePath": "src/billing-cost-management-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/billing-cost-management-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-pricing-mcp-server",
+      "name": "AWS Pricing MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "pricing",
+        "cost-operations",
+        "cost-analysis",
+        "estimation",
+        "optimization",
+        "pre-deployment",
+        "conversational",
+        "business-services"
+      ],
+      "sourcePath": "src/aws-pricing-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-pricing-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "prometheus-mcp-server",
+      "name": "AWS Managed Prometheus MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "cost-operations",
+        "prometheus",
+        "monitoring",
+        "metrics",
+        "observability",
+        "autonomous",
+        "operations-monitoring"
+      ],
+      "sourcePath": "src/prometheus-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/prometheus-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-dataprocessing-mcp-server",
+      "name": "Amazon Data Processing MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "glue",
+        "emr",
+        "athena",
+        "data-processing",
+        "etl",
+        "pipeline",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/aws-dataprocessing-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-dataprocessing-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-healthomics-mcp-server",
+      "name": "AWS HealthOmics MCP Server",
+      "category": "Healthcare & Lifesciences",
+      "tags": [
+        "healthcare",
+        "lifesciences",
+        "healthomics",
+        "workflows",
+        "genomics",
+        "vibe-coding"
+      ],
+      "sourcePath": "src/aws-healthomics-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "healthimaging-mcp-server",
+      "name": "HealthImaging MCP Server",
+      "category": "Healthcare & Lifesciences",
+      "tags": [
+        "healthcare",
+        "medical-imaging",
+        "healthimaging",
+        "dicom",
+        "radiology",
+        "patient-data"
+      ],
+      "sourcePath": "src/healthimaging-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/healthimaging-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "healthlake-mcp-server",
+      "name": "HealthLake MCP Server",
+      "category": "Healthcare & Lifesciences",
+      "tags": [
+        "healthcare",
+        "lifesciences",
+        "healthlake",
+        "fhir",
+        "vibe-coding"
+      ],
+      "sourcePath": "src/healthlake-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/healthlake-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "cloudwatch-applicationsignals-mcp-server",
+      "name": "Amazon CloudWatch Application Signals MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "cost-operations",
+        "cloudwatch",
+        "application-signals",
+        "monitoring",
+        "performance",
+        "insights",
+        "autonomous",
+        "operations-monitoring"
+      ],
+      "sourcePath": "src/cloudwatch-applicationsignals-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/cloudwatch-applicationsignals-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "cloudwatch-mcp-server",
+      "name": "Amazon CloudWatch MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "cost-operations",
+        "cloudwatch",
+        "metrics",
+        "alarms",
+        "logs",
+        "analysis",
+        "troubleshooting",
+        "autonomous",
+        "operations-monitoring"
+      ],
+      "sourcePath": "src/cloudwatch-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/cloudwatch-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "cloudtrail-mcp-server",
+      "name": "AWS CloudTrail MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "cost-operations",
+        "cloudtrail",
+        "activity",
+        "audit",
+        "compliance",
+        "logs",
+        "events",
+        "analysis",
+        "troubleshooting",
+        "autonomous",
+        "operations-monitoring"
+      ],
+      "sourcePath": "src/cloutrail-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/cloutrail-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "iam-mcp-server",
+      "name": "AWS IAM MCP Server",
+      "category": "Developer Tools & Support",
+      "tags": [
+        "developer-tools",
+        "iam",
+        "security",
+        "access-management",
+        "policies",
+        "best-practices",
+        "vibe-coding"
+      ],
+      "sourcePath": "src/iam-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/iam-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "redshift-mcp-server",
+      "name": "Amazon Redshift MCP Server",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "redshift",
+        "data-warehouse",
+        "query",
+        "analytics",
+        "autonomous",
+        "data-operations"
+      ],
+      "sourcePath": "src/redshift-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/redshift-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-bedrock-agentcore-mcp-server",
+      "name": "Amazon Bedrock AgentCore MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "bedrock",
+        "conversational",
+        "knowledge-search",
+        "agentcore",
+        "agents",
+        "ai-agents",
+        "agentic",
+        "runtime",
+        "mcp"
+      ],
+      "sourcePath": "src/amazon-bedrock-agentcore-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-bedrock-agentcore-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "well-architected-security-mcp-server",
+      "name": "AWS Well-Architected Security Assessment Tool MCP Server",
+      "category": "Cost & Operations",
+      "tags": [
+        "cost-operations",
+        "security",
+        "well-architected",
+        "assessment",
+        "compliance",
+        "security-posture",
+        "monitoring",
+        "conversational"
+      ],
+      "sourcePath": "src/well-architected-security-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/well-architected-security-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "amazon-translate-mcp-server",
+      "name": "Amazon Translate MCP Server",
+      "category": "AI & Machine Learning",
+      "tags": [
+        "ai-ml",
+        "translate",
+        "language-processing",
+        "multilingual",
+        "terminology",
+        "batch-processing",
+        "workflow-orchestration",
+        "conversational",
+        "autonomous",
+        "vibe-coding"
+      ],
+      "sourcePath": "src/amazon-translate-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/amazon-translate-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "sagemaker-unified-studio-spark-troubleshooting-mcp-server",
+      "name": "Amazon SageMaker Unified Studio MCP for Spark Troubleshooting and Code Recommendation",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "glue",
+        "emr",
+        "data-processing",
+        "etl",
+        "pipeline",
+        "autonomous",
+        "troubleshooting",
+        "code-recommendation",
+        "remote-mcp",
+        "data-operations"
+      ],
+      "sourcePath": "src/sagemaker-unified-studio-spark-troubleshooting-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/sagemaker-unified-studio-spark-troubleshooting-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "sagemaker-unified-studio-spark-upgrade-mcp-server",
+      "name": "Amazon SageMaker Unified Studio MCP for Spark Upgrade",
+      "category": "Data & Analytics",
+      "tags": [
+        "data-analytics",
+        "glue",
+        "emr",
+        "data-processing",
+        "etl",
+        "pipeline",
+        "autonomous",
+        "upgrade",
+        "remote-mcp",
+        "data-operations"
+      ],
+      "sourcePath": "src/sagemaker-unified-studio-spark-upgrade-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/sagemaker-unified-studio-spark-upgrade-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "aws-for-sap-management-mcp-server",
+      "name": "AWS Systems Manager for SAP MCP Server",
+      "category": "Infrastructure & Deployment",
+      "tags": [
+        "infrastructure-deployment",
+        "ssm-sap",
+        "sap",
+        "hana",
+        "operations",
+        "monitoring",
+        "health-checks",
+        "configuration",
+        "scheduling",
+        "autonomous",
+        "conversational"
+      ],
+      "sourcePath": "src/aws-for-sap-management-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-for-sap-management-mcp-server/",
+      "status": "discovery-only"
+    },
+    {
+      "id": "roda-mcp-server",
+      "name": "Registry of Open Data on AWS (RODA) MCP Server",
+      "category": "Healthcare & Lifesciences",
+      "tags": [
+        "ai4good",
+        "open-data",
+        "health",
+        "climate",
+        "research",
+        "genomics",
+        "satellite-imagery",
+        "geospatial"
+      ],
+      "sourcePath": "src/roda-mcp-server/",
+      "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/roda-mcp-server/",
+      "status": "discovery-only"
+    }
+  ]
+}

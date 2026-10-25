@@ -1,0 +1,20 @@
+name: Report a workshop result or problem
+description: Reproducible, sanitized feedback in Portuguese or English
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow and expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and reproduction
+      description: Include MCP/client version. No secrets, account IDs or private customer data.
+    validations:
+      required: true
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Suggested improvement

@@ -1,0 +1,8 @@
+{
+  "servers": [
+    {
+      "id": "aws-documentation-mcp-server",
+      "allowTools": ["search_documentation", "read_documentation"]
+    }
+  ]
+}

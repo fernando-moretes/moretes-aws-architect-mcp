@@ -1,0 +1,397 @@
+{
+  "resolvedAt": "2026-10-25T00:14:28.855Z",
+  "packages": {
+    "aws-transform-mcp-server": {
+      "package": "awslabs.aws-transform-mcp-server",
+      "version": "0.2.3",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-transform-mcp-server/"
+    },
+    "aws-documentation-mcp-server": {
+      "package": "awslabs.aws-documentation-mcp-server",
+      "version": "1.2.3",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server/"
+    },
+    "aws-api-mcp-server": {
+      "package": "awslabs.aws-api-mcp-server",
+      "version": "1.5.6",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-api-mcp-server/"
+    },
+    "ccapi-mcp-server": {
+      "package": "awslabs.ccapi-mcp-server",
+      "version": "1.0.18",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/ccapi-mcp-server/"
+    },
+    "eks-mcp-server": {
+      "package": "awslabs.eks-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/eks-mcp-server/"
+    },
+    "ecs-mcp-server": {
+      "package": "awslabs.ecs-mcp-server",
+      "version": "0.1.37",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/ecs-mcp-server/"
+    },
+    "aws-serverless-mcp-server": {
+      "package": "awslabs.aws-serverless-mcp-server",
+      "version": "0.2.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-serverless-mcp-server/"
+    },
+    "finch-mcp-server": {
+      "package": "awslabs.finch-mcp-server",
+      "version": "0.2.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/finch-mcp-server/"
+    },
+    "amazon-qbusiness-anonymous-mcp-server": {
+      "package": "awslabs.amazon-qbusiness-anonymous-mcp-server",
+      "version": "0.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-qbusiness-anonymous-mcp-server/"
+    },
+    "amazon-kendra-index-mcp-server": {
+      "package": "awslabs.amazon-kendra-index-mcp-server",
+      "version": "1.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-kendra-index-mcp-server/"
+    },
+    "lambda-tool-mcp-server": {
+      "package": "awslabs.lambda-tool-mcp-server",
+      "version": "2.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/lambda-tool-mcp-server/"
+    },
+    "aws-support-mcp-server": {
+      "package": "awslabs.aws-support-mcp-server",
+      "version": "0.1.23",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-support-mcp-server/"
+    },
+    "bedrock-kb-retrieval-mcp-server": {
+      "package": "awslabs.bedrock-kb-retrieval-mcp-server",
+      "version": "1.1.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/bedrock-kb-retrieval-mcp-server/"
+    },
+    "aws-bedrock-custom-model-import-mcp-server": {
+      "package": "awslabs.aws-bedrock-custom-model-import-mcp-server",
+      "version": "0.0.23",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-bedrock-custom-model-import-mcp-server/"
+    },
+    "dynamodb-mcp-server": {
+      "package": "awslabs.dynamodb-mcp-server",
+      "version": "2.1.8",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/dynamodb-mcp-server/"
+    },
+    "amazon-qindex-mcp-server": {
+      "package": "awslabs.amazon-qindex-mcp-server",
+      "version": "0.1.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-qindex-mcp-server/"
+    },
+    "document-loader-mcp-server": {
+      "package": "awslabs.document-loader-mcp-server",
+      "version": "1.0.23",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/document-loader-mcp-server/"
+    },
+    "sagemaker-ai-mcp-server": {
+      "package": "awslabs.sagemaker-ai-mcp-server",
+      "version": "1.1.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/sagemaker-ai-mcp-server/"
+    },
+    "db2-mcp-server": {
+      "package": "awslabs.db2-mcp-server",
+      "version": "0.0.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/db2-mcp-server/"
+    },
+    "mysql-mcp-server": {
+      "package": "awslabs.mysql-mcp-server",
+      "version": "1.1.3",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/mysql-mcp-server/"
+    },
+    "postgres-mcp-server": {
+      "package": "awslabs.postgres-mcp-server",
+      "version": "1.2.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/postgres-mcp-server/"
+    },
+    "mssql-mcp-server": {
+      "package": "awslabs.mssql-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/mssql-mcp-server/"
+    },
+    "s3-tables-mcp-server": {
+      "package": "awslabs.s3-tables-mcp-server",
+      "version": "0.1.1",
+      "python": ">=3.11",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/s3-tables-mcp-server/"
+    },
+    "documentdb-mcp-server": {
+      "package": "awslabs.documentdb-mcp-server",
+      "version": "2.0.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/documentdb-mcp-server/"
+    },
+    "amazon-keyspaces-mcp-server": {
+      "package": "awslabs.amazon-keyspaces-mcp-server",
+      "version": "0.0.19",
+      "python": "<3.12,>=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-keyspaces-mcp-server/"
+    },
+    "amazon-neptune-mcp-server": {
+      "package": "awslabs.amazon-neptune-mcp-server",
+      "version": "1.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-neptune-mcp-server/"
+    },
+    "aurora-dsql-mcp-server": {
+      "package": "awslabs.aurora-dsql-mcp-server",
+      "version": "1.1.4",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aurora-dsql-mcp-server/"
+    },
+    "oracle-mcp-server": {
+      "package": "awslabs.oracle-mcp-server",
+      "version": "0.2.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/oracle-mcp-server/"
+    },
+    "security-agent-mcp-server": {
+      "package": "awslabs.security-agent-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/security-agent-mcp-server/"
+    },
+    "memcached-mcp-server": {
+      "package": "awslabs.memcached-mcp-server",
+      "version": "1.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/memcached-mcp-server/"
+    },
+    "timestream-for-influxdb-mcp-server": {
+      "package": "awslabs.timestream-for-influxdb-mcp-server",
+      "version": "0.1.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/timestream-for-influxdb-mcp-server/"
+    },
+    "valkey-mcp-server": {
+      "package": "awslabs.valkey-mcp-server",
+      "version": "1.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/valkey-mcp-server/"
+    },
+    "elasticache-mcp-server": {
+      "package": "awslabs.elasticache-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/elasticache-mcp-server/"
+    },
+    "aws-appsync-mcp-server": {
+      "package": "awslabs.aws-appsync-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-appsync-mcp-server/"
+    },
+    "amazon-mq-mcp-server": {
+      "package": "awslabs.amazon-mq-mcp-server",
+      "version": "2.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-mq-mcp-server/"
+    },
+    "amazon-sns-sqs-mcp-server": {
+      "package": "awslabs.amazon-sns-sqs-mcp-server",
+      "version": "2.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-sns-sqs-mcp-server/"
+    },
+    "openapi-mcp-server": {
+      "package": "awslabs.openapi-mcp-server",
+      "version": "1.1.6",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/openapi-mcp-server/"
+    },
+    "aws-iot-sitewise-mcp-server": {
+      "package": "awslabs.aws-iot-sitewise-mcp-server",
+      "version": "11.0.23",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-iot-sitewise-mcp-server"
+    },
+    "stepfunctions-tool-mcp-server": {
+      "package": "awslabs.stepfunctions-tool-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/stepfunctions-tool-mcp-server/"
+    },
+    "aws-pricing-mcp-server": {
+      "package": "awslabs.aws-pricing-mcp-server",
+      "version": "1.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-pricing-mcp-server/"
+    },
+    "billing-cost-management-mcp-server": {
+      "package": "awslabs.billing-cost-management-mcp-server",
+      "version": "0.0.42",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/billing-cost-management-mcp-server/"
+    },
+    "prometheus-mcp-server": {
+      "package": "awslabs.prometheus-mcp-server",
+      "version": "0.3.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/prometheus-mcp-server/"
+    },
+    "aws-location-mcp-server": {
+      "package": "awslabs.aws-location-mcp-server",
+      "version": "2.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-location-mcp-server/"
+    },
+    "healthimaging-mcp-server": {
+      "package": "awslabs.healthimaging-mcp-server",
+      "version": "0.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/healthimaging-mcp-server/"
+    },
+    "healthlake-mcp-server": {
+      "package": "awslabs.healthlake-mcp-server",
+      "version": "0.0.20",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/healthlake-mcp-server/"
+    },
+    "aws-dataprocessing-mcp-server": {
+      "package": "awslabs.aws-dataprocessing-mcp-server",
+      "version": "0.2.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-dataprocessing-mcp-server/"
+    },
+    "cloudwatch-applicationsignals-mcp-server": {
+      "package": "awslabs.cloudwatch-applicationsignals-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/cloudwatch-applicationsignals-mcp-server/"
+    },
+    "aws-healthomics-mcp-server": {
+      "package": "awslabs.aws-healthomics-mcp-server",
+      "version": "0.1.5",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server/"
+    },
+    "iam-mcp-server": {
+      "package": "awslabs.iam-mcp-server",
+      "version": "1.1.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/iam-mcp-server/"
+    },
+    "amazon-bedrock-agentcore-mcp-server": {
+      "package": "awslabs.amazon-bedrock-agentcore-mcp-server",
+      "version": "0.2.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-bedrock-agentcore-mcp-server/"
+    },
+    "cloudwatch-mcp-server": {
+      "package": "awslabs.cloudwatch-mcp-server",
+      "version": "0.3.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/cloudwatch-mcp-server/"
+    },
+    "redshift-mcp-server": {
+      "package": "awslabs.redshift-mcp-server",
+      "version": "0.1.2",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/redshift-mcp-server/"
+    },
+    "amazon-translate-mcp-server": {
+      "package": "awslabs.amazon-translate-mcp-server",
+      "version": "1.0.7",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/amazon-translate-mcp-server/"
+    },
+    "well-architected-security-mcp-server": {
+      "package": "awslabs.well-architected-security-mcp-server",
+      "version": "0.2.0",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/well-architected-security-mcp-server/"
+    },
+    "aws-for-sap-management-mcp-server": {
+      "package": "awslabs.aws-for-sap-management-mcp-server",
+      "version": "0.1.1",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/aws-for-sap-management-mcp-server/"
+    },
+    "roda-mcp-server": {
+      "package": "awslabs.roda-mcp-server",
+      "version": "0.1.7",
+      "python": ">=3.10",
+      "status": "configuration-only",
+      "source": "https://github.com/awslabs/mcp/tree/main/src/roda-mcp-server/"
+    }
+  }
+}

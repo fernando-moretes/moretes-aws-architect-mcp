@@ -1,0 +1,35 @@
+{
+  "name": "moretes-aws-architect-mcp",
+  "version": "0.1.0",
+  "description": "Evidence-first AWS solution architecture MCP by Fernando Azevedo: architecture tools, official knowledge federation and scoped integration profiles.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/bundle.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts",
+    "start": "node dist/stdio.js",
+    "dev": "tsx src/stdio.ts",
+    "http": "tsx src/http.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "catalog:refresh": "node scripts/refresh-catalog.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cost-explorer": "^3.1156.0",
+    "@aws-sdk/client-dynamodb": "^3.1156.0",
+    "@aws-sdk/client-resource-groups-tagging-api": "^3.1156.0",
+    "@aws-sdk/client-sts": "^3.1156.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

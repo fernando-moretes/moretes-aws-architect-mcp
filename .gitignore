@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+.env*
+*.zip
+.local/
+coverage/
+!examples/*.env.example
