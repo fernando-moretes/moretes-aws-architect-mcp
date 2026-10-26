@@ -3,7 +3,7 @@
   "name": "io.github.fernando-moretes/moretes-aws-architect-mcp",
   "title": "Moretes Architect MCP",
   "description": "Evidence-first architecture workbench: 48 deterministic tools, 10 architect personas, any cloud",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "websiteUrl": "https://fernando.moretes.com/mcp",
   "repository": {
     "url": "https://github.com/fernando-moretes/moretes-aws-architect-mcp",

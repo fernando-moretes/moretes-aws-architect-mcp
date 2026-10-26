@@ -1,0 +1,46 @@
+name: Moretes Architect review
+description: Architecture, IaC, API and MCP safety reviews from the Moretes Architect MCP, offline, with SARIF and exit codes.
+author: Fernando Azevedo
+branding:
+  icon: shield
+  color: orange
+inputs:
+  tool:
+    description: "Tool to run, e.g. terraform_plan_review, cloudformation_review, kubernetes_manifest_review, openapi_review, iam_policy_review, mcp_config_review, dependency_manifest_review, code_review_architecture"
+    required: true
+  files:
+    description: Space-separated files to review (one review per file)
+    required: true
+  fail-on:
+    description: Fail the step on findings at this severity or above (high, medium, info). Empty never fails.
+    required: false
+    default: high
+  sarif:
+    description: Also write a SARIF file for code scanning (only for a single file)
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: Build the CLI
+      shell: bash
+      run: cd "$GITHUB_ACTION_PATH" && npm ci --ignore-scripts --no-audit --no-fund && npm run build >/dev/null
+    - name: Review
+      shell: bash
+      env:
+        TOOL: ${{ inputs.tool }}
+        FILES: ${{ inputs.files }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SARIF: ${{ inputs.sarif }}
+      run: |
+        CLI="$GITHUB_ACTION_PATH/dist/cli.js"
+        set +e
+        if [ -n "$SARIF" ]; then node "$CLI" call "$TOOL" --input $FILES --format sarif > "$SARIF"; fi
+        node "$CLI" check "$TOOL" ${FAIL_ON:+--fail-on "$FAIL_ON"} $FILES | tee review.md
+        code=${PIPESTATUS[0]}
+        { echo "## Moretes Architect: $TOOL"; echo; cat review.md; } >> "$GITHUB_STEP_SUMMARY"
+        if [ -z "$FAIL_ON" ]; then exit 0; fi
+        exit $code

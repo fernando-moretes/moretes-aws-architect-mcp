@@ -1,0 +1,42 @@
+name: Action self-test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fixtures from the documented examples
+        run: |
+          node -e 'const e=require("./docs/examples/terraform_plan_review.json");require("fs").writeFileSync("plan.json",JSON.stringify(e.arguments.plan))'
+          echo '{"mcpServers":{"ok":{"url":"https://example.com/mcp"}}}' > clean.mcp.json
+      - name: Clean config passes
+        uses: ./
+        with:
+          tool: mcp_config_review
+          files: clean.mcp.json
+      - name: Risky plan is reported (no failure threshold)
+        uses: ./
+        with:
+          tool: terraform_plan_review
+          files: plan.json
+          fail-on: ""
+          sarif: review.sarif
+      - name: Risky plan fails the gate
+        id: gate
+        continue-on-error: true
+        uses: ./
+        with:
+          tool: terraform_plan_review
+          files: plan.json
+      - name: Assert gate outcome and SARIF
+        run: |
+          [ "${{ steps.gate.outcome }}" = "failure" ] || { echo "expected the high-severity gate to fail"; exit 1; }
+          node -e 'const s=JSON.parse(require("fs").readFileSync("review.sarif","utf8"));if(!s.runs[0].results.length)process.exit(1)'

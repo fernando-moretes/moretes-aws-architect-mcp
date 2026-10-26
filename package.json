@@ -1,6 +1,6 @@
 {
   "name": "moretes-aws-architect-mcp",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Evidence-first architecture workbench MCP by Fernando Azevedo: architect personas, cloud-agnostic design tools, IaC/code/API reviews, AI-agent and MCP safety, live AWS knowledge. Deterministic, no model calls. CLI for pipelines.",
   "type": "module",
   "license": "MIT",
@@ -37,14 +37,21 @@
     "moretes-aws-architect-mcp": "dist/stdio.js"
   },
   "files": [
+    ".claude-plugin",
+    ".pre-commit-hooks.yaml",
     "LICENSE",
     "NOTICE.md",
     "PRIVACY.md",
     "README.md",
     "SECURITY.md",
+    "action.yml",
     "dist",
+    "gemini-extension.json",
+    "scripts/prepare.mjs",
     "server.json",
-    "src/data"
+    "skills",
+    "src/data",
+    "tsconfig.json"
   ],
   "scripts": {
     "build": "tsc && node scripts/bundle.mjs",
@@ -56,7 +63,7 @@
     "smoke": "tsx scripts/smoke.ts",
     "catalog:refresh": "node scripts/refresh-catalog.mjs",
     "cli": "node dist/cli.js",
-    "prepare": "tsc",
+    "prepare": "node scripts/prepare.mjs",
     "docs:tools": "node scripts/tool-docs.mjs",
     "coverage": "tsx --test --experimental-test-coverage test/*.test.ts",
     "contracts": "node scripts/contracts.mjs",
