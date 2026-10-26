@@ -39,4 +39,4 @@ jobs:
       - name: Assert gate outcome and SARIF
         run: |
           [ "${{ steps.gate.outcome }}" = "failure" ] || { echo "expected the high-severity gate to fail"; exit 1; }
-          node -e 'const s=require("./review.sarif");if(!s.runs[0].results.length)process.exit(1)'
+          node -e 'const s=JSON.parse(require("fs").readFileSync("review.sarif","utf8"));if(!s.runs[0].results.length)process.exit(1)'
