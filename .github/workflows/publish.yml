@@ -56,5 +56,15 @@ jobs:
       - name: Install mcp-publisher
         run: |
           curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+      - name: Wait for npm to serve the version
+        run: |
+          # O npm processa o pacote de forma assíncrona; na v0.4.0 levou ~2 min e
+          # o Registry recusou com 404 por validar antes da versão aparecer.
+          V=$(node -p "require('./package.json').version")
+          for i in $(seq 1 60); do
+            npm view "moretes-aws-architect-mcp@$V" version >/dev/null 2>&1 && exit 0
+            sleep 10
+          done
+          echo "moretes-aws-architect-mcp@$V não apareceu no npm em 10 min"; exit 1
       - run: ./mcp-publisher login github-oidc
       - run: ./mcp-publisher publish
