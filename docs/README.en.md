@@ -30,12 +30,12 @@ It stops a dangerous apply in CI: the same engine as an offline CLI with SARIF a
 ## Connect in 30 seconds
 
 ```sh
-claude mcp add --transport http moretes-architect https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
-codex mcp add moretes-architect --url https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
-gemini mcp add --transport http moretes-architect https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
+claude mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
+codex mcp add moretes-architect --url https://mcp.moretes.com/mcp
+gemini mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
 ```
 
-Kiro, Cursor, Amazon Q: `{"mcpServers":{"moretes-architect":{"url":"https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp"}}}`. VS Code: `{"servers":{"moretes-architect":{"type":"http","url":"..."}}}`. Every client step by step: [clients.md](clients.md).
+Kiro, Cursor, Amazon Q: `{"mcpServers":{"moretes-architect":{"url":"https://mcp.moretes.com/mcp"}}}`. VS Code: `{"servers":{"moretes-architect":{"type":"http","url":"..."}}}`. Every client step by step: [clients.md](clients.md).
 
 Public quota: 300 requests per day per caller, 3,000 in total. No SLA. For volume or private inputs, run locally:
 

@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "description": "Evidence-first architecture workbench: 48 deterministic tools and 10 architect personas.",
   "mcpServers": {
-    "moretes-architect": { "httpUrl": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp" }
+    "moretes-architect": { "httpUrl": "https://mcp.moretes.com/mcp" }
   },
   "contextFileName": "skills/moretes-architect/SKILL.md"
 }

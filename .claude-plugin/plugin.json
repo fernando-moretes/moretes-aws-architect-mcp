@@ -8,6 +8,6 @@
   "license": "MIT",
   "keywords": ["architecture", "aws", "azure", "gcp", "well-architected", "adr", "terraform", "kubernetes", "finops", "mcp", "security"],
   "mcpServers": {
-    "moretes-architect": { "type": "http", "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp" }
+    "moretes-architect": { "type": "http", "url": "https://mcp.moretes.com/mcp" }
   }
 }
