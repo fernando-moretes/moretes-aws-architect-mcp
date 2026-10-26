@@ -2,7 +2,7 @@
 
 What the public service does with your data, in one page. The local mode (stdio and CLI) sends nothing anywhere unless you call the two tool families listed below.
 
-## Public endpoint (`https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp`)
+## Public endpoint (`https://mcp.moretes.com/mcp`)
 
 **Collected per request, kept 7 days in CloudWatch Logs:**
 

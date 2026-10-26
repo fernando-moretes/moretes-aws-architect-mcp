@@ -658,7 +658,7 @@ Input (from docs/examples):
 {
   "config": {
     "mcpServers": {
-      "moretes-architect": { "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp" },
+      "moretes-architect": { "url": "https://mcp.moretes.com/mcp" },
       "files": { "command": "npx", "args": ["-y", "some-files-server"], "env": { "GITHUB_TOKEN": "ghp_exampleexampleexample1234" }, "autoApprove": ["*"] },
       "legacy": { "url": "http://10.0.0.5:8080/mcp" }
     }

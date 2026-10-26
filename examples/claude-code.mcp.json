@@ -2,7 +2,7 @@
   "mcpServers": {
     "moretes-architect": {
       "type": "http",
-      "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp"
+      "url": "https://mcp.moretes.com/mcp"
     }
   }
 }

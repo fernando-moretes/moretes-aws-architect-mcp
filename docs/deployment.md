@@ -2,9 +2,10 @@
 
 Release: **0.1.0**, 24 October 2026 (America/Sao_Paulo).
 
-- Landing page: https://m9od37vm41.execute-api.us-east-1.amazonaws.com/
-- MCP endpoint: https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
-- Health: https://m9od37vm41.execute-api.us-east-1.amazonaws.com/health
+- Landing page: https://mcp.moretes.com/
+- MCP endpoint: https://mcp.moretes.com/mcp
+- Health: https://mcp.moretes.com/health
+- Since 0.4.0 (26 October 2026) the custom domain `mcp.moretes.com` (ACM certificate, regional API Gateway domain, DNS-only CNAME at Cloudflare) is the published address. The original `https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp` keeps answering, so existing client configs do not break.
 - Region: us-east-1.
 - Application stack: `moretes-architect-mcp`; artifacts stack: `moretes-architect-mcp-artifacts`.
 

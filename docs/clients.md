@@ -8,7 +8,7 @@ Moretes Architect MCP speaks MCP over two transports:
 Canonical endpoint (verified 2026-10-24, version 0.2.0):
 
 ```text
-https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
+https://mcp.moretes.com/mcp
 ```
 
 Also available soon at `https://fernando.moretes.com/api/mcp` (a site rewrite to the same endpoint). Keep the execute-api URL as the canonical one in configurations. Landing page, `/health`, `/.well-known/mcp/server-card.json` and `/tools.json` live on the same host. Tutorials, course and FAQ: https://fernando.moretes.com/mcp.
@@ -259,7 +259,7 @@ With `MORETES_INTEGRATIONS_FILE` pointing to a reviewed allowlist JSON, two more
 1. Health, from a shell:
 
    ```sh
-   curl -s https://m9od37vm41.execute-api.us-east-1.amazonaws.com/health
+   curl -s https://mcp.moretes.com/health
    ```
 
    Expected: `{"status":"ok","version":"0.2.0","publicTools":48,"accountTools":false}`.

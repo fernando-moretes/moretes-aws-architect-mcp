@@ -61,20 +61,20 @@ Feito por [Fernando Azevedo](https://fernando.moretes.com), Arquiteto de Tecnolo
 
 <p>
   <a href="https://cursor.com/en/install-mcp?name=moretes-architect&config=eyJ1cmwiOiJodHRwczovL205b2QzN3ZtNDEuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbWNwIn0="><img alt="Instalar no Cursor" src="https://img.shields.io/badge/Cursor-instalar%20em%20um%20clique-0f1b2d?logo=cursor"></a>
-  <a href="https://insiders.vscode.dev/redirect/mcp/install?name=moretes-architect&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fm9od37vm41.execute-api.us-east-1.amazonaws.com%2Fmcp%22%7D"><img alt="Instalar no VS Code" src="https://img.shields.io/badge/VS%20Code-instalar%20em%20um%20clique-007ACC?logo=visualstudiocode"></a>
+  <a href="https://insiders.vscode.dev/redirect/mcp/install?name=moretes-architect&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.moretes.com%2Fmcp%22%7D"><img alt="Instalar no VS Code" src="https://img.shields.io/badge/VS%20Code-instalar%20em%20um%20clique-007ACC?logo=visualstudiocode"></a>
 </p>
 
 Sem chave, sem cadastro:
 
 ```sh
 # Claude Code
-claude mcp add --transport http moretes-architect https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
+claude mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
 
 # Codex
-codex mcp add moretes-architect --url https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
+codex mcp add moretes-architect --url https://mcp.moretes.com/mcp
 
 # Gemini CLI
-gemini mcp add --transport http moretes-architect https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp
+gemini mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
 ```
 
 <details>
@@ -86,7 +86,7 @@ Kiro (`.kiro/settings/mcp.json`), Cursor (`.cursor/mcp.json`) e Amazon Q (`mcp.j
 {
   "mcpServers": {
     "moretes-architect": {
-      "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp",
+      "url": "https://mcp.moretes.com/mcp",
       "autoApprove": []
     }
   }
@@ -98,7 +98,7 @@ VS Code (`.vscode/mcp.json`):
 ```json
 {
   "servers": {
-    "moretes-architect": { "type": "http", "url": "https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp" }
+    "moretes-architect": { "type": "http", "url": "https://mcp.moretes.com/mcp" }
   }
 }
 ```
@@ -302,7 +302,7 @@ A role da Lambda só escreve na tabela de cota e nos próprios logs. Deploy por 
 
 ```sh
 npm run typecheck && npm test && npm run build && npm audit --omit=dev
-npm run smoke -- https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp   # consulta pública real
+npm run smoke -- https://mcp.moretes.com/mcp   # consulta pública real
 node scripts/examples.mjs    # regenera docs/examples com as saídas reais
 ```
 
