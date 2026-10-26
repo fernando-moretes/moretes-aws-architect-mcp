@@ -8,6 +8,8 @@ def aws(*args):
     return subprocess.check_output(['aws',*args],env=env,text=True).strip()
 parser=argparse.ArgumentParser()
 parser.add_argument('--email',required=True)
+parser.add_argument('--domain',default='',help='Optional custom domain, requires --certificate-arn')
+parser.add_argument('--certificate-arn',default='')
 parser.add_argument('--execute',action='store_true',help='Execute the reviewed application change set; otherwise prepare it only')
 args=parser.parse_args()
 identity=json.loads(aws('sts','get-caller-identity'))
@@ -20,7 +22,7 @@ with zipfile.ZipFile('build/lambda.zip','w',zipfile.ZIP_DEFLATED) as archive:arc
 digest=hashlib.sha256(pathlib.Path('build/lambda.zip').read_bytes()).hexdigest()
 key=f'releases/{digest}.zip'
 aws('s3','cp','build/lambda.zip',f's3://{bucket}/{key}','--only-show-errors')
-command=['aws','cloudformation','deploy','--template-file','infra/service.json','--stack-name','moretes-architect-mcp','--capabilities','CAPABILITY_IAM','--parameter-overrides',f'ArtifactBucket={bucket}',f'ArtifactKey={key}',f'AlertEmail={args.email}','--no-fail-on-empty-changeset']
+command=['aws','cloudformation','deploy','--template-file','infra/service.json','--stack-name','moretes-architect-mcp','--capabilities','CAPABILITY_IAM','--parameter-overrides',f'ArtifactBucket={bucket}',f'ArtifactKey={key}',f'AlertEmail={args.email}',f'CustomDomainName={args.domain}',f'CertificateArn={args.certificate_arn}','--no-fail-on-empty-changeset']
 if not args.execute:command.append('--no-execute-changeset')
 subprocess.run(command,env=env,check=True)
 if args.execute:

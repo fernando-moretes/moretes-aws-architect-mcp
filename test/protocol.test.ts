@@ -44,3 +44,12 @@ test('public mode cannot acquire account tools even when process opts in',async(
 });
 test('account guard fails closed before any network call',async()=>{delete process.env.ENABLE_AWS_ACCOUNT_TOOLS;await assert.rejects(verifyAccount(),/local stdio/);process.env.ENABLE_AWS_ACCOUNT_TOOLS='true';delete process.env.EXPECTED_AWS_ACCOUNT_ID;await assert.rejects(verifyAccount(),/EXPECTED_AWS_ACCOUNT/);delete process.env.ENABLE_AWS_ACCOUNT_TOOLS;});
 test('integration configs are disabled, pinned and not auto-approved',async()=>{const t=publicTools.find(t=>t.name==='integration_config')!;const r=await t.run({serverId:'aws-api-mcp-server'});const c=(r.configuration as any).mcpServers['aws-api-mcp-server'];assert.equal(c.disabled,true);assert.deepEqual(c.autoApprove,[]);assert.ok(!c.args[0].includes('@latest'));});
+test('usage counter records only known tool names and stats route answers',async()=>{
+ const seen:string[]=[];const headers={'Content-Type':'application/json',Accept:'application/json, text/event-stream'};
+ const body=(name:string)=>JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/call',params:{name,arguments:{availabilityPercent:99,periodDays:1}}});
+ await handleRequest(new Request('https://t/mcp',{method:'POST',headers,body:body('slo_budget')}),{countTool:async n=>{seen.push(n);}});
+ await handleRequest(new Request('https://t/mcp',{method:'POST',headers,body:body('not_a_tool')}),{countTool:async n=>{seen.push(n);}});
+ assert.deepEqual(seen,['slo_budget']);
+ const none=await handleRequest(new Request('https://t/stats.json'));assert.equal((await none.json()).available,false);
+ const ok=await handleRequest(new Request('https://t/stats.json'),{stats:async()=>({months:{}})});assert.equal(ok.status,200);
+});

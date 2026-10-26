@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Public per-tool usage: monthly `tools/call` counts by tool name only, at `/stats.json` (10-minute cache). Lambda role gains `dynamodb:BatchGetItem` on its own table.
+- Optional custom domain parameters in the service template.
+
 ## 0.3.0 — 2026-10-25
 
 Trust and contracts release. Same 48 tools.

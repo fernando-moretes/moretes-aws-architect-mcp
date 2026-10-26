@@ -29,6 +29,16 @@
       "MinValue": 10,
       "MaxValue": 10000,
       "Description": "Daily MCP requests per pseudonymous caller (sha256 of day + source IP)."
+    },
+    "CustomDomainName": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Optional custom domain (e.g. mcp.moretes.com). Empty keeps only the execute-api URL."
+    },
+    "CertificateArn": {
+      "Type": "String",
+      "Default": "",
+      "Description": "ISSUED ACM certificate in us-east-1 for CustomDomainName."
     }
   },
   "Resources": {
@@ -112,7 +122,10 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": "dynamodb:UpdateItem",
+                  "Action": [
+                    "dynamodb:UpdateItem",
+                    "dynamodb:BatchGetItem"
+                  ],
                   "Resource": {
                     "Fn::GetAtt": [
                       "Quota",
@@ -167,7 +180,15 @@
             },
             "SERVICE_ENABLED": "true",
             "PUBLIC_MCP_URL": {
-              "Fn::Sub": "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"
+              "Fn::If": [
+                "HasCustomDomain",
+                {
+                  "Fn::Sub": "https://${CustomDomainName}/mcp"
+                },
+                {
+                  "Fn::Sub": "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/mcp"
+                }
+              ]
             },
             "ENABLE_AWS_ACCOUNT_TOOLS": "false",
             "CLIENT_DAILY_REQUEST_LIMIT": {
@@ -397,6 +418,42 @@
           ]
         }
       }
+    },
+    "CustomDomain": {
+      "Type": "AWS::ApiGatewayV2::DomainName",
+      "Condition": "HasCustomDomain",
+      "Properties": {
+        "DomainName": {
+          "Ref": "CustomDomainName"
+        },
+        "DomainNameConfigurations": [
+          {
+            "CertificateArn": {
+              "Ref": "CertificateArn"
+            },
+            "EndpointType": "REGIONAL",
+            "SecurityPolicy": "TLS_1_2"
+          }
+        ],
+        "Tags": {
+          "Project": "moretes-aws-architect-mcp"
+        }
+      }
+    },
+    "CustomDomainMapping": {
+      "Type": "AWS::ApiGatewayV2::ApiMapping",
+      "Condition": "HasCustomDomain",
+      "Properties": {
+        "ApiId": {
+          "Ref": "Api"
+        },
+        "DomainName": {
+          "Ref": "CustomDomain"
+        },
+        "Stage": {
+          "Ref": "Stage"
+        }
+      }
     }
   },
   "Outputs": {
@@ -427,6 +484,30 @@
           "Arn"
         ]
       }
+    },
+    "CustomDomainTarget": {
+      "Condition": "HasCustomDomain",
+      "Description": "CNAME target for CustomDomainName (DNS only, not proxied)",
+      "Value": {
+        "Fn::GetAtt": [
+          "CustomDomain",
+          "RegionalDomainName"
+        ]
+      }
+    }
+  },
+  "Conditions": {
+    "HasCustomDomain": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "CustomDomainName"
+            },
+            ""
+          ]
+        }
+      ]
     }
   }
 }

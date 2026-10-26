@@ -17,6 +17,12 @@ That is the whole log line. Tool name, arguments, results, prompts, headers and 
 - `global#2026-10-24` → number of MCP requests that day.
 - `client#<24 hex chars>#2026-10-24` → number of requests from one caller. The key is `sha256(day + source IP)`, truncated. The raw IP is not stored and the key changes every day.
 
+**Usage counters, kept 400 days in DynamoDB:**
+
+- `toolmonth#capacity_plan#2026-10` → how many times that tool was called that month.
+
+Only the tool name and the month. No arguments, results, caller key or IP. The totals are public at `/stats.json` so anyone can see which tools are used.
+
 **What leaves the server:**
 
 | Tool | Destination | What is sent |
@@ -27,7 +33,7 @@ That is the whole log line. Tool name, arguments, results, prompts, headers and 
 
 **Not collected:** accounts, emails, cookies, analytics, fingerprints. Browser origins are rejected by default, so no web page can call the endpoint on your behalf.
 
-**Retention:** logs 7 days, counters 2 days, nothing else persisted.
+**Retention:** logs 7 days, quota counters 2 days, per-tool monthly counters 400 days, nothing else persisted.
 
 ## Local mode
 
