@@ -39,6 +39,15 @@ Kiro, Cursor, Amazon Q: `{"mcpServers":{"moretes-architect":{"url":"https://mcp.
 
 Public quota: 300 requests per day per caller, 3,000 in total. No SLA. For volume or private inputs, run locally:
 
+Install the published release with an explicit binary:
+
+```sh
+npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-architect list
+npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-aws-architect-mcp
+```
+
+The second command starts MCP stdio. Installation uses the network; deterministic review/calculation tools run offline afterward. Source builds remain available:
+
 ```sh
 git clone https://github.com/fernando-moretes/moretes-aws-architect-mcp.git
 cd moretes-aws-architect-mcp && npm ci --ignore-scripts && npm run build
@@ -47,6 +56,8 @@ node dist/cli.js list       # pipeline CLI
 ```
 
 ## What it does
+
+Release 0.4.1 fixes large-queue numerical overflow and makes GitHub Action report-only mode fail on execution errors. See [release notes](release-notes.md) and [integration setup](integrations-clients.md). Queue calculations accept at most 100,000 concurrent slots; errors are explicit, never silently reported as successful reviews.
 
 | Group | Tools |
 |---|---|

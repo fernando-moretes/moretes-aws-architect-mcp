@@ -1,6 +1,6 @@
 # Troubleshooting
 
-Symptom, what to check, how to fix. Version 0.2.0. HTTP status codes come from `src/web.ts` and `src/lambda.ts`; local errors from `src/account.ts`, `src/federation.ts` and `src/cli.ts`.
+Symptom, what to check, how to fix. Version 0.4.1. HTTP status codes come from `src/web.ts` and `src/lambda.ts`; local errors from `src/account.ts`, `src/federation.ts` and `src/cli.ts`.
 
 ## Public endpoint (HTTP)
 

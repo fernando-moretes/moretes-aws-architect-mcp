@@ -1,6 +1,6 @@
 # Tools guide
 
-A human guide to the 48 public tools of Moretes Architect MCP 0.2.0. Tools are grouped exactly as the server lists them (`toolGroups` in `src/server.ts`), so the order here matches what your client shows.
+A human guide to the 48 public tools of Moretes Architect MCP 0.4.1. Tools are grouped exactly as the server lists them (`toolGroups` in `src/server.ts`), so the order here matches what your client shows.
 
 For every tool: what it does, a minimal input, what the output contains, and the limitation you must keep in mind. Inputs marked "from docs/examples" are the real arguments used to produce the committed outputs in `docs/examples/<tool>.json`; those files are real tool results, regenerated with `node scripts/examples.mjs`. The exact JSON schema of each tool is in the generated [tool reference](tools.md); each heading below links to it.
 
@@ -458,6 +458,8 @@ Input (from docs/examples):
 ```
 
 Output: `offeredLoadErlangs: 4`, `utilizationPercent: 100`, `stable: false` (4 consumers cannot keep up), `waitProbability: 1`, `backlogDrainSeconds: null`, `consumersForTargetUtilization: 7`, `warnings`, `formulas`.
+
+Numerics: stable Erlang B recurrence converted to Erlang C; at most 100,000 concurrent slots (`consumers × maxConcurrencyPerConsumer`). Larger products return an explicit input error to bound CPU work. For 900 arrivals/s, 1,000 ms service and 1,000 consumers, `waitProbability` is 0.0006 and `meanInSystem` is 900.005. Reference: [Whitt, Erlang B and C formulas](https://www.columbia.edu/~ww2040/ErlangBandCFormulas.pdf).
 
 Limitation: assumes Poisson arrivals and exponential service times. Bursty traffic waits longer; batch receive, broker limits and failures are ignored. [Schema](tools.md#queue_sizing).
 

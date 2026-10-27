@@ -6,7 +6,7 @@ Key facts:
 
 - **Local and offline for review tools.** `terraform_plan_review`, `cloudformation_review`, `kubernetes_manifest_review`, `iam_policy_review`, `openapi_review`, `mcp_config_review`, `mcp_server_review`, `code_review_architecture`, `dependency_manifest_review` and every calculator run in memory. No network, no model, nothing leaves the runner, and the public quota does not apply. Only the `aws_knowledge_*`, `aws_regions`, `aws_regional_availability`, `aws_skill` and `github_public_repository` tools call outside, and you would rarely use those in CI.
 - **Heuristics.** Findings are triage. Keep OPA/Conftest, Checkov, tfsec, cfn-lint, Kyverno, Spectral or your SAST for enforcement. A clean run is not an approval.
-- **No npm registry package yet.** Build from the repository in the job (shown below). `npx -y github:fernando-moretes/moretes-aws-architect-mcp` may work through the `prepare` script but is untested.
+- **Published npm package.** Install a pinned version (`npm install --global moretes-aws-architect-mcp@0.4.1`) or build a reviewed repository tag. Installation requires network access; local review execution does not.
 
 ## Commands
 
@@ -16,7 +16,7 @@ moretes-architect describe <tool>                      description and JSON sche
 moretes-architect call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]
 ```
 
-Until a package is published, `moretes-architect` means `node dist/cli.js` from the built repository.
+`moretes-architect` is the published CLI binary. Source builds can use `node dist/cli.js`. `check <tool> [--fail-on high|medium|info] [--format markdown|json] file...` reviews multiple files with a default threshold of high. In the GitHub Action, an empty `fail-on` suppresses severity findings only: invalid input, missing files, execution and artifact errors always fail.
 
 `--input` takes a JSON file (or `-` for stdin) with the tool arguments. For the tools that take one big document, the file may be the raw document itself and the CLI wraps it in the expected argument:
 
@@ -32,7 +32,7 @@ Until a package is published, `moretes-architect` means `node dist/cli.js` from 
 
 If the file already looks like the tool's arguments (it has one of the schema's property names at the top level), it is passed as is. `--arg key=value` adds or overrides single arguments; numbers, `true`/`false` and values starting with `[` or `{` are parsed.
 
-`dependency_manifest_review` is not in the wrap table because it needs two fields (`filename`, `content`). Build the arguments with `jq` (see the example below).
+`dependency_manifest_review` also accepts a raw manifest path through `--input`; the CLI supplies `filename` and `content`. The explicit `jq` example below remains useful when choosing optional arguments.
 
 ### Exit codes
 

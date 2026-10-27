@@ -1,6 +1,6 @@
 {
   "name": "moretes-aws-architect-mcp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Evidence-first architecture workbench MCP by Fernando Azevedo: architect personas, cloud-agnostic design tools, IaC/code/API reviews, AI-agent and MCP safety, live AWS knowledge. Deterministic, no model calls. CLI for pipelines.",
   "type": "module",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "dist",
     "gemini-extension.json",
     "scripts/prepare.mjs",
+    "scripts/action-review.mjs",
     "server.json",
     "skills",
     "src/data",
@@ -67,7 +68,9 @@
     "docs:tools": "node scripts/tool-docs.mjs",
     "coverage": "tsx --test --experimental-test-coverage test/*.test.ts",
     "contracts": "node scripts/contracts.mjs",
-    "examples": "node scripts/examples.mjs"
+    "examples": "node scripts/examples.mjs",
+    "docs:check": "node scripts/check-docs.mjs",
+    "package:smoke": "node scripts/package-smoke.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-cost-explorer": "^3.1156.0",

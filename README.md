@@ -10,7 +10,7 @@
   <a href="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml/badge.svg"></a>
   <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.fernando-moretes/moretes-aws-architect-mcp"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-listado-ff9900"></a>
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff9900"></a>
-  <img alt="Versão 0.4.0" src="https://img.shields.io/badge/vers%C3%A3o-0.4.0-0f1b2d">
+  <img alt="Versão 0.4.1" src="https://img.shields.io/badge/vers%C3%A3o-0.4.1-0f1b2d">
   <img alt="48 ferramentas" src="https://img.shields.io/badge/ferramentas-48-0f1b2d">
   <img alt="Sem chamadas a modelo" src="https://img.shields.io/badge/chamadas%20a%20modelo-0-10b981">
   <img alt="Sem chave de API" src="https://img.shields.io/badge/chave%20de%20API-nenhuma-10b981">
@@ -60,7 +60,7 @@ Feito por [Fernando Azevedo](https://fernando.moretes.com), Arquiteto de Tecnolo
 ## Conecte em 30 segundos
 
 <p>
-  <a href="https://cursor.com/en/install-mcp?name=moretes-architect&config=eyJ1cmwiOiJodHRwczovL205b2QzN3ZtNDEuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vbWNwIn0="><img alt="Instalar no Cursor" src="https://img.shields.io/badge/Cursor-instalar%20em%20um%20clique-0f1b2d?logo=cursor"></a>
+  <a href="https://cursor.com/en/install-mcp?name=moretes-architect&config=eyJ1cmwiOiJodHRwczovL21jcC5tb3JldGVzLmNvbS9tY3AifQ=="><img alt="Instalar no Cursor" src="https://img.shields.io/badge/Cursor-instalar%20em%20um%20clique-0f1b2d?logo=cursor"></a>
   <a href="https://insiders.vscode.dev/redirect/mcp/install?name=moretes-architect&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.moretes.com%2Fmcp%22%7D"><img alt="Instalar no VS Code" src="https://img.shields.io/badge/VS%20Code-instalar%20em%20um%20clique-007ACC?logo=visualstudiocode"></a>
 </p>
 
@@ -216,7 +216,7 @@ Roda offline e sem cota. O SARIF entra no code scanning do GitHub; o Markdown va
 | **Claude Code (plugin + skill)** | `/plugin marketplace add fernando-moretes/moretes-aws-architect-mcp` e `/plugin install moretes-architect@moretes` |
 | **Gemini CLI** | `gemini extensions install https://github.com/fernando-moretes/moretes-aws-architect-mcp` |
 | **Qualquer agente com Agent Skills** | `npx skills add fernando-moretes/moretes-aws-architect-mcp` |
-| **GitHub Actions** | `uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.0` com `tool`, `files`, `fail-on` e `sarif` |
+| **GitHub Actions** | `uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.1` com `tool`, `files`, `fail-on` e `sarif` |
 | **pre-commit** | hooks `mcp-config-review`, `dependency-manifest-review`, `cloudformation-review`, `openapi-review`, `code-review-architecture` |
 | **Docker** | `docker run -i --rm ghcr.io/fernando-moretes/moretes-aws-architect-mcp` (stdio), `... http`, `... cli check <ferramenta> <arquivo>` |
 
@@ -231,7 +231,7 @@ npm run http         # http://127.0.0.1:8787/mcp e a landing local
 node dist/cli.js list
 ```
 
-As ferramentas de conta AWS (identidade STS, recursos por tag, histórico de custo) e a federação com os servidores oficiais são **opt-in por variável de ambiente e só existem no stdio**: o HTTP público nunca as expõe. Detalhes em [docs/clients.md](docs/clients.md) e [docs/integrations.md](docs/integrations.md). Ainda não há publicação no npm; use o clone de uma tag.
+As ferramentas de conta AWS (identidade STS, recursos por tag, histórico de custo) e a federação com os servidores oficiais são **opt-in por variável de ambiente e só existem no stdio**: o HTTP público nunca as expõe. Detalhes em [docs/clients.md](docs/clients.md) e [docs/integrations.md](docs/integrations.md). O pacote está publicado no [npm](https://www.npmjs.com/package/moretes-aws-architect-mcp). Use `npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-architect list` para o CLI ou `npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-aws-architect-mcp` para stdio.
 
 ## Tutorial em vídeo e curso grátis
 
@@ -269,6 +269,7 @@ Em [fernando.moretes.com/mcp](https://fernando.moretes.com/mcp): conexão por cl
 
 - O servidor público processa a entrada em memória e registra só id da requisição, status e duração. Nunca argumentos, prompts ou resultados.
 - Só duas famílias saem para a internet: `aws_knowledge_*` (a consulta vai para o MCP oficial da AWS) e `github_public_repository` (api.github.com). Todo o resto é cálculo local.
+- Contadores mensais em `/stats.json` registram apenas nomes de ferramentas, sem argumentos, resultados ou identidade; não representam usuários únicos ou análises bem-sucedidas.
 - A cota por cliente usa `sha256(dia + IP)` com validade de dois dias; o IP bruto não é guardado.
 - Não envie segredos, dados de clientes ou arquitetura confidencial ao endpoint público; para isso existe o modo local.
 - Sem SLA. Serviço comunitário, mantido por uma pessoa, com orçamento alvo de US$ 30 por mês.
@@ -296,7 +297,7 @@ flowchart LR
 <p align="center"><img alt="Landing do servidor público com o comando de cada cliente e as ferramentas por grupo" src="docs/images/landing.png" width="80%"></p>
 </details>
 
-A role da Lambda só escreve na tabela de cota e nos próprios logs. Deploy por change set CloudFormation revisado. [Design](docs/architecture.md) · [Custos](docs/costs.md) · [Runbook](docs/operations.md) · [Evidências do deploy](docs/deployment.md)
+A role da Lambda escreve e lê contadores somente na própria tabela DynamoDB e escreve nos próprios logs. Deploy por change set CloudFormation revisado. [Design](docs/architecture.md) · [Custos](docs/costs.md) · [Runbook](docs/operations.md) · [Evidências do deploy](docs/deployment.md)
 
 ## Qualidade
 

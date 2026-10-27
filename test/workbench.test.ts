@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {publicTools} from '../src/server.js';
-import {erlangC} from '../src/reliability.js';
+import {erlangC,MAX_QUEUE_CAPACITY} from '../src/reliability.js';
 import {reviewToolList} from '../src/ai.js';
 import {reviewTerraformPlan, reviewKubernetesManifests} from '../src/iac.js';
 import {PERSONAS} from '../src/personas.js';
@@ -55,6 +55,24 @@ test('queue_sizing: Erlang C sanity and unstable detection',async()=>{
  assert.equal(r.offeredLoadErlangs,5);assert.equal(r.stable,false);
  const ok=await run('queue_sizing',{arrivalsPerSecond:100,serviceTimeMs:50,consumers:10,backlogMessages:1000});
  assert.equal(ok.stable,true);assert.equal(ok.consumersForTargetUtilization,8);assert.equal(ok.backlogDrainSeconds,10);
+});
+test('Erlang C matches high-precision references without overflow at large loads',()=>{
+ // Independently evaluated from the direct sum with Python Decimal at 100 digits.
+ for(const [servers,load,expected] of [[1000,900,0.0005926699663787812],[1000,999,0.9612392604084191],[10000,9990,0.8805417113739897]]){
+  assert.ok(Math.abs(erlangC(servers,load)-expected)<1e-12,`${servers}, ${load}`);
+ }
+ assert.equal(erlangC(1,0),0);
+ assert.equal(erlangC(1000,1000),1);
+ const nearFull=erlangC(MAX_QUEUE_CAPACITY,MAX_QUEUE_CAPACITY-0.001);
+ assert.ok(Number.isFinite(nearFull)&&nearFull>0&&nearFull<=1);
+});
+test('queue_sizing large stable queue returns finite numbers and bounded work',async()=>{
+ const result=await run('queue_sizing',{arrivalsPerSecond:900,serviceTimeMs:1000,consumers:1000});
+ assert.equal(result.stable,true);assert.equal(result.waitProbability,0.0006);assert.equal(result.meanInSystem,900.005);
+ const max=await run('queue_sizing',{arrivalsPerSecond:99999,serviceTimeMs:1000,consumers:10000,maxConcurrencyPerConsumer:10});
+ for(const key of ['waitProbability','meanInSystem','utilizationPercent'])assert.ok(Number.isFinite(max[key]));
+ await assert.rejects(run('queue_sizing',{arrivalsPerSecond:1,serviceTimeMs:1,consumers:100000,maxConcurrencyPerConsumer:10000}),/Total queue capacity/);
+ for(const [servers,load] of [[0,1],[1.5,1],[100001,1],[1,-1],[1,Infinity]])assert.throws(()=>erlangC(servers,load));
 });
 test('dr_strategy picks the cheapest feasible tier',async()=>{
  const r=await run('dr_strategy',{workload:'core banking',rtoMinutes:15,rpoMinutes:1});

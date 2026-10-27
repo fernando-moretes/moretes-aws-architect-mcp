@@ -1,13 +1,13 @@
 {
   "name": "moretes",
   "owner": { "name": "Fernando Azevedo", "url": "https://fernando.moretes.com" },
-  "metadata": { "description": "Moretes Architect: evidence-first architecture workbench for coding agents", "version": "0.4.0" },
+  "metadata": { "description": "Moretes Architect: evidence-first architecture workbench for coding agents", "version": "0.4.1" },
   "plugins": [
     {
       "name": "moretes-architect",
       "source": "./",
       "description": "48 deterministic architecture tools and 10 architect personas inside your coding agent. Requirements, ADRs, C4, auditable costs, Terraform/Kubernetes/code reviews and AI-agent safety. No model calls, no API key.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "author": { "name": "Fernando Azevedo" },
       "license": "MIT",
       "keywords": ["architecture", "aws", "well-architected", "adr", "terraform", "finops", "mcp"],

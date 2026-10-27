@@ -1,6 +1,6 @@
 # Architect personas
 
-Moretes Architect MCP 0.2.0 ships ten architect personas. Each persona is a **lens**: a mandate, the questions it asks before anything else, the checks it applies, the deliverables it owes, the workbench tools it leans on and the anti-patterns it calls out.
+Moretes Architect MCP 0.4.1 ships ten architect personas. Each persona is a **lens**: a mandate, the questions it asks before anything else, the checks it applies, the deliverables it owes, the workbench tools it leans on and the anti-patterns it calls out.
 
 The persona does not reason by itself. The server has no model. Your client's model adopts the lens and then calls the listed tools with real inputs. The source of truth is `src/personas.ts`; every string below is copied from it.
 
