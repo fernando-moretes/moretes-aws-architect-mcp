@@ -1,6 +1,16 @@
 # Deployment and validation
 
-Release **0.4.1**, 26 October 2026 (America/Sao_Paulo). The GitHub release and tag workflows record the immutable build/publishing results; this file describes the validation gates and the historical evidence separately.
+Release **0.4.1**, prepared 26 October and verified 27 October 2026 (America/Sao_Paulo). The GitHub release and tag workflows record the immutable build/publishing results; this file describes the validation gates and the historical evidence separately.
+
+## Confirmed release evidence
+
+- [PR #15](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/15) merged at `6c08891`; CI on Node 22/24, CodeQL and real Action self-tests passed.
+- [npm and MCP Registry publication](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/40441540914) completed successfully. npm 0.4.1 has a provenance attestation; Registry 0.4.1 is active and advertises `https://mcp.moretes.com/mcp`.
+- [Container publication](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/40441540855) completed for linux/amd64 and linux/arm64. Image index: `sha256:c583817f36c67abb75c33a8136d035530543bc7df4fd13c6d05585155ddf8383`.
+- `npm run package:smoke -- --package moretes-aws-architect-mcp@0.4.1` passed against the published package, including both bins, SDK stdio discovery, the large-queue regression and default account-tool isolation.
+- A reviewed CloudFormation change set updated Lambda code and its dependent integration reference only. Existing domain, certificate, quotas and budget parameters were preserved; the stack reached `UPDATE_COMPLETE`.
+- Live SDK smoke at the canonical endpoint confirmed version 0.4.1, 48 tools, 20 prompts, 18 resources, capacity calculation, large-queue regression, live AWS Knowledge search and rejection of account identity access.
+- `CLAUDE.md` is the machine-local handoff, intentionally excluded by `.git/info/exclude`; public operational guidance is maintained in the tracked documentation.
 
 ## Service and distribution
 
