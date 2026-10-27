@@ -1,6 +1,6 @@
 # FAQ
 
-Answers reflect version 0.2.0, verified on 2026-10-24. When a fact comes from code, the file is named so you can check it.
+Answers reflect version 0.4.1, updated on 2026-10-26. When a fact comes from code, the file is named so you can check it.
 
 ## Cost and availability
 
@@ -65,7 +65,7 @@ When your inputs are confidential, when you need the AWS account tools, when you
 Because a shared public server must never hold or be handed credentials for your account. The HTTP server is created with `createServer(false)` and never registers account or federation tools, regardless of environment variables (`src/server.ts`). Local stdio with your SDK credential chain is the only path, and it verifies STS identity against `EXPECTED_AWS_ACCOUNT_ID` before any call.
 
 **Is there an npm package?**
-Not yet. Clone the repository, `npm ci --ignore-scripts`, `npm run build`. `npx -y github:fernando-moretes/moretes-aws-architect-mcp` may work because of the `prepare` script, but it is untested.
+Yes: [moretes-aws-architect-mcp](https://www.npmjs.com/package/moretes-aws-architect-mcp). Use `npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-architect list` for the CLI or replace the final command with `moretes-aws-architect-mcp` for stdio. Node 22.13+ is required. Installation requires registry access; deterministic reviews run offline once installed. Source builds remain supported.
 
 **Which clients work?**
 Any MCP client with Streamable HTTP for remote use (Claude Code, Codex CLI, Kiro, Cursor, VS Code with Copilot, Gemini CLI, Amazon Q Developer CLI, Windsurf/Devin Desktop) and any client with stdio for local use (also Claude Desktop). Snippets in `docs/clients.md`. Protocol-level tests passed; not every IDE was tested interactively.

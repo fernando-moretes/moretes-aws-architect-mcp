@@ -21,7 +21,7 @@ That is the whole log line. Tool name, arguments, results, prompts, headers and 
 
 - `toolmonth#capacity_plan#2026-10` → how many times that tool was called that month.
 
-Only the tool name and the month. No arguments, results, caller key or IP. The totals are public at `/stats.json` so anyone can see which tools are used.
+Only the tool name and the month. No arguments, results, caller key or IP. The totals are public at `/stats.json` with a 10-minute cache. Counts are attempted known tool calls, including validation/upstream failures, not unique users or successful analyses. Counter write failures are best-effort and may undercount; DynamoDB TTL deletion is asynchronous.
 
 **What leaves the server:**
 

@@ -17,7 +17,7 @@ Ways to use the workbench besides connecting an MCP client to the public endpoin
 ```yaml
 - uses: actions/checkout@v4
 - run: terraform show -json tfplan > plan.json
-- uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.0
+- uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.1
   with:
     tool: terraform_plan_review
     files: plan.json
@@ -29,14 +29,14 @@ Ways to use the workbench besides connecting an MCP client to the public endpoin
     sarif_file: review.sarif
 ```
 
-Inputs: `tool`, `files` (space separated, one review per file), `fail-on` (`high`, `medium`, `info` or empty), `sarif`. Tested on every PR by `.github/workflows/action-selftest.yml`.
+Inputs: `tool`, `files` (space-separated paths or a JSON array such as `["plans/my plan.json"]`), `fail-on` (`high`, `medium`, `info` or empty), `sarif` (exactly one input). Paths are passed without shell evaluation. Empty `fail-on` permits findings but never invalid input, missing files, execution errors or failed report writes. Exit codes: 0 completed/report-only, 1 severity gate, 2 error. Regression tests and `.github/workflows/action-selftest.yml` exercise these cases.
 
 ## pre-commit
 
 ```yaml
 repos:
   - repo: https://github.com/fernando-moretes/moretes-aws-architect-mcp
-    rev: v0.4.0
+    rev: v0.4.1
     hooks:
       - id: mcp-config-review
       - id: dependency-manifest-review

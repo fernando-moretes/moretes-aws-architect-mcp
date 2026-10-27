@@ -14,7 +14,7 @@ The caller's LLM performs reasoning and language generation. Tools provide deter
 
 The official TypeScript SDK owns protocol handling. Each request creates and closes its own server/transport. JSON responses avoid holding SSE streams across Lambda invocations. Notifications receive the SDK's accepted response. Sessions, SSE GET streams, JSON-RPC batching, asynchronous tasks and resume tokens are intentionally unsupported. Standard SDK clients are tested against this transport.
 
-API Gateway HTTP API fronts a Node 22 arm64 Lambda (256 MB, 25 seconds). Each accepted JSON MCP request consumes a global atomic DynamoDB counter keyed by UTC day. The count is protocol requests, **not users or tool calls**. Failures in the quota store fail closed. No IP/user fingerprint is stored. A shared quota is simple but allows one caller to exhaust public availability; authenticated quotas are a roadmap item.
+API Gateway HTTP API fronts a Node 22 arm64 Lambda (256 MB, 25 seconds). Each accepted JSON MCP request consumes daily counters: 300 per caller and 3,000 globally. The caller key hashes day and source IP, truncated to 24 hex characters; raw IPs are not stored. The count is protocol requests, **not users or tool calls**. Quota-store failures fail closed. NAT/proxy callers share a quota; this is not authenticated identity or protection against distributed abuse. Authenticated quotas remain a roadmap item.
 
 ## ADR-004: bounded external knowledge
 
@@ -32,11 +32,13 @@ The dispatcher is annotated potentially destructive and non-idempotent. Provider
 
 - Inputs/results stay in process memory. No chat/history/vector store.
 - CloudWatch receives request ID, duration and status; never request bodies, queries, AWS credentials or model transcripts.
-- DynamoDB stores only daily aggregate request count plus TTL.
+- DynamoDB stores daily global/caller counters (2-day TTL) and monthly per-tool call counts (400-day TTL). `/stats.json` reads this stack's counters with a 10-minute cache. Tool names are counted before execution: totals include failed attempts and are not unique-user or successful-review metrics. TTL deletion is asynchronous.
 - S3 stores the deployment bundle privately with encryption and TLS-only access.
 - Public requests fail on quota/provider errors; no retry storm or silent fallback.
 - Local tools do not reuse a prior successful identity check across resource operations.
-- Static IAM/CloudFormation checks cover a documented subset, not full policy evaluation.
+- Static IAM/CloudFormation/Terraform/Kubernetes/code/API checks cover documented subsets, not full policy evaluation.
+- Action report-only mode suppresses severity findings only; invalid input, execution and artifact errors fail.
+- Queue calculations use a stable recurrence and reject more than 100,000 concurrent slots to bound CPU work.
 
 ## Sources checked
 

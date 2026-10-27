@@ -1,38 +1,39 @@
 # Deployment and validation
 
-Release: **0.1.0**, 24 October 2026 (America/Sao_Paulo).
+Release **0.4.1**, 26 October 2026 (America/Sao_Paulo). The GitHub release and tag workflows record the immutable build/publishing results; this file describes the validation gates and the historical evidence separately.
 
-- Landing page: https://mcp.moretes.com/
-- MCP endpoint: https://mcp.moretes.com/mcp
+## Service and distribution
+
+- Landing: https://mcp.moretes.com/
+- MCP: https://mcp.moretes.com/mcp
 - Health: https://mcp.moretes.com/health
-- Since 0.4.0 (26 October 2026) the custom domain `mcp.moretes.com` (ACM certificate, regional API Gateway domain, DNS-only CNAME at Cloudflare) is the published address. The original `https://m9od37vm41.execute-api.us-east-1.amazonaws.com/mcp` keeps answering, so existing client configs do not break.
-- Region: us-east-1.
-- Application stack: `moretes-architect-mcp`; artifacts stack: `moretes-architect-mcp-artifacts`.
+- Inventory: https://mcp.moretes.com/tools.json
+- Aggregate calls: https://mcp.moretes.com/stats.json
+- GitHub release: https://github.com/fernando-moretes/moretes-aws-architect-mcp/releases/tag/v0.4.1
+- npm: https://www.npmjs.com/package/moretes-aws-architect-mcp/v/0.4.1
+- MCP Registry ID: `io.github.fernando-moretes/moretes-aws-architect-mcp`
+- GHCR: `ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1`
 
-CloudFormation reported CREATE_COMPLETE. Production SDK smoke verified initialization, discovery of 24 public tools, a capacity calculation, a live AWS Knowledge query, rejection of account tools, three resources and four prompts. The daily counter persisted eight protocol requests during the initial smoke. The USD 30 gross-cost budget and active Project cost-allocation tag were read back after deployment.
+The custom domain introduced in 0.4.0 uses regional API Gateway, an ACM certificate and the existing DNS-only CNAME. The original execute-api URL remains compatible. Deployment region: us-east-1. Stacks: `moretes-architect-mcp` and `moretes-architect-mcp-artifacts`.
 
-## Evidence and scope
+## Reproducible release checks
 
-| Check | Result |
-|---|---|
-| TypeScript strict check | Passed |
-| MCP SDK client over in-memory transport | Passed |
-| MCP SDK client over stateless HTTP | Passed |
-| Input bounds, negative numbers, invalid diagram edges | Passed |
-| Evidence-free met control downgraded to unknown | Passed |
-| IAM/CloudFormation heuristic cases | Passed |
-| Origin, body limit, batch and daily-quota rejection | Passed |
-| Public account-tool isolation | Passed |
-| Production AWS Knowledge search | Passed |
-| Live AWS Knowledge read, regions, regional availability and exact-ID skill retrieval | Passed |
-| Optional local AWS Documentation 1.2.3 discovery | Passed |
-| Optional local allowlisted documentation search | Passed |
-| Local STS identity, tagged Lambda inventory and one-day cost history | Passed; private results were not published |
-| Runtime IAM simulation for S3 account listing, role assumption, Bedrock invocation, IAM user creation and Lambda invocation | All five denied |
-| Runtime dependency audit | No known vulnerabilities reported at validation time |
+| Check | Evidence produced |
+| --- | --- |
+| `npm run typecheck`, `npm run build` | Strict TypeScript and Lambda bundle |
+| `npm test` | 50 tests; high-load numerical references, bounded capacity, Action error propagation, protocol/input/isolation and reproducible examples |
+| `npm run contracts` + clean diff | 48 name/description/input hashes and 42 example-based output schemas |
+| `npm run docs:check` | Release manifest consistency and local Markdown/image links |
+| `npm run package:smoke` | Fresh tarball install, both bins, CLI/stdio queue regression and account-tool rejection |
+| `npm audit --omit=dev` | Known runtime dependency advisories at execution time |
+| GitHub CI, CodeQL, Action self-test | Node 22/24 plus actual composite Action outcomes |
+| Publish and Container tag workflows | npm/Registry, SBOM, amd64/arm64 images and provenance |
+| `npm run smoke -- https://mcp.moretes.com/mcp` | Exact version, 48 tools, queue and capacity calculations, live AWS Knowledge, account isolation, 18 resources and 20 prompts |
 
-The initial GitHub CI run passed on Node 22 and Node 24. The test suite contains 15 behavioral/negative tests. The verified local provider allowlist exposed only `read_documentation` and `search_documentation`; a real documentation search succeeded through the bridge.
+A source build, npm release, container publication and AWS deployment are separate events. Check each result before claiming it complete. `GET /health` alone does not test upstream availability. Tests do not constitute a full security audit or proof of every IDE/provider combination.
 
-This is not a claim of full interactive testing inside every IDE. Client configuration examples follow official documentation. Other catalog packages have pinned configurations, but were not all installed or functionally tested. No AWS resource mutation was performed through a provider. The tagged-resource inventory test is not a claim of complete account discovery, and the IAM simulation covers only the listed actions.
+## Historical provider evidence
 
-The public service is an initial community release with shared quotas and no uptime SLA. Full source, validation commands, operational limits and recovery procedures are in this repository. CI results are available in the Actions tab after publication.
+The initial 0.1.0 delivery tested all five AWS Knowledge adapters, exact-ID skill retrieval, AWS Documentation 1.2.3 discovery and allowlisted search, and local STS/tagged inventory/one-day cost history. Those private account results were not published. Runtime IAM simulation denied five selected account actions; it was not an exhaustive permissions proof. These observations are historical, not a claim that every release repeats authenticated-account tests.
+
+The service remains a community deployment without uptime SLA. A budget target and credits are not financial hard stops. Current boundaries and recovery procedures: [architecture](architecture.md), [costs](costs.md), [operations](operations.md), [privacy](../PRIVACY.md).

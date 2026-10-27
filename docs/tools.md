@@ -1568,7 +1568,7 @@ External call: false. Potentially mutating: false.
 
 ### queue_sizing
 
-Size consumers for a queue with Little's law and Erlang C: utilization, wait probability, backlog drain time and consumers needed for a target utilization.
+Size consumers with Little's law and stable Erlang C: utilization, wait probability, backlog drain time and target consumers. At most 100,000 total concurrent slots (consumers × concurrency).
 
 External call: false. Potentially mutating: false.
 

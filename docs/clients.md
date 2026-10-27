@@ -5,7 +5,7 @@ Moretes Architect MCP speaks MCP over two transports:
 - **Streamable HTTP (remote).** Public endpoint, no API key, shared daily quota. Exposes the 48 public tools, 20 prompts and 18 resources. It cannot touch any AWS account.
 - **stdio (local).** `node dist/stdio.js` on your machine. Same 48 tools, no quota, and the only way to enable the 5 opt-in local tools (AWS account identity, tagged inventory, cost history, federation).
 
-Canonical endpoint (verified 2026-10-24, version 0.2.0):
+Canonical endpoint for release 0.4.1 (26 October 2026):
 
 ```text
 https://mcp.moretes.com/mcp
@@ -262,7 +262,7 @@ With `MORETES_INTEGRATIONS_FILE` pointing to a reviewed allowlist JSON, two more
    curl -s https://mcp.moretes.com/health
    ```
 
-   Expected: `{"status":"ok","version":"0.2.0","publicTools":48,"accountTools":false}`.
+   Expected: `{"status":"ok","version":"0.4.1","publicTools":48,"accountTools":false}`.
 
 2. In your client, open the MCP/tools panel. `tools/list` should show **48 tools**. Each has annotations: `readOnlyHint: true` on all public tools, `openWorldHint: true` only on the 6 tools that call outside (`aws_knowledge_search`, `aws_knowledge_read`, `aws_regions`, `aws_regional_availability`, `aws_skill`, `github_public_repository`).
 

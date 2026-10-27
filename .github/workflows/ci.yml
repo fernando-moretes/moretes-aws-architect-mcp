@@ -24,6 +24,9 @@ jobs:
         run: |
           node scripts/contracts.mjs
           git diff --exit-code -- src/data/output-schemas.json docs/tools.lock.json
+      - run: npm run docs:check
+      - name: Clean consumer package install (CLI and stdio)
+        run: npm run package:smoke
       - name: Coverage summary
         if: matrix.node == 22
         run: |

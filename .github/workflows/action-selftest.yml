@@ -17,6 +17,7 @@ jobs:
         run: |
           node -e 'const e=require("./docs/examples/terraform_plan_review.json");require("fs").writeFileSync("plan.json",JSON.stringify(e.arguments.plan))'
           echo '{"mcpServers":{"ok":{"url":"https://example.com/mcp"}}}' > clean.mcp.json
+          echo '{ invalid JSON' > broken.json
       - name: Clean config passes
         uses: ./
         with:
@@ -40,3 +41,33 @@ jobs:
         run: |
           [ "${{ steps.gate.outcome }}" = "failure" ] || { echo "expected the high-severity gate to fail"; exit 1; }
           node -e 'const s=JSON.parse(require("fs").readFileSync("review.sarif","utf8"));if(!s.runs[0].results.length)process.exit(1)'
+      - name: Invalid JSON fails even in report-only mode
+        id: invalid
+        continue-on-error: true
+        uses: ./
+        with:
+          tool: mcp_config_review
+          files: broken.json
+          fail-on: ""
+      - name: Missing file fails even in report-only mode
+        id: missing
+        continue-on-error: true
+        uses: ./
+        with:
+          tool: mcp_config_review
+          files: does-not-exist.json
+          fail-on: ""
+      - name: Failed SARIF write fails even in report-only mode
+        id: artifact
+        continue-on-error: true
+        uses: ./
+        with:
+          tool: mcp_config_review
+          files: clean.mcp.json
+          fail-on: ""
+          sarif: missing-directory/report.sarif
+      - name: Assert execution failures remain failures
+        run: |
+          [ "${{ steps.invalid.outcome }}" = "failure" ]
+          [ "${{ steps.missing.outcome }}" = "failure" ]
+          [ "${{ steps.artifact.outcome }}" = "failure" ]

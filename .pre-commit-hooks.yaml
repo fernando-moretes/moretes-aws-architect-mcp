@@ -3,28 +3,28 @@
 - id: mcp-config-review
   name: MCP client config review
   description: Inline secrets, unpinned packages, plain HTTP and auto-approved tools in MCP client configs.
-  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4 cli check mcp_config_review --fail-on high
+  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1 cli check mcp_config_review --fail-on high
   language: docker_image
   files: (^|/)(\.mcp\.json|mcp\.json|mcp_config\.json|claude_desktop_config\.json)$
 - id: dependency-manifest-review
   name: Dependency manifest review
   description: Wildcard versions, git sources and install scripts in dependency manifests.
-  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4 cli check dependency_manifest_review --fail-on high
+  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1 cli check dependency_manifest_review --fail-on high
   language: docker_image
   files: (^|/)(package\.json|requirements[^/]*\.txt|pyproject\.toml|go\.mod|Cargo\.toml|Gemfile|pom\.xml|build\.gradle(\.kts)?)$
 - id: cloudformation-review
   name: CloudFormation template review
-  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4 cli check cloudformation_review --fail-on high
+  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1 cli check cloudformation_review --fail-on high
   language: docker_image
   files: (^|/)(template|cfn|stack)[^/]*\.json$
 - id: openapi-review
   name: OpenAPI review
-  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4 cli check openapi_review --fail-on high
+  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1 cli check openapi_review --fail-on high
   language: docker_image
   files: (^|/)(openapi|swagger)[^/]*\.json$
 - id: code-review-architecture
   name: Architecture and security heuristics on source
   description: Hardcoded secrets, SQL concatenation, disabled TLS. Heuristic triage.
-  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4 cli check code_review_architecture --fail-on high
+  entry: ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.4.1 cli check code_review_architecture --fail-on high
   language: docker_image
   types_or: [ts, javascript, python, go, java, kotlin, ruby, php, rust, shell]

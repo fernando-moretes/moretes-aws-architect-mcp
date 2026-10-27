@@ -1,5 +1,19 @@
 # What's new
 
+## 0.4.1 (2026-10-26)
+
+Reliability patch: large stable queues now produce finite Erlang C results, with an explicit 100,000-total-slot bound. GitHub Action report-only mode permits findings while input, execution and artifact errors still fail. JSON file arrays support paths with spaces without shell evaluation. Tests cover the two regressions; the production smoke checks the exact version and large-queue example. Current deployment/distribution instructions and the Claude handoff are consolidated. See [release-notes.md](release-notes.md).
+
+## 0.4.0 (2026-10-26)
+
+Published npm package with provenance, npm-backed MCP Registry entry, GHCR images, GitHub Action, pre-commit hooks, Claude Code plugin/Agent Skill and Gemini extension. The canonical endpoint is `https://mcp.moretes.com/mcp`; the original AWS URL remains compatible. Monthly per-tool usage at `/stats.json` records attempted calls without arguments or callers. See [integrations-clients.md](integrations-clients.md).
+
+## 0.3.0 (2026-10-25)
+
+Output schemas and reproducible examples, reviewed input-contract hashes, IAM Azure/GCP review, CodeQL, SBOM and release provenance. Details in [CHANGELOG.md](../CHANGELOG.md).
+
+The sections below describe historical releases; their publication limitations apply to those versions only.
+
 ## 0.2.0 (2026-10-24)
 
 The workbench grows from 24 to 48 public tools, from 4 to 20 prompts and from 3 to 18 resources. Still deterministic, still no model calls, still no account access on the public endpoint. Full list in [CHANGELOG.md](../CHANGELOG.md); per-tool guide in [tools-guide.md](tools-guide.md).

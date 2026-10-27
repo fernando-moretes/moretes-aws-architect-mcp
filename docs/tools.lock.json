@@ -1,7 +1,7 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "note": "sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.",
-  "aggregate": "04902b392ca6205fb16fde769fee737093a5d7fcb8ab9b424672173ab8fc92ea",
+  "aggregate": "6632b67b31aef4cb3693499701cab8fd146b04f8ff8228a60a2d481c68ec10b7",
   "tools": [
     {
       "name": "architect_panel",
@@ -101,7 +101,7 @@
     },
     {
       "name": "queue_sizing",
-      "sha256": "cd5aa1787b1c923b82bed0d97f9d1be63935d6e744590095c5b194f4ee7a54f6"
+      "sha256": "0cb80a5899d4f56da1f13d8c065b9378ae7216ceec544b761f2ba3679d6e9804"
     },
     {
       "name": "dr_strategy",

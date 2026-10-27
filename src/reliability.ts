@@ -9,14 +9,24 @@ import { tool, text, short, lines, provenance } from './definition.js';
 
 const round = (n: number, d = 2) => Math.round(n * 10 ** d) / 10 ** d;
 
-/** Erlang C: probability that an arriving job waits, for c servers at offered load a = λ·S. */
+export const MAX_QUEUE_CAPACITY = 100000;
+
+/** Erlang C via the bounded Erlang B recurrence; avoids factorial/power overflow.
+ * B(0,a)=1; B(k,a)=a*B(k-1,a)/(k+a*B(k-1,a)); C=B/(1-rho+rho*B).
+ * Reference: https://www.columbia.edu/~ww2040/ErlangBandCFormulas.pdf
+ */
 export function erlangC(servers: number, offeredLoad: number): number {
+  if (!Number.isInteger(servers) || servers < 1 || servers > MAX_QUEUE_CAPACITY)
+    throw new Error(`Total queue capacity must be between 1 and ${MAX_QUEUE_CAPACITY} concurrent slots`);
+  if (!Number.isFinite(offeredLoad) || offeredLoad < 0) throw new Error('Offered load must be finite and nonnegative');
   if (offeredLoad >= servers) return 1;
-  let sum = 0, term = 1;
-  for (let k = 0; k < servers; k++) { if (k > 0) term *= offeredLoad / k; sum += term; }
-  const last = term * offeredLoad / servers;
-  const top = last * servers / (servers - offeredLoad);
-  return top / (sum + top);
+  let blocking = 1;
+  for (let k = 1; k <= servers; k++) {
+    const weighted = offeredLoad * blocking;
+    blocking = weighted / (k + weighted);
+  }
+  // Compute the spare fraction directly to retain precision near saturation.
+  return blocking / ((servers - offeredLoad) / servers + offeredLoad / servers * blocking);
 }
 
 export function backoffSchedule(baseMs: number, factor: number, capMs: number, attempts: number, jitter: 'none' | 'full' | 'equal') {
@@ -77,7 +87,7 @@ export const reliabilityTools = [
     }),
 
   tool('queue_sizing',
-    'Size consumers for a queue with Little\'s law and Erlang C: utilization, wait probability, backlog drain time and consumers needed for a target utilization.',
+    'Size consumers with Little\'s law and stable Erlang C: utilization, wait probability, backlog drain time and target consumers. At most 100,000 total concurrent slots (consumers × concurrency).',
     {
       arrivalsPerSecond: z.number().positive().max(1e7),
       serviceTimeMs: z.number().positive().max(3.6e6),

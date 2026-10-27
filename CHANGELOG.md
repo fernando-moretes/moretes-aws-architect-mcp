@@ -1,6 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 — 2026-10-26
+
+- Fix `queue_sizing` overflow using a stable Erlang B recurrence converted to Erlang C; independently checked large-load references and a 100,000-total-slot computational bound. Previously valid inputs could return NaN/null despite a stable queue. Products above the bound now return an explicit input error.
+- Fix GitHub Action report-only mode: an empty `fail-on` suppresses severity findings only. Invalid JSON, missing files, CLI failures and failed Markdown/summary/SARIF writes fail with exit 2. Severity gates remain exit 1.
+- Action uses argument arrays without shell expansion, supports JSON file lists (including spaces), and requires one file for SARIF.
+- Add numerical and real-CLI Action regression tests; extend the workflow self-test and production smoke to check the fixes and exact release version.
+- Consolidate the Claude handoff, deployment evidence, release history, installation guides, privacy/cost documentation, current quotas and published distribution channels. Pin pre-commit images to the patch version and update the encoded Cursor install URL.
+
+## 0.4.0 — 2026-10-26
+
+- Add GitHub Action, `check` CLI command, pre-commit hooks, Docker image, Claude Code plugin/Agent Skill and Gemini CLI extension.
+- Publish npm through Trusted Publisher OIDC with provenance; publish the npm-backed MCP Registry entry after propagation. GHCR publishes amd64/arm64 images with attestation.
+- Use `https://mcp.moretes.com/mcp` as the canonical endpoint; the execute-api URL remains available.
 
 - Public per-tool usage: monthly `tools/call` counts by tool name only, at `/stats.json` (10-minute cache). Lambda role gains `dynamodb:BatchGetItem` on its own table.
 - Optional custom domain parameters in the service template.

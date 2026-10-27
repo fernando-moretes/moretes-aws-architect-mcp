@@ -28,6 +28,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - run: npm run docs:check
+      - run: npm run package:smoke
       - name: Check versions match
         run: |
           PKG=$(node -p "require('./package.json').version")
