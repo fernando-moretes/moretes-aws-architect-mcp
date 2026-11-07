@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Address #19 first-use feedback: partial capacity inputs, explicit per-field caller-reported provenance, visible server headroom default, and no daily extrapolation of an explicitly peak rate. Missing arithmetic outputs are null; complete legacy calls retain their numerical results.
+- Return structured Zod input errors with missing paths and issue codes, without echoing supplied values in structured errors.
+- Export Zod input-mode schemas across MCP, CLI, documentation and lock generation so defaults do not become mandatory inputs.
+- Give all eight calculators consistent unvalidated scenario metadata; preserve formula-specific limits and existing sources without inventing citations.
+- Add regression tests and regenerate examples, tool contracts and documentation. No npm release or AWS deployment is implied by these source changes.
+
 ## 0.4.1 — 2026-10-26
 
 - Fix `queue_sizing` overflow using a stable Erlang B recurrence converted to Erlang C; independently checked large-load references and a 100,000-total-slot computational bound. Previously valid inputs could return NaN/null despite a stable queue. Products above the bound now return an explicit input error.

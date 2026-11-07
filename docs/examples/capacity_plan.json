@@ -7,6 +7,9 @@
     "headroom": 1.5
   },
   "result": {
+    "validated": false,
+    "limitation": "Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.",
+    "sources": [],
     "kind": "calculation",
     "assumptions": {
       "requestsPerSecond": 5,
@@ -14,12 +17,40 @@
       "payloadKB": 4,
       "headroom": 1.5
     },
+    "provenance": {
+      "requestsPerSecond": {
+        "value": 5,
+        "origin": "caller-unspecified"
+      },
+      "durationMs": {
+        "value": 400,
+        "origin": "caller-unspecified"
+      },
+      "payloadKB": {
+        "value": 4,
+        "origin": "caller-unspecified"
+      },
+      "headroom": {
+        "value": 1.5,
+        "origin": "caller-unspecified"
+      }
+    },
+    "provenanceLimitation": "Caller labels are self-reported, not verified. Missing labels do not mean supplied requirements.",
+    "insufficientInputs": [],
+    "status": "scenario",
+    "rateType": "unspecified",
     "averageConcurrency": 2,
     "plannedConcurrency": 3,
     "dailyRequests": 432000,
     "dailyPayloadGB": 1.728,
+    "formulas": [
+      "concurrency = requestsPerSecond × durationMs / 1000",
+      "plannedConcurrency = ceil(concurrency × headroom)",
+      "dailyRequests = sustained requestsPerSecond × 86400",
+      "dailyPayloadGB = dailyRequests × payloadKB / 1000000 (decimal units)"
+    ],
     "limitations": [
-      "Assumes sustained rate all day; separate burst and average inputs",
+      "Daily volume is a sustained-rate scenario, never a forecast from a peak; unspecified rate type assumes sustained traffic only for scenario arithmetic",
       "Validate quotas, tail latency, downstream capacity, storage overhead and retries"
     ]
   }

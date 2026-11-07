@@ -31,6 +31,9 @@
     "contingencyPercent": 20
   },
   "result": {
+    "validated": false,
+    "limitation": "Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.",
+    "sources": [],
     "kind": "scenario-not-quote",
     "currency": "USD",
     "items": [

@@ -10,7 +10,19 @@ export type Definition = {
 export function tool<S extends z.ZodRawShape>(name:string, description:string, shape:S,
   fn:(args:z.infer<z.ZodObject<S>>)=>Record<string,unknown>|Promise<Record<string,unknown>>, external=false):Definition {
   const schema=z.object(shape).strict();
-  return {name, description, schema, external, run:async args=>fn(schema.parse(args))};
+  return {name, description, schema, external, run:async args=>{
+    const result = await fn(schema.parse(args));
+    // Arithmetic verifies neither the workload nor the caller's measurements.
+    if (['capacity_plan','cost_model','slo_budget','latency_budget','queue_sizing','retry_policy','storage_growth','finops_unit_economics'].includes(name)) {
+      return {
+        validated:false,
+        limitation:'Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.',
+        sources:[],
+        ...result
+      };
+    }
+    return result;
+  }};
 }
 export const provenance = {
   kind:'heuristic-design-aid', validated:false,

@@ -76,7 +76,7 @@ export function createServer(local = false) {
     tools: tools.map(t => ({
       name: t.name,
       description: t.description,
-      inputSchema: z.toJSONSchema(t.schema) as { type: 'object' },
+      inputSchema: z.toJSONSchema(t.schema, {io:'input'}) as { type: 'object' },
       ...(OUTPUT_SCHEMAS[t.name] ? { outputSchema: OUTPUT_SCHEMAS[t.name] } : {}),
       annotations: { readOnlyHint: !t.mutating, destructiveHint: !!t.mutating, idempotentHint: !t.mutating, openWorldHint: t.external }
     }))
@@ -92,7 +92,13 @@ export function createServer(local = false) {
       const detail = error instanceof z.ZodError ? 'Invalid tool input: ' + error.issues.map(i => i.path.join('.') + ': ' + i.message).join('; ') : error instanceof Error ? error.message : 'Tool failed';
       // Never return AWS SDK raw errors, URLs containing credentials or stack traces.
       const safe = t.name.startsWith('aws_') && !t.name.startsWith('aws_knowledge') ? 'AWS operation failed or guard rejected the request; verify configuration, account identity and permissions.' : detail.slice(0, 1200);
-      return { isError: true, content: [{ type: 'text', text: safe }] };
+      const validation = error instanceof z.ZodError ? {
+        kind:'input-validation-error', validated:false,
+        // Do not echo supplied values or raw Zod issues (which can contain secrets).
+        missing:error.issues.filter(i => i.code === 'invalid_type' && i.path.reduce<unknown>((value,key) => value !== null && typeof value === 'object' ? (value as Record<PropertyKey,unknown>)[key] : undefined, request.params.arguments ?? {}) === undefined).map(i => i.path.join('.')),
+        issues:error.issues.map(i => ({path:i.path.map(String), code:i.code}))
+      } : undefined;
+      return { isError: true, content: [{ type: 'text', text: safe }], ...(validation ? {structuredContent:validation} : {}) };
     }
   });
   server.setRequestHandler(ListResourcesRequestSchema, async () => ({ resources: Object.entries(resources).map(([uri, r]) => ({ uri, name: r.name, description: r.description, mimeType: r.mimeType })) }));

@@ -38,6 +38,9 @@
     ]
   },
   "result": {
+    "validated": false,
+    "limitation": "Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.",
+    "sources": [],
     "kind": "calculation",
     "percentile": "p95",
     "targetMs": 2000,

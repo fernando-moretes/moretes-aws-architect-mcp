@@ -71,9 +71,7 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "subject",
-    "artifactType",
-    "roles",
-    "knownFacts"
+    "artifactType"
   ],
   "additionalProperties": false
 }
@@ -124,8 +122,6 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "filename",
-    "language",
     "code"
   ],
   "additionalProperties": false
@@ -203,9 +199,7 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "workload",
-    "requirements",
-    "constraints"
+    "workload"
   ],
   "additionalProperties": false
 }
@@ -251,8 +245,7 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "pattern",
-    "workload",
-    "provider"
+    "workload"
   ],
   "additionalProperties": false
 }
@@ -290,8 +283,7 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "family",
-    "constraints"
+    "family"
   ],
   "additionalProperties": false
 }
@@ -357,8 +349,7 @@ External call: false. Potentially mutating: false.
     "context",
     "options",
     "decision",
-    "consequences",
-    "status"
+    "consequences"
   ],
   "additionalProperties": false
 }
@@ -425,10 +416,8 @@ External call: false. Potentially mutating: false.
         "required": [
           "id",
           "pillar",
-          "status",
-          "evidence"
-        ],
-        "additionalProperties": false
+          "status"
+        ]
       }
     }
   },
@@ -529,7 +518,7 @@ External call: false. Potentially mutating: false.
 
 ### capacity_plan
 
-Calculate concurrency and daily data volume from explicit traffic assumptions. No service sizing guarantee.
+Calculate partial capacity scenarios without inventing missing duration or payload. Label caller-reported provenance; no service sizing guarantee.
 
 External call: false. Potentially mutating: false.
 
@@ -554,17 +543,61 @@ External call: false. Potentially mutating: false.
       "maximum": 1000000000
     },
     "headroom": {
-      "default": 1.3,
       "type": "number",
       "minimum": 1,
       "maximum": 10
+    },
+    "rateType": {
+      "default": "unspecified",
+      "type": "string",
+      "enum": [
+        "peak",
+        "sustained",
+        "unspecified"
+      ]
+    },
+    "inputProvenance": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "requestsPerSecond": {
+          "type": "string",
+          "enum": [
+            "provided",
+            "assumed",
+            "measured"
+          ]
+        },
+        "durationMs": {
+          "type": "string",
+          "enum": [
+            "provided",
+            "assumed",
+            "measured"
+          ]
+        },
+        "payloadKB": {
+          "type": "string",
+          "enum": [
+            "provided",
+            "assumed",
+            "measured"
+          ]
+        },
+        "headroom": {
+          "type": "string",
+          "enum": [
+            "provided",
+            "assumed",
+            "measured"
+          ]
+        }
+      },
+      "additionalProperties": false
     }
   },
   "required": [
-    "requestsPerSecond",
-    "durationMs",
-    "payloadKB",
-    "headroom"
+    "requestsPerSecond"
   ],
   "additionalProperties": false
 }
@@ -633,8 +666,7 @@ External call: false. Potentially mutating: false.
           "pricePerUnit",
           "source",
           "priceDate"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "contingencyPercent": {
@@ -645,9 +677,7 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "currency",
-    "items",
-    "contingencyPercent"
+    "items"
   ],
   "additionalProperties": false
 }
@@ -682,8 +712,7 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "availabilityPercent",
-    "periodDays",
-    "usedDowntimeMinutes"
+    "periodDays"
   ],
   "additionalProperties": false
 }
@@ -734,8 +763,7 @@ External call: false. Potentially mutating: false.
   "required": [
     "source",
     "target",
-    "strategy",
-    "constraints"
+    "strategy"
   ],
   "additionalProperties": false
 }
@@ -772,8 +800,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "id",
           "label"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "edges": {
@@ -800,8 +827,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "from",
           "to"
-        ],
-        "additionalProperties": false
+        ]
       }
     }
   },
@@ -946,10 +972,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "id",
-          "name",
-          "description"
-        ],
-        "additionalProperties": false
+          "name"
+        ]
       }
     },
     "externalSystems": {
@@ -980,10 +1004,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "id",
-          "name",
-          "description"
-        ],
-        "additionalProperties": false
+          "name"
+        ]
       }
     },
     "containers": {
@@ -1014,10 +1036,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "id",
-          "name",
-          "description"
-        ],
-        "additionalProperties": false
+          "name"
+        ]
       }
     },
     "relations": {
@@ -1047,20 +1067,14 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "from",
-          "to",
-          "label"
-        ],
-        "additionalProperties": false
+          "to"
+        ]
       }
     }
   },
   "required": [
     "level",
-    "system",
-    "people",
-    "externalSystems",
-    "containers",
-    "relations"
+    "system"
   ],
   "additionalProperties": false
 }
@@ -1109,10 +1123,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "id",
-          "label",
-          "kind"
-        ],
-        "additionalProperties": false
+          "label"
+        ]
       }
     },
     "messages": {
@@ -1174,20 +1186,15 @@ External call: false. Potentially mutating: false.
               }
             },
             "required": [
-              "kind",
-              "label"
-            ],
-            "additionalProperties": false
+              "kind"
+            ]
           }
         },
         "required": [
           "from",
           "to",
-          "text",
-          "style",
-          "activate"
-        ],
-        "additionalProperties": false
+          "text"
+        ]
       }
     }
   },
@@ -1256,10 +1263,6 @@ External call: false. Potentially mutating: false.
       "maxLength": 100
     }
   },
-  "required": [
-    "from",
-    "to"
-  ],
   "additionalProperties": false
 }
 ```
@@ -1332,11 +1335,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "name",
-          "category",
-          "purpose",
-          "sharedWith"
-        ],
-        "additionalProperties": false
+          "category"
+        ]
       }
     },
     "jurisdictions": {
@@ -1359,8 +1359,7 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "system",
-    "elements",
-    "jurisdictions"
+    "elements"
   ],
   "additionalProperties": false
 }
@@ -1459,11 +1458,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "name",
-          "type",
-          "required",
-          "pii"
-        ],
-        "additionalProperties": false
+          "type"
+        ]
       }
     },
     "ordering": {
@@ -1489,9 +1485,7 @@ External call: false. Potentially mutating: false.
     "eventName",
     "producer",
     "consumers",
-    "payloadFields",
-    "ordering",
-    "deliveryGuarantee"
+    "payloadFields"
   ],
   "additionalProperties": false
 }
@@ -1550,16 +1544,13 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "name",
-          "estimatedMs",
-          "cacheable"
-        ],
-        "additionalProperties": false
+          "estimatedMs"
+        ]
       }
     }
   },
   "required": [
     "targetMs",
-    "percentile",
     "hops"
   ],
   "additionalProperties": false
@@ -1614,10 +1605,7 @@ External call: false. Potentially mutating: false.
   "required": [
     "arrivalsPerSecond",
     "serviceTimeMs",
-    "consumers",
-    "backlogMessages",
-    "targetUtilizationPercent",
-    "maxConcurrencyPerConsumer"
+    "consumers"
   ],
   "additionalProperties": false
 }
@@ -1678,9 +1666,7 @@ External call: false. Potentially mutating: false.
   "required": [
     "workload",
     "rtoMinutes",
-    "rpoMinutes",
-    "dataGB",
-    "statefulComponents"
+    "rpoMinutes"
   ],
   "additionalProperties": false
 }
@@ -1740,11 +1726,6 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "baseDelayMs",
-    "factor",
-    "capMs",
-    "maxAttempts",
-    "jitter",
     "operationIdempotent"
   ],
   "additionalProperties": false
@@ -1815,12 +1796,7 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "dailyIngestGB",
-    "retentionDays",
-    "monthlyGrowthPercent",
-    "compressionRatio",
-    "replicationFactor",
-    "months",
-    "hotDays"
+    "retentionDays"
   ],
   "additionalProperties": false
 }
@@ -1872,8 +1848,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "name",
           "amount"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "variableCosts": {
@@ -1897,8 +1872,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "name",
           "amount"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "units": {
@@ -1922,8 +1896,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "name",
           "count"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "targetCostPerPrimaryUnit": {
@@ -1934,9 +1907,6 @@ External call: false. Potentially mutating: false.
   },
   "required": [
     "period",
-    "currency",
-    "fixedCosts",
-    "variableCosts",
     "units"
   ],
   "additionalProperties": false
@@ -2014,8 +1984,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "at",
           "event"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "contributingFactors": {
@@ -2074,8 +2043,7 @@ External call: false. Potentially mutating: false.
           "owner",
           "due",
           "kind"
-        ],
-        "additionalProperties": false
+        ]
       }
     }
   },
@@ -2089,7 +2057,6 @@ External call: false. Potentially mutating: false.
     "impact",
     "timeline",
     "contributingFactors",
-    "whatWentWell",
     "actionItems"
   ],
   "additionalProperties": false
@@ -2142,8 +2109,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "name",
           "meaning"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "diagnostics": {
@@ -2199,10 +2165,7 @@ External call: false. Potentially mutating: false.
     "owner",
     "alerts",
     "diagnostics",
-    "remediation",
-    "rollback",
-    "escalation",
-    "dashboards"
+    "remediation"
   ],
   "additionalProperties": false
 }
@@ -2253,8 +2216,7 @@ External call: false. Potentially mutating: false.
         "required": [
           "name",
           "mutating"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "risks": {
@@ -2287,9 +2249,7 @@ External call: false. Potentially mutating: false.
   "required": [
     "agent",
     "capabilities",
-    "tools",
-    "risks",
-    "releaseCadence"
+    "risks"
   ],
   "additionalProperties": false
 }
@@ -2351,10 +2311,8 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "name",
-          "mutating",
-          "external"
-        ],
-        "additionalProperties": false
+          "mutating"
+        ]
       }
     },
     "humanInLoop": {
@@ -2443,12 +2401,9 @@ External call: false. Potentially mutating: false.
       },
       "required": [
         "documents",
-        "averagePages",
         "formats",
-        "updateFrequency",
-        "languages"
-      ],
-      "additionalProperties": false
+        "updateFrequency"
+      ]
     },
     "authorization": {
       "type": "string",
@@ -2473,9 +2428,7 @@ External call: false. Potentially mutating: false.
   "required": [
     "useCase",
     "corpus",
-    "authorization",
-    "latencyBudgetMs",
-    "citationsRequired"
+    "authorization"
   ],
   "additionalProperties": false
 }
@@ -2530,8 +2483,7 @@ External call: false. Potentially mutating: false.
         },
         "required": [
           "name"
-        ],
-        "additionalProperties": false
+        ]
       }
     }
   },
@@ -2598,8 +2550,7 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "policy",
-    "provider"
+    "policy"
   ],
   "additionalProperties": false
 }
@@ -2728,9 +2679,7 @@ External call: true. Potentially mutating: false.
     }
   },
   "required": [
-    "query",
-    "topic",
-    "limit"
+    "query"
   ],
   "additionalProperties": false
 }
@@ -2765,9 +2714,7 @@ External call: true. Potentially mutating: false.
     }
   },
   "required": [
-    "url",
-    "startIndex",
-    "maxLength"
+    "url"
   ],
   "additionalProperties": false
 }
@@ -2889,10 +2836,6 @@ External call: false. Potentially mutating: false.
       "maximum": 70
     }
   },
-  "required": [
-    "query",
-    "limit"
-  ],
   "additionalProperties": false
 }
 ```
@@ -2926,9 +2869,7 @@ External call: false. Potentially mutating: false.
     }
   },
   "required": [
-    "serverId",
-    "awsProfile",
-    "region"
+    "serverId"
   ],
   "additionalProperties": false
 }
@@ -3007,9 +2948,6 @@ External call: true. Potentially mutating: false.
       "maxLength": 2048
     }
   },
-  "required": [
-    "resourceTypeFilters"
-  ],
   "additionalProperties": false
 }
 ```
@@ -3102,8 +3040,7 @@ External call: true. Potentially mutating: true.
   },
   "required": [
     "serverId",
-    "toolName",
-    "arguments"
+    "toolName"
   ],
   "additionalProperties": false
 }
