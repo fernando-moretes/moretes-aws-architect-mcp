@@ -30,6 +30,6 @@ for (const f of readdirSync('docs/examples').filter(f => f.endsWith('.json') && 
 }
 writeFileSync('src/data/output-schemas.json', JSON.stringify(schemas, null, 2) + '\n');
 const sha = s => createHash('sha256').update(s).digest('hex');
-const tools = publicTools.map(t => ({name: t.name, sha256: sha(JSON.stringify({name: t.name, description: t.description, inputSchema: z.toJSONSchema(t.schema)}))}));
+const tools = publicTools.map(t => ({name: t.name, sha256: sha(JSON.stringify({name: t.name, description: t.description, inputSchema: z.toJSONSchema(t.schema, {io:'input'})}))}));
 writeFileSync('docs/tools.lock.json', JSON.stringify({version: VERSION, note: 'sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.', aggregate: sha(tools.map(t => t.sha256).join('')), tools}, null, 2) + '\n');
 console.log(`output schemas: ${Object.keys(schemas).length} · lock: ${tools.length} tools`);

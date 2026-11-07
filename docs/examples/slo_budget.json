@@ -6,13 +6,15 @@
     "usedDowntimeMinutes": 12
   },
   "result": {
+    "validated": false,
+    "limitation": "Time-based SLO only; request-based availability requires good/total event counts.",
+    "sources": [],
     "kind": "calculation",
     "availabilityPercent": 99.9,
     "periodDays": 30,
     "usedDowntimeMinutes": 12,
     "allowedDowntimeMinutes": 43.19999999999524,
     "remainingMinutes": 31.199999999995242,
-    "exhausted": false,
-    "limitation": "Time-based SLO only; request-based availability requires good/total event counts."
+    "exhausted": false
   }
 }

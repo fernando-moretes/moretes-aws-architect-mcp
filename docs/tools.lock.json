@@ -1,15 +1,15 @@
 {
   "version": "0.4.1",
   "note": "sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.",
-  "aggregate": "6632b67b31aef4cb3693499701cab8fd146b04f8ff8228a60a2d481c68ec10b7",
+  "aggregate": "5645dd0192b0a13f46e576c211490b0743bedb89b758eee4f64fe146eff013b4",
   "tools": [
     {
       "name": "architect_panel",
-      "sha256": "7e96a850b568cd0e99109293b1fcbf5ffca5216e061036b422cda37a76fa7fc3"
+      "sha256": "f3c92b110d6561888d20c44ac3876246e52220401cef9240c5dd61c9c18c00ef"
     },
     {
       "name": "code_review_architecture",
-      "sha256": "e8043002a009b92300a732e7f2ec139a52f441b89adb47b020c36f908365bd20"
+      "sha256": "d72a0e1e21321628949668df51470b749ce3f27673c9b9902e44d30609b9b30f"
     },
     {
       "name": "dependency_manifest_review",
@@ -17,23 +17,23 @@
     },
     {
       "name": "requirements_check",
-      "sha256": "d5ef48f588e66763a0e6760bc4793ef1fb62a47b465899ece328b021bc02f735"
+      "sha256": "96e0e0b51a6e2f5aafa559067f924d30be1c2d6839d605dba9167c483d8d77d5"
     },
     {
       "name": "architecture_pattern",
-      "sha256": "b73d8d8b909c86f16d21d0e4ec71ca6946cdc30395d9f39415a47fcfa341d3e5"
+      "sha256": "dfad434320539082632b630c337415ac18554f3a169e2fb315698138fdf187b9"
     },
     {
       "name": "service_compare",
-      "sha256": "4faa0dbb576926cc094c4f6a43cc47ca96388ee4ddfa0f4abf9be6c7e5462df1"
+      "sha256": "5a6b4795a7ce1b2f15edf0fc2b1288cb0377dbb6eade1ec2da90dcd83a20a22c"
     },
     {
       "name": "decision_record",
-      "sha256": "7648caf6e6fa896d7aaf873767bc1f4a865e22e3fbbeeb03f68cd8a6e94894f1"
+      "sha256": "c66e0f14934e10f74f714c8baf4f9139680464bcda73699eec5f07dfb9049318"
     },
     {
       "name": "well_architected_review",
-      "sha256": "9d0cb617115b96e327e5320ab3cf4e439cb8cf097edc0921671268bf8155db73"
+      "sha256": "67ce6f15e35b050436bf8b9c8088927259277ae7f70f597383ffa067871fdc91"
     },
     {
       "name": "threat_model",
@@ -45,23 +45,23 @@
     },
     {
       "name": "capacity_plan",
-      "sha256": "d4b5eb742a66b5d77cb0c62ffd4e07cf094b2660be24a5b6de080f24b2f04ff8"
+      "sha256": "53d12726b091928ada3f84fe3d2d1012c36357665668821eb05dda1ac05f0991"
     },
     {
       "name": "cost_model",
-      "sha256": "25f518e1ad93b4a2a068cec2219eeef7a96168aaa0de4e418fa5796f487c10f3"
+      "sha256": "a07e5ae5274f97890632ee841a08342b48a69787b0321965d9dc4cbc84d42771"
     },
     {
       "name": "slo_budget",
-      "sha256": "ecbb6dd6a8eca7afc352cf85c6392cbbcf584405af86562627b4b73b4b8f99a4"
+      "sha256": "72263f272807948da283c524bf64cd924ca0d3ee1a48cc4a6a8a496507c48472"
     },
     {
       "name": "migration_plan",
-      "sha256": "d049a2c7d0f25f45418a1cf0c5a7a31e01d9048bcad0ab4fdfed7d048b7f5557"
+      "sha256": "b294c682598416cab253afd9d708fe5a1e54176bccad94fb8c8e159528570685"
     },
     {
       "name": "architecture_diagram",
-      "sha256": "3865c58aa3699b3a4bd646ff241f7a51faad8ebea45a94509dcb75384c13cc86"
+      "sha256": "f83e45e05928d61440b1ceeb0fd6fdc4b74e1d1bf0c8bd5636fb9a22ee62fb00"
     },
     {
       "name": "implementation_plan",
@@ -73,19 +73,19 @@
     },
     {
       "name": "c4_model",
-      "sha256": "6bdff92773ed318f190db0207380384a38b85938c998b75dfc8d44d0f71939e1"
+      "sha256": "53960e962505e270922775a4227796e57d4718e36c9b8921cd81ef173d4cd308"
     },
     {
       "name": "sequence_diagram",
-      "sha256": "c7a7dda126cddddc6837e14f4dd587999a8169d1d66aeb42b4ede10e65e95bf0"
+      "sha256": "67a995d242fe94fd9d31e1f084b64a3034218ab2664badf3b5e326539e5b6f6a"
     },
     {
       "name": "service_equivalents",
-      "sha256": "cb71bf5c2ae504c67013538d3389485c0bf52968367933531d4087a32eef3d7b"
+      "sha256": "fe2b6c754e881e4de5651fe176d67cb7e53e653d650907ca0cc65c7ce8a125ac"
     },
     {
       "name": "data_classification",
-      "sha256": "5e572fea5993540785e11cb7ade0ccfb65583a838015627fdce50edaf263a05f"
+      "sha256": "8aea32b04a9b3febc55ce705a243ac966c41084e3f22a6009cb0826ee3364b5d"
     },
     {
       "name": "openapi_review",
@@ -93,55 +93,55 @@
     },
     {
       "name": "event_contract",
-      "sha256": "4d9dd1cfbce2d55c861a9fd87362fd8f1576ef0d1caeac74be9be35025616bb1"
+      "sha256": "bcf94ca8d13ceb9c84731f44faf2885453ca4a2d2d3acca0a75a2c2535e1999f"
     },
     {
       "name": "latency_budget",
-      "sha256": "d37ffa7a60c3ceb808cfbcf12affda430a4e38c73d8e28550b0e796bd0b368be"
+      "sha256": "00f1e9696239f31b575856030ee2bf964343ff543ca4875d190d918003321e9e"
     },
     {
       "name": "queue_sizing",
-      "sha256": "0cb80a5899d4f56da1f13d8c065b9378ae7216ceec544b761f2ba3679d6e9804"
+      "sha256": "e65953c24a2801d5ab17a37a18611279fb668edd5ebbdbe6914f62459bf6a225"
     },
     {
       "name": "dr_strategy",
-      "sha256": "9583e9189e2db488e277a3aacf935dea609bbf841a8681313e1acb2834e78162"
+      "sha256": "2247e09e671b824af0cb9fac83b8522888455a351996b28d0f99bfc83d93deb3"
     },
     {
       "name": "retry_policy",
-      "sha256": "629693527e1a0fee902a0aab17d609fc071681f6cfbaf7d9edd6dec78d6add19"
+      "sha256": "5a3527a5c777554892aa7c2c0018e46fda4f89becd716c5eeb31c714fad56c4e"
     },
     {
       "name": "storage_growth",
-      "sha256": "bf007ba90b9154f700373ae68b074895e427ac808a28a85b05015f41b7544b95"
+      "sha256": "ffe47dd978f18290c43382f143781f0c496a2624849407943d3d87b7dd786dce"
     },
     {
       "name": "finops_unit_economics",
-      "sha256": "72b25d3586ea211772bc0d405f02a8753bf67f8256169faa712f4ffae6a393cf"
+      "sha256": "701eb5501791f0e8084ddef60524e1b754683781e009887bdc3f68165592d89c"
     },
     {
       "name": "postmortem",
-      "sha256": "fe4d8bc04a6812f8df4e446bdaa1554637ef23d5865675bc089d7c80d29841ef"
+      "sha256": "21e51ce60b478323de09c95040bf59933c4430ebc2a54f14859f1660c774b8e3"
     },
     {
       "name": "runbook",
-      "sha256": "e3ccc56101ec812619392fd110ef1c01d3facc1182340b9c55a83ec5e50bd75f"
+      "sha256": "efb8e03996f3099a9de05fd2a8b9d6f692f528d90434d507160cbe19eed5ad20"
     },
     {
       "name": "agent_eval_plan",
-      "sha256": "c737fb46d7652155d69d9818d3ba4edc8b95a2da15daec21fc44d8d5fe247d06"
+      "sha256": "6a7e114b443ddbb7df6d34271466bd6f3e76fe6ee14940f504007545d0051f1a"
     },
     {
       "name": "prompt_injection_checklist",
-      "sha256": "00a0938c2e37dfa2767390ea419ee675cc5d88c48ea43ea7e583360d78536158"
+      "sha256": "25b3a3b697cecd4e2d0df43626241da93ac6d58d1e83e043f826ecb0cbae18ec"
     },
     {
       "name": "rag_pipeline_plan",
-      "sha256": "9ae821c2634b2aad4ae3595a9cee59a64ffecd088908d24f8a1328c93f0455a0"
+      "sha256": "2a95dce1c6b9a0ac31a75a38660bd7694d3e665ae0ada171929ffad1b5ed8d72"
     },
     {
       "name": "mcp_server_review",
-      "sha256": "104beb4a049a9e611a8d93c9950d3cd4907d0a9f5ed8b6a61de04fc3e3e50d6d"
+      "sha256": "03bf18f6acdd6ae223553c52ed9cb7f88b8e1e8d3e0fd2bf3ed28c9e88bc050b"
     },
     {
       "name": "mcp_config_review",
@@ -149,7 +149,7 @@
     },
     {
       "name": "iam_policy_review",
-      "sha256": "c18fd20634efb619a68132993466669b97cdd5e9e7db827c5bc8e76cf832246f"
+      "sha256": "376ffed7b74ad71a36ca9bba8347407c0c6942c04a923477d0cd42e582cb112f"
     },
     {
       "name": "cloudformation_review",
@@ -165,11 +165,11 @@
     },
     {
       "name": "aws_knowledge_search",
-      "sha256": "ae407d2b91b7a602d1347238a46454273e89e6665156f9cf2c862d542c5818c4"
+      "sha256": "d2160be4113ee41490aec3cf021d7971496432773ba8c375df924c010a9056b5"
     },
     {
       "name": "aws_knowledge_read",
-      "sha256": "21d0452537e51e1cee53deb7613384fd965ccc3a87650bf2e8119a69eb3ff476"
+      "sha256": "eae979c6411401171786aeed67cf5a85c567c321405b8f32d23021276faebf49"
     },
     {
       "name": "aws_regions",
@@ -185,11 +185,11 @@
     },
     {
       "name": "integration_catalog",
-      "sha256": "9785d8d9c5051afbff0dcf8fc7281bec70fc1eb05180340fed0dc7f643542598"
+      "sha256": "f5aae6f991a0f29f51ff4008787ac7977a1f74f160d1e180f4b519755560c799"
     },
     {
       "name": "integration_config",
-      "sha256": "c895582ed1a89acdc6c0d9c84226f102b082a58bef4cbc50b71d18425e562d42"
+      "sha256": "a6c85e8c9e8ea34481237be70f853bfb84efa4fedf9560bd72c7f4cdd1a8a38b"
     },
     {
       "name": "github_public_repository",

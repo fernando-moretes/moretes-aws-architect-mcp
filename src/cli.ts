@@ -88,7 +88,7 @@ async function main() {
   if (command === 'describe') {
     const t = publicTools.find(x => x.name === rest[0]);
     if (!t) usage(`unknown tool: ${rest[0]}`);
-    console.log(JSON.stringify({ name: t.name, description: t.description, external: t.external, inputSchema: z.toJSONSchema(t.schema) }, null, 2));
+    console.log(JSON.stringify({ name: t.name, description: t.description, external: t.external, inputSchema: z.toJSONSchema(t.schema, {io:'input'}) }, null, 2));
     return;
   }
   if (command === 'check') return check(rest);
@@ -121,7 +121,7 @@ function argsFromFile(name: string, raw: string, filename: string, base: Record<
   let parsed: unknown;
   try { parsed = JSON.parse(raw); } catch { usage(`${filename}: input is not valid JSON`); }
   const obj = parsed as Record<string, unknown>;
-  const keys = Object.keys((z.toJSONSchema(t.schema) as { properties?: Record<string, unknown> }).properties ?? {});
+  const keys = Object.keys((z.toJSONSchema(t.schema, {io:'input'}) as { properties?: Record<string, unknown> }).properties ?? {});
   const looksLikeArgs = !Array.isArray(parsed) && Object.keys(obj).some(k => keys.includes(k));
   if (wrap && !looksLikeArgs) return { ...base, [wrap]: obj };
   if (name === 'kubernetes_manifest_review' && Array.isArray(parsed)) return { ...base, manifests: parsed };

@@ -380,6 +380,21 @@
   "capacity_plan": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -416,6 +431,57 @@
         },
         "additionalProperties": true
       },
+      "provenance": {
+        "type": "object",
+        "properties": {
+          "requestsPerSecond": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "durationMs": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "payloadKB": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "headroom": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "provenanceLimitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "insufficientInputs": {
+        "type": "array"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rateType": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
       "averageConcurrency": {
         "type": [
           "number",
@@ -439,6 +505,9 @@
           "number",
           "null"
         ]
+      },
+      "formulas": {
+        "type": "array"
       },
       "limitations": {
         "type": "array"
@@ -602,6 +671,21 @@
   "cost_model": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -1088,6 +1172,21 @@
   "finops_unit_economics": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -1385,6 +1484,21 @@
   "latency_budget": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -1856,6 +1970,21 @@
   "queue_sizing": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -2095,6 +2224,21 @@
   "retry_policy": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -2165,9 +2309,6 @@
         ]
       },
       "guidance": {
-        "type": "array"
-      },
-      "sources": {
         "type": "array"
       }
     },
@@ -2314,6 +2455,21 @@
   "slo_budget": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",
@@ -2355,12 +2511,6 @@
           "boolean",
           "null"
         ]
-      },
-      "limitation": {
-        "type": [
-          "string",
-          "null"
-        ]
       }
     },
     "additionalProperties": true
@@ -2368,6 +2518,21 @@
   "storage_growth": {
     "type": "object",
     "properties": {
+      "validated": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "limitation": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sources": {
+        "type": "array"
+      },
       "kind": {
         "type": [
           "string",

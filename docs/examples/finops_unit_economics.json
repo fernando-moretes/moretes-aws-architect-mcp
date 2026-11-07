@@ -36,6 +36,9 @@
     "targetCostPerPrimaryUnit": 0.001
   },
   "result": {
+    "validated": false,
+    "limitation": "Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.",
+    "sources": [],
     "kind": "calculation",
     "period": "2026-09",
     "currency": "USD",

@@ -10,7 +10,7 @@ Three facts apply to all 48:
 - **Read-only.** Every public tool carries `readOnlyHint: true`. Six tools call outside your machine (`openWorldHint: true`): the five `aws_knowledge*`/`aws_regions`/`aws_regional_availability`/`aws_skill` adapters and `github_public_repository`. The other 42 run entirely in memory.
 - **Heuristic where they review.** Review tools (`*_review`, `threat_model`, `well_architected_review`) return findings and a `limitations` list. They are triage, not certification. An empty findings list is not an approval.
 
-Most outputs include `kind`, `limitation` or `limitations`, and often `nextTools` (which tool to call next) and `sources` (URLs the heuristic was built from).
+Most outputs include `kind`, `limitation` or `limitations`, and often `nextTools` (which tool to call next) and `sources` (URLs the heuristic was built from). All eight calculators include `validated: false`, `limitation` and `sources`; an empty source list means no external evidence was checked, not that the inputs are proven. Existing per-item price sources and formula-specific references remain available. This does not standardize every other tool or give claim-level citations to every heuristic.
 
 ## Architect personas and code
 
@@ -204,7 +204,17 @@ Input (from docs/examples):
 
 Output: `averageConcurrency: 2`, `plannedConcurrency: 3`, `dailyRequests: 432000`, `dailyPayloadGB: 1.728`, `assumptions` echoed, `limitations`.
 
-Limitation: assumes a sustained rate all day. Model burst and average separately; validate service quotas and tail latency yourself. [Schema](tools.md#capacity_plan).
+`durationMs` and `payloadKB` are optional. For the first-use order API, call `{"requestsPerSecond":500,"rateType":"peak"}`. The result lists both in `insufficientInputs`, returns null concurrency and volume fields, and never fills them with guessed numbers. Supplying duration alone permits concurrency arithmetic while payload remains unknown. Zero is a valid value, distinct from a missing value.
+
+Optional `inputProvenance` labels each numeric field as `provided`, `assumed` or `measured`. These labels are caller-reported, not verified by the server. The returned per-field `provenance` includes the value and origin; unlabeled values are `caller-unspecified`, missing values are `missing`, and omitted headroom is explicitly `server-default` (1.3). The legacy `assumptions` object remains for compatibility, with nulls for unknowns; use `provenance` to render the origin. Do not label model guesses as requirements.
+
+Limitation: `rateType: "peak"` suppresses daily extrapolation. `sustained` permits it; the compatibility default `unspecified` retains arithmetic as a sustained-rate scenario, explicitly not a daily forecast. Validate service quotas and tail latency yourself. [Schema](tools.md#capacity_plan).
+
+### Structured input errors
+
+MCP calls rejected by Zod return `isError: true` plus `structuredContent` with `kind: "input-validation-error"`, `validated: false`, `missing` (dotted field paths), and `issues` (`path` segments and validation `code`). For example, calling `capacity_plan` with `{}` reports `missing: ["requestsPerSecond"]`. An invalid supplied value is an issue, not a missing value. Clients should ask for missing inputs without parsing prose. Structured errors omit supplied values; do not submit private inputs to the public endpoint.
+
+Published input schemas now describe input rather than output: defaulted fields are optional in MCP, CLI, generated docs and the manifest lock. Existing complete calls remain accepted; capacity partial calls return unknown numbers as null, so clients must handle nullable output fields.
 
 ### cost_model
 

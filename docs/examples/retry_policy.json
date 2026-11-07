@@ -10,6 +10,11 @@
     "operationIdempotent": true
   },
   "result": {
+    "validated": false,
+    "limitation": "Scenario arithmetic over caller inputs; no independent workload, measurement or pricing validation.",
+    "sources": [
+      "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/"
+    ],
     "kind": "calculation",
     "inputs": {
       "baseDelayMs": 200,
@@ -54,9 +59,6 @@
       "Retry only on transient errors (timeouts, 429, 5xx); never on validation or authorization errors",
       "Circuit breaker: open after consecutive failures (e.g. 5) or error ratio above 50% in a window; half-open probes every cap interval",
       "Propagate the remaining deadline downstream so nested retries do not multiply"
-    ],
-    "sources": [
-      "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/"
     ]
   }
 }

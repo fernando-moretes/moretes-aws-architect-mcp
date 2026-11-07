@@ -22,7 +22,7 @@ test('every documented example still produces exactly the documented output', as
 test('tool names, descriptions and input schemas match docs/tools.lock.json', () => {
   const lock = JSON.parse(readFileSync('docs/tools.lock.json', 'utf8')) as {tools: {name: string; sha256: string}[]};
   const sha = (s: string) => createHash('sha256').update(s).digest('hex');
-  const now = publicTools.map(t => ({name: t.name, sha256: sha(JSON.stringify({name: t.name, description: t.description, inputSchema: z.toJSONSchema(t.schema)}))}));
+  const now = publicTools.map(t => ({name: t.name, sha256: sha(JSON.stringify({name: t.name, description: t.description, inputSchema: z.toJSONSchema(t.schema, {io:'input'})}))}));
   assert.deepEqual(now, lock.tools, 'Tool contract changed; run node scripts/contracts.mjs after npm run build and review the diff');
 });
 
