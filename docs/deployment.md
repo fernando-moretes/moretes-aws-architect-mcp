@@ -1,8 +1,21 @@
 # Deployment and validation — 0.5.0
 
-Prepared 7 November 2026. Source fixes are merged in [PR #20](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/20) and [PR #21](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/21); each passed Node 22/24 CI, Action self-test and CodeQL.
+Verified 7 November 2026. Source fixes are merged in [PR #20](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/20) and [PR #21](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/21); release [PR #22](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/22) was tagged at `1965e0d673f821cd02ad287d3095eca55c6fb04f`. All passed Node 22/24 CI, Action self-test and CodeQL.
 
 The [v0.5.0 release](https://github.com/fernando-moretes/moretes-aws-architect-mcp/releases/tag/v0.5.0) records actual distribution and deployment outcomes. This checklist alone does not claim those operations completed.
+
+### Confirmed 0.5.0 evidence
+
+- [Publish](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/42392695896) completed npm with provenance, MCP Registry and CycloneDX SBOM. The SBOM is attached to the GitHub release. A clean consumer install of the published npm package passed CLI/stdio discovery, manifest parity, queue regression and account isolation.
+- [Container](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/42392695912) completed linux/amd64 and linux/arm64 with provenance. OCI index: `sha256:58fd063cf658cc298800a4b05e2f30844c8e65f917a6860bc09e9145ada86c32`.
+- [Release CI](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/42392695918), [CodeQL](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/42392692384) and [Action self-test](https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/runs/42392692362) succeeded. Local release gates included 60 tests and runtime audit with zero known vulnerabilities at execution time.
+- The reviewed CloudFormation change set reached `UPDATE_COMPLETE`. Only `Function.Code` and the dependent `Integration.IntegrationUri` changed, with no replacement. All non-code parameters, including domain, certificate, quotas and budget, were preserved. Deployed Lambda code checksum matched the uploaded artifact; no IAM permissions or capacity were expanded.
+- Live SDK smoke confirmed 0.5.0, 48 public tools, 20 prompts and 18 resources. Manifest/source parity, conditional ETag, partial capacity, structured input errors, capacity/large-queue regressions, official AWS Knowledge and public account rejection passed.
+- Health, inventory, aggregate stats, well-known server card/Glama metadata and landing returned HTTP 200. Public manifest: https://mcp.moretes.com/manifest.json . Contract digest: `06f265c1244ad8edc2160ddac3787ba2a304889f529057a5b6a461b18d56d7c2`.
+
+Billing, identity, stack parameters and private operational evidence remain outside public Git. Hashes and successful smoke checks do not certify security or every IDE/provider combination.
+
+### Reproduce the release gates
 
 - Run all 60 tests, typecheck/build, contracts, docs checks, clean consumer package install and runtime audit.
 - Tag the merged release commit; verify Publish (npm, MCP Registry, SBOM) and Container (amd64/arm64 and provenance) separately.

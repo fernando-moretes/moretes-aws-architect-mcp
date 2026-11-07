@@ -25,6 +25,8 @@ claude mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
 
 Publication, image and live deployment results are separate: consult the [v0.5.0 release](https://github.com/fernando-moretes/moretes-aws-architect-mcp/releases/tag/v0.5.0) and [deployment evidence](deployment.md).
 
+All distribution workflows completed and AWS production was verified on 7 November 2026. The canonical endpoint reports 0.5.0; the full smoke suite and public route checks passed, with existing infrastructure parameters preserved.
+
 ---
 
 
