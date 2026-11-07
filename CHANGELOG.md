@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add a complete public-tool contract manifest in local CLI and HTTP, with output schemas, safety annotations, aggregate/per-tool SHA-256 fingerprints, conditional ETags and a health fingerprint. Share descriptors with MCP discovery to avoid divergent inventories.
+- Verify the complete-contract fingerprint baseline in CI alongside the historical input-only lock. Hashes detect drift, not safety or publisher identity. Source feature; not yet deployed or released on npm.
 - Address #19 first-use feedback: partial capacity inputs, explicit per-field caller-reported provenance, visible server headroom default, and no daily extrapolation of an explicitly peak rate. Missing arithmetic outputs are null; complete legacy calls retain their numerical results.
 - Return structured Zod input errors with missing paths and issue codes, without echoing supplied values in structured errors.
 - Export Zod input-mode schemas across MCP, CLI, documentation and lock generation so defaults do not become mandatory inputs.

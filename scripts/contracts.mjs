@@ -10,6 +10,7 @@ import {readFileSync, writeFileSync, readdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {z} from 'zod';
 import {publicTools, VERSION} from '../dist/server.js';
+import {buildContractManifest} from '../dist/contracts.js';
 
 const typeOf = v => v === null ? 'null' : Array.isArray(v) ? 'array' : Number.isInteger(v) ? 'number' : typeof v;
 function shape(v, depth = 0) {
@@ -29,6 +30,9 @@ for (const f of readdirSync('docs/examples').filter(f => f.endsWith('.json') && 
   schemas[e.tool] = {type: 'object', properties: s.properties, additionalProperties: true};
 }
 writeFileSync('src/data/output-schemas.json', JSON.stringify(schemas, null, 2) + '\n');
+// Pass the freshly generated schemas; dist's bundled JSON can be one build old.
+const {snapshot,...baseline} = buildContractManifest(publicTools,VERSION,schemas);
+writeFileSync('docs/contracts.lock.json', JSON.stringify({...baseline,schemaVersion:snapshot.schemaVersion,server:snapshot.server,scope:snapshot.scope},null,2)+'\n');
 const sha = s => createHash('sha256').update(s).digest('hex');
 const tools = publicTools.map(t => ({name: t.name, sha256: sha(JSON.stringify({name: t.name, description: t.description, inputSchema: z.toJSONSchema(t.schema, {io:'input'})}))}));
 writeFileSync('docs/tools.lock.json', JSON.stringify({version: VERSION, note: 'sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.', aggregate: sha(tools.map(t => t.sha256).join('')), tools}, null, 2) + '\n');

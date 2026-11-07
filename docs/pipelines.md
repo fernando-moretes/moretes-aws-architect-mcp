@@ -12,6 +12,7 @@ Key facts:
 
 ```text
 moretes-architect list [--json]                        tools by group
+moretes-architect manifest                             complete public contract snapshot and hashes (source build)
 moretes-architect describe <tool>                      description and JSON schema
 moretes-architect call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]
 ```

@@ -20,6 +20,8 @@ Deployment/CI results are recorded separately in docs/deployment.md; this list d
 
 ## Next, based on real users
 
+Implemented after v0.4.1, awaiting release/deployment: partial capacity and structured input validation (#20), plus full output-schema/annotation fingerprints, public manifest, CLI inspection and CI baseline checks. Implementation details and limits: [contract manifest](docs/contract-manifest.md).
+
 - Five external developers complete the workshop; record friction and outcomes with permission.
 - Dedicated contract tests for the most requested official providers (pricing, ECS, serverless, Transform).
 - Add user-supplied trace evidence to architecture reviews, with local redaction.

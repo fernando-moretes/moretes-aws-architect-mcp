@@ -5,6 +5,7 @@
  *
  *   moretes-architect list [--json]
  *   moretes-architect describe <tool>
+ *   moretes-architect manifest
  *   moretes-architect call <tool> [--input file.json|-] [--arg key=value ...]
  *                                 [--format json|markdown|sarif] [--fail-on high|medium|info]
  *
@@ -17,6 +18,7 @@
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
 import { publicTools, toolGroups, VERSION } from './server.js';
+import {buildContractManifest,describeTool} from './contracts.js';
 
 type Finding = { severity?: string; message?: string; target?: string; path?: string; line?: number; rule?: string };
 const WRAP: Record<string, string> = { terraform_plan_review: 'plan', cloudformation_review: 'template', openapi_review: 'document', iam_policy_review: 'policy', mcp_config_review: 'config', code_review_architecture: 'code' };
@@ -24,7 +26,7 @@ const RANK: Record<string, number> = { info: 1, medium: 2, high: 3 };
 
 function usage(message?: string): never {
   if (message) console.error(`error: ${message}\n`);
-  console.error(`moretes-architect ${VERSION}\n\n  list [--json]                      tools by group\n  describe <tool>                    description and JSON schema\n  call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]\n  check <tool> [--fail-on high] [--format markdown|json] file...   one review per file (pre-commit, CI)\n\nExit codes: 0 ok · 1 findings at/above --fail-on · 2 usage or input error`);
+  console.error(`moretes-architect ${VERSION}\n\n  list [--json]                      tools by group\n  manifest                          offline public contract snapshot and hashes\n  describe <tool>                    description and JSON schema\n  call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]\n  check <tool> [--fail-on high] [--format markdown|json] file...   one review per file (pre-commit, CI)\n\nExit codes: 0 ok · 1 findings at/above --fail-on · 2 usage or input error`);
   process.exit(2);
 }
 
@@ -80,6 +82,11 @@ function toSarif(tool: string, result: Record<string, unknown>, file?: string) {
 async function main() {
   const [command, ...rest] = process.argv.slice(2);
   if (!command || command === '--help' || command === '-h') usage();
+  if (command === 'manifest') {
+    if(rest.length) usage('manifest takes no arguments');
+    console.log(JSON.stringify(buildContractManifest(publicTools,VERSION),null,2));
+    return;
+  }
   if (command === 'list') {
     if (rest.includes('--json')) console.log(JSON.stringify(toolGroups.map(g => ({ group: g.group, tools: g.tools.map(t => t.name) })), null, 2));
     else for (const g of toolGroups) { console.log(`\n${g.group}`); for (const t of g.tools) console.log(`  ${t.name.padEnd(30)} ${t.description.split('. ')[0]}`); }
@@ -88,7 +95,7 @@ async function main() {
   if (command === 'describe') {
     const t = publicTools.find(x => x.name === rest[0]);
     if (!t) usage(`unknown tool: ${rest[0]}`);
-    console.log(JSON.stringify({ name: t.name, description: t.description, external: t.external, inputSchema: z.toJSONSchema(t.schema, {io:'input'}) }, null, 2));
+    console.log(JSON.stringify({ ...describeTool(t), external:t.external }, null, 2));
     return;
   }
   if (command === 'check') return check(rest);

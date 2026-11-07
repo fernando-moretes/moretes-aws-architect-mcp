@@ -145,6 +145,8 @@ Mais **20 prompts** (10 fluxos e um `architect_<papel>` por persona), **18 resou
 
 Guia de cada ferramenta: [docs/tools-guide.md](docs/tools-guide.md) · Schemas: [docs/tools.md](docs/tools.md) · Saídas reais: [docs/examples](docs/examples) · Personas: [docs/personas.md](docs/personas.md)
 
+No código em desenvolvimento, `node dist/cli.js manifest` exporta os contratos públicos completos com hashes por ferramenta, incluindo schemas de saída e anotações de segurança. [Como verificar e comparar contratos](docs/contract-manifest.md). Essa melhoria requer build deste checkout; sua publicação no npm e no HTTP público é uma etapa separada.
+
 ### Saída real: um C4 desenhado pelo `c4_model`
 
 Entrada: pessoas, sistemas e relações explícitas. Saída: Mermaid validado (id duplicado, aresta solta e rótulo com sintaxe perigosa são recusados). O GitHub renderiza abaixo exatamente o que a ferramenta devolveu em [docs/examples/c4_model.json](docs/examples/c4_model.json):

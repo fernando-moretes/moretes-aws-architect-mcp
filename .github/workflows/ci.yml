@@ -23,7 +23,7 @@ jobs:
       - name: Contracts are up to date (output schemas, tools lock)
         run: |
           node scripts/contracts.mjs
-          git diff --exit-code -- src/data/output-schemas.json docs/tools.lock.json
+          git diff --exit-code -- src/data/output-schemas.json docs/tools.lock.json docs/contracts.lock.json
       - run: npm run docs:check
       - name: Clean consumer package install (CLI and stdio)
         run: npm run package:smoke
