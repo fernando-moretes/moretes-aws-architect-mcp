@@ -51,7 +51,7 @@ jobs:
             server.json > server.tmp && mv server.tmp server.json
       - name: SBOM (CycloneDX)
         run: npm sbom --sbom-format cyclonedx --omit dev > sbom.cdx.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: sbom-${{ github.ref_name }}
           path: sbom.cdx.json
