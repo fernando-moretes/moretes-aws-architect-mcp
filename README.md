@@ -10,7 +10,7 @@
   <a href="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://github.com/fernando-moretes/moretes-aws-architect-mcp/actions/workflows/codeql.yml/badge.svg"></a>
   <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.fernando-moretes/moretes-aws-architect-mcp"><img alt="MCP Registry" src="https://img.shields.io/badge/MCP%20Registry-listado-ff9900"></a>
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-ff9900"></a>
-  <img alt="Versão 0.4.1" src="https://img.shields.io/badge/vers%C3%A3o-0.4.1-0f1b2d">
+  <img alt="Versão 0.5.0" src="https://img.shields.io/badge/vers%C3%A3o-0.5.0-0f1b2d">
   <img alt="48 ferramentas" src="https://img.shields.io/badge/ferramentas-48-0f1b2d">
   <img alt="Sem chamadas a modelo" src="https://img.shields.io/badge/chamadas%20a%20modelo-0-10b981">
   <img alt="Sem chave de API" src="https://img.shields.io/badge/chave%20de%20API-nenhuma-10b981">
@@ -145,7 +145,7 @@ Mais **20 prompts** (10 fluxos e um `architect_<papel>` por persona), **18 resou
 
 Guia de cada ferramenta: [docs/tools-guide.md](docs/tools-guide.md) · Schemas: [docs/tools.md](docs/tools.md) · Saídas reais: [docs/examples](docs/examples) · Personas: [docs/personas.md](docs/personas.md)
 
-No código em desenvolvimento, `node dist/cli.js manifest` exporta os contratos públicos completos com hashes por ferramenta, incluindo schemas de saída e anotações de segurança. [Como verificar e comparar contratos](docs/contract-manifest.md). Essa melhoria requer build deste checkout; sua publicação no npm e no HTTP público é uma etapa separada.
+Na versão 0.5.0, `node dist/cli.js manifest` exporta os contratos públicos completos com hashes por ferramenta, incluindo schemas de saída e anotações de segurança. [Como verificar e comparar contratos](docs/contract-manifest.md). A instalação local e o endpoint HTTP permitem comparar os mesmos contratos; confira a versão em uso antes de comparar.
 
 ### Saída real: um C4 desenhado pelo `c4_model`
 
@@ -218,7 +218,7 @@ Roda offline e sem cota. O SARIF entra no code scanning do GitHub; o Markdown va
 | **Claude Code (plugin + skill)** | `/plugin marketplace add fernando-moretes/moretes-aws-architect-mcp` e `/plugin install moretes-architect@moretes` |
 | **Gemini CLI** | `gemini extensions install https://github.com/fernando-moretes/moretes-aws-architect-mcp` |
 | **Qualquer agente com Agent Skills** | `npx skills add fernando-moretes/moretes-aws-architect-mcp` |
-| **GitHub Actions** | `uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.1` com `tool`, `files`, `fail-on` e `sarif` |
+| **GitHub Actions** | `uses: fernando-moretes/moretes-aws-architect-mcp@v0.5.0` com `tool`, `files`, `fail-on` e `sarif` |
 | **pre-commit** | hooks `mcp-config-review`, `dependency-manifest-review`, `cloudformation-review`, `openapi-review`, `code-review-architecture` |
 | **Docker** | `docker run -i --rm ghcr.io/fernando-moretes/moretes-aws-architect-mcp` (stdio), `... http`, `... cli check <ferramenta> <arquivo>` |
 
@@ -233,7 +233,7 @@ npm run http         # http://127.0.0.1:8787/mcp e a landing local
 node dist/cli.js list
 ```
 
-As ferramentas de conta AWS (identidade STS, recursos por tag, histórico de custo) e a federação com os servidores oficiais são **opt-in por variável de ambiente e só existem no stdio**: o HTTP público nunca as expõe. Detalhes em [docs/clients.md](docs/clients.md) e [docs/integrations.md](docs/integrations.md). O pacote está publicado no [npm](https://www.npmjs.com/package/moretes-aws-architect-mcp). Use `npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-architect list` para o CLI ou `npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-aws-architect-mcp` para stdio.
+As ferramentas de conta AWS (identidade STS, recursos por tag, histórico de custo) e a federação com os servidores oficiais são **opt-in por variável de ambiente e só existem no stdio**: o HTTP público nunca as expõe. Detalhes em [docs/clients.md](docs/clients.md) e [docs/integrations.md](docs/integrations.md). O pacote está publicado no [npm](https://www.npmjs.com/package/moretes-aws-architect-mcp). Use `npx --yes --package moretes-aws-architect-mcp@0.5.0 moretes-architect list` para o CLI ou `npx --yes --package moretes-aws-architect-mcp@0.5.0 moretes-aws-architect-mcp` para stdio.
 
 ## Tutorial em vídeo e curso grátis
 

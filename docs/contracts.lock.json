@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256-sorted-json-v1",
-  "digest": "bbe21df9dbcbf00628cd8d4126285a36f8054b4c6185d4c4b28ff61eb99411a6",
+  "digest": "06f265c1244ad8edc2160ddac3787ba2a304889f529057a5b6a461b18d56d7c2",
   "toolDigests": [
     {
       "name": "agent_eval_plan",
@@ -198,7 +198,7 @@
   "schemaVersion": 1,
   "server": {
     "name": "moretes-aws-architect",
-    "version": "0.4.1"
+    "version": "0.5.0"
   },
   "scope": "public-tools"
 }

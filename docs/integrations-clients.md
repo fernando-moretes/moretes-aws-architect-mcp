@@ -17,7 +17,7 @@ Ways to use the workbench besides connecting an MCP client to the public endpoin
 ```yaml
 - uses: actions/checkout@v4
 - run: terraform show -json tfplan > plan.json
-- uses: fernando-moretes/moretes-aws-architect-mcp@v0.4.1
+- uses: fernando-moretes/moretes-aws-architect-mcp@v0.5.0
   with:
     tool: terraform_plan_review
     files: plan.json
@@ -36,7 +36,7 @@ Inputs: `tool`, `files` (space-separated paths or a JSON array such as `["plans/
 ```yaml
 repos:
   - repo: https://github.com/fernando-moretes/moretes-aws-architect-mcp
-    rev: v0.4.1
+    rev: v0.5.0
     hooks:
       - id: mcp-config-review
       - id: dependency-manifest-review

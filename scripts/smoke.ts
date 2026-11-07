@@ -1,6 +1,8 @@
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import {VERSION} from '../src/version.js';
+import {buildContractManifest} from '../src/contracts.js';
+import {publicTools} from '../src/server.js';
 const url=process.argv[2];if(!url)throw new Error('Usage: npm run smoke -- https://endpoint/mcp');
 const c=new Client({name:'moretes-smoke',version:VERSION});
 try{
@@ -8,6 +10,18 @@ try{
  if(c.getServerVersion()?.version!==VERSION)throw new Error(`Expected release ${VERSION}, received ${c.getServerVersion()?.version}`);
  const tools=await c.listTools();
  if(tools.tools.length!==48)throw new Error('Unexpected public tool count');
+ const health=await (await fetch(new URL('/health',url))).json();
+ const response=await fetch(new URL('/manifest.json',url));
+ if(!response.ok)throw new Error('Manifest endpoint unavailable');
+ const manifest=await response.json();
+ const expected=buildContractManifest(publicTools,VERSION);
+ if(manifest.digest!==expected.digest||health.contractDigest!==expected.digest||JSON.stringify(manifest.snapshot)!==JSON.stringify(expected.snapshot))throw new Error('Deployed contracts differ from reviewed source build');
+ const cached=await fetch(new URL('/manifest.json',url),{headers:{'If-None-Match':response.headers.get('etag')??''}});
+ if(cached.status!==304)throw new Error('Manifest conditional caching failed');
+ const partial=await c.callTool({name:'capacity_plan',arguments:{requestsPerSecond:500,rateType:'peak'}});
+ if(partial.isError||partial.structuredContent?.averageConcurrency!==null||partial.structuredContent?.dailyRequests!==null||JSON.stringify(partial.structuredContent?.insufficientInputs)!==JSON.stringify(['durationMs','payloadKB']))throw new Error('Partial capacity regression smoke failed');
+ const invalid=await c.callTool({name:'capacity_plan',arguments:{}});
+ if(!invalid.isError||JSON.stringify(invalid.structuredContent?.missing)!==JSON.stringify(['requestsPerSecond']))throw new Error('Structured validation smoke failed');
  const capacity=await c.callTool({name:'capacity_plan',arguments:{requestsPerSecond:100,durationMs:200,payloadKB:1}});
  if(capacity.isError||capacity.structuredContent?.averageConcurrency!==20)throw new Error('Capacity smoke failed');
  const queue=await c.callTool({name:'queue_sizing',arguments:{arrivalsPerSecond:900,serviceTimeMs:1000,consumers:1000}});
@@ -16,5 +30,5 @@ try{
  if(knowledge.isError)throw new Error('Live AWS Knowledge smoke failed');
  const forbidden=await c.callTool({name:'aws_account_identity',arguments:{}});
  if(!forbidden.isError)throw new Error('Public isolation failed');
- console.log(JSON.stringify({endpoint:url,version:VERSION,toolCount:tools.tools.length,capacity:'passed',largeQueue:'passed',liveKnowledge:'passed',publicIsolation:'passed',resources:(await c.listResources()).resources.length,prompts:(await c.listPrompts()).prompts.length},null,2));
+ console.log(JSON.stringify({endpoint:url,version:VERSION,toolCount:tools.tools.length,contractDigest:manifest.digest,manifest:'passed',partialCapacity:'passed',structuredValidation:'passed',capacity:'passed',largeQueue:'passed',liveKnowledge:'passed',publicIsolation:'passed',resources:(await c.listResources()).resources.length,prompts:(await c.listPrompts()).prompts.length},null,2));
 }finally{await c.close();}
