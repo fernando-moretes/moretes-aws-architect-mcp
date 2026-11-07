@@ -6,13 +6,13 @@ Key facts:
 
 - **Local and offline for review tools.** `terraform_plan_review`, `cloudformation_review`, `kubernetes_manifest_review`, `iam_policy_review`, `openapi_review`, `mcp_config_review`, `mcp_server_review`, `code_review_architecture`, `dependency_manifest_review` and every calculator run in memory. No network, no model, nothing leaves the runner, and the public quota does not apply. Only the `aws_knowledge_*`, `aws_regions`, `aws_regional_availability`, `aws_skill` and `github_public_repository` tools call outside, and you would rarely use those in CI.
 - **Heuristics.** Findings are triage. Keep OPA/Conftest, Checkov, tfsec, cfn-lint, Kyverno, Spectral or your SAST for enforcement. A clean run is not an approval.
-- **Published npm package.** Install a pinned version (`npm install --global moretes-aws-architect-mcp@0.4.1`) or build a reviewed repository tag. Installation requires network access; local review execution does not.
+- **Published npm package.** Install a pinned version (`npm install --global moretes-aws-architect-mcp@0.5.0`) or build a reviewed repository tag. Installation requires network access; local review execution does not.
 
 ## Commands
 
 ```text
 moretes-architect list [--json]                        tools by group
-moretes-architect manifest                             complete public contract snapshot and hashes (source build)
+moretes-architect manifest                             complete public contract snapshot and hashes (0.5.0+)
 moretes-architect describe <tool>                      description and JSON schema
 moretes-architect call <tool> [--input f|-] [--arg k=v]... [--format json|markdown|sarif] [--fail-on high|medium|info]
 ```

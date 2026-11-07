@@ -1,4 +1,20 @@
-# Deployment and validation
+# Deployment and validation — 0.5.0
+
+Prepared 7 November 2026. Source fixes are merged in [PR #20](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/20) and [PR #21](https://github.com/fernando-moretes/moretes-aws-architect-mcp/pull/21); each passed Node 22/24 CI, Action self-test and CodeQL.
+
+The [v0.5.0 release](https://github.com/fernando-moretes/moretes-aws-architect-mcp/releases/tag/v0.5.0) records actual distribution and deployment outcomes. This checklist alone does not claim those operations completed.
+
+- Run all 60 tests, typecheck/build, contracts, docs checks, clean consumer package install and runtime audit.
+- Tag the merged release commit; verify Publish (npm, MCP Registry, SBOM) and Container (amd64/arm64 and provenance) separately.
+- Verify the published npm package with `npm run package:smoke -- --package moretes-aws-architect-mcp@0.5.0`.
+- Verify AWS identity and credit coverage privately. Preserve the deployed domain/certificate, quota, budget and existing stack parameters. Review the exact CloudFormation change set before execution.
+- Wait for UPDATE_COMPLETE and run `npm run smoke -- https://mcp.moretes.com/mcp`. In addition to previous checks, verify full manifest/source parity, ETag, partial capacity and structured validation.
+- Check health, tools, stats and well-known metadata. Do not infer users, successes or security certification from these signals.
+
+Distribution targets: npm `moretes-aws-architect-mcp@0.5.0`, MCP Registry `io.github.fernando-moretes/moretes-aws-architect-mcp`, GHCR `ghcr.io/fernando-moretes/moretes-aws-architect-mcp:0.5.0`. Canonical endpoint: https://mcp.moretes.com/mcp .
+
+## Historical evidence — 0.4.1
+
 
 Release **0.4.1**, prepared 26 October and verified 27 October 2026 (America/Sao_Paulo). The GitHub release and tag workflows record the immutable build/publishing results; this file describes the validation gates and the historical evidence separately.
 

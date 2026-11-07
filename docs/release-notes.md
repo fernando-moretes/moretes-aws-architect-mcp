@@ -1,4 +1,32 @@
-# Moretes Architect MCP 0.4.1
+# Moretes Architect MCP 0.5.0
+
+7 November 2026 · partial capacity and verifiable contracts.
+
+## Changes
+
+- Capacity planning accepts missing duration/payload, returns null unknowns and explicit missing inputs, and distinguishes caller-reported origins from the server headroom default.
+- Explicit peak rates are never extrapolated into daily traffic. Complete legacy calls retain their numerical results; unspecified traffic remains a conditional sustained-rate scenario.
+- MCP input errors include structured missing paths and issue codes. Defaulted fields are optional in input schemas across MCP, CLI and generated docs.
+- All eight calculators include unvalidated scenario metadata, retaining existing limits and sources.
+- CLI `manifest`, HTTP `/manifest.json`, conditional ETags and a health fingerprint cover full public contracts, including output schemas and safety annotations. CI checks a new complete baseline alongside the historical input-only lock.
+
+## Compatibility and boundaries
+
+Partial capacity outputs may be null; clients must handle them. Provenance labels are self-reported, not independently verified. Fingerprints detect descriptor drift, not implementation behavior or security. Output schemas remain permissive and six external tools still have no declared output schema. No public tools were removed, no dependencies were upgraded, and public AWS account/provider access remains unavailable.
+
+## Validation and use
+
+60 behavioral/contract tests, typecheck/build, generated contract checks, documentation checks, clean consumer CLI/stdio install, and dependency audit form the release gates. GitHub CI runs on Node 22/24 with CodeQL and real Action self-tests. The production smoke additionally verifies manifest parity/ETag, partial capacity, structured errors, live AWS Knowledge and account-tool rejection.
+
+```sh
+npx --yes --package moretes-aws-architect-mcp@0.5.0 moretes-architect manifest
+claude mcp add --transport http moretes-architect https://mcp.moretes.com/mcp
+```
+
+Publication, image and live deployment results are separate: consult the [v0.5.0 release](https://github.com/fernando-moretes/moretes-aws-architect-mcp/releases/tag/v0.5.0) and [deployment evidence](deployment.md).
+
+---
+
 
 26 October 2026 · reliability and documentation patch.
 

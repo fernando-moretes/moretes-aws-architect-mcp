@@ -1,5 +1,9 @@
 # What's new
 
+## 0.5.0 (2026-11-07)
+
+Missing capacity inputs remain unknown, caller-reported assumptions are labeled per field, and explicit peak rates no longer turn into daily forecasts. MCP validation errors include structured missing paths; defaulted parameters are optional in input schemas. The CLI and HTTP expose complete public contract manifests covering output schemas and safety annotations, with aggregate/per-tool hashes, ETags and CI baseline checks. See [release notes](release-notes.md) and [contract verification](contract-manifest.md). The public tool count remains 48; public account access remains disabled.
+
 ## 0.4.1 (2026-10-26)
 
 Reliability patch: large stable queues now produce finite Erlang C results, with an explicit 100,000-total-slot bound. GitHub Action report-only mode permits findings while input, execution and artifact errors still fail. JSON file arrays support paths with spaces without shell evaluation. Tests cover the two regressions; the production smoke checks the exact version and large-queue example. Current deployment/distribution instructions and the Claude handoff are consolidated. See [release-notes.md](release-notes.md).

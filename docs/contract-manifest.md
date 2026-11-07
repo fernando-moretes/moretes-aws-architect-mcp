@@ -1,6 +1,6 @@
 # Verifiable tool contracts
 
-Implemented in source after v0.4.1. Build this checkout to use the CLI below. The public endpoint and published npm package acquire this feature only after a separate release and deployment; this document is not deployment evidence.
+Available in v0.5.0. Build this checkout or install the pinned package to use the CLI. Compare the exact versions on each side; distribution and live deployment evidence are recorded in the GitHub release and [deployment guide](deployment.md).
 
 ## Inspect before an upgrade
 

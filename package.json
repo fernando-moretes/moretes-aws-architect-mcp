@@ -1,6 +1,6 @@
 {
   "name": "moretes-aws-architect-mcp",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Evidence-first architecture workbench MCP by Fernando Azevedo: architect personas, cloud-agnostic design tools, IaC/code/API reviews, AI-agent and MCP safety, live AWS knowledge. Deterministic, no model calls. CLI for pipelines.",
   "type": "module",
   "license": "MIT",

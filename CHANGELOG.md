@@ -1,14 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.5.0 — 2026-11-07
 
 - Add a complete public-tool contract manifest in local CLI and HTTP, with output schemas, safety annotations, aggregate/per-tool SHA-256 fingerprints, conditional ETags and a health fingerprint. Share descriptors with MCP discovery to avoid divergent inventories.
-- Verify the complete-contract fingerprint baseline in CI alongside the historical input-only lock. Hashes detect drift, not safety or publisher identity. Source feature; not yet deployed or released on npm.
+- Verify the complete-contract fingerprint baseline in CI alongside the historical input-only lock. Hashes detect drift, not safety or publisher identity.
 - Address #19 first-use feedback: partial capacity inputs, explicit per-field caller-reported provenance, visible server headroom default, and no daily extrapolation of an explicitly peak rate. Missing arithmetic outputs are null; complete legacy calls retain their numerical results.
 - Return structured Zod input errors with missing paths and issue codes, without echoing supplied values in structured errors.
 - Export Zod input-mode schemas across MCP, CLI, documentation and lock generation so defaults do not become mandatory inputs.
 - Give all eight calculators consistent unvalidated scenario metadata; preserve formula-specific limits and existing sources without inventing citations.
-- Add regression tests and regenerate examples, tool contracts and documentation. No npm release or AWS deployment is implied by these source changes.
+- Add regression tests and regenerate examples, tool contracts and documentation. Publication and deployment evidence are tracked separately from source changes.
 
 ## 0.4.1 — 2026-10-26
 

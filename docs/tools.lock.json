@@ -1,5 +1,5 @@
 {
-  "version": "0.4.1",
+  "version": "0.5.0",
   "note": "sha256 of name + description + inputSchema per public tool. Regenerate with node scripts/contracts.mjs; review the diff before merging.",
   "aggregate": "5645dd0192b0a13f46e576c211490b0743bedb89b758eee4f64fe146eff013b4",
   "tools": [

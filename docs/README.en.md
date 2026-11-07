@@ -7,7 +7,7 @@
 
 # Moretes Architect MCP (English)
 
-Source-build improvement: `node dist/cli.js manifest` exports complete public tool contracts with per-tool hashes, output schemas and safety annotations. See [verifiable contracts](contract-manifest.md). This feature requires building the current checkout; npm publication and public deployment are separate steps.
+New in 0.5.0: `node dist/cli.js manifest` exports complete public tool contracts with per-tool hashes, output schemas and safety annotations. See [verifiable contracts](contract-manifest.md). Compare the exact client/server versions when checking fingerprints.
 
 **Evidence-first architecture, for any cloud, inside your coding agent.**
 
@@ -44,8 +44,8 @@ Public quota: 300 requests per day per caller, 3,000 in total. No SLA. For volum
 Install the published release with an explicit binary:
 
 ```sh
-npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-architect list
-npx --yes --package moretes-aws-architect-mcp@0.4.1 moretes-aws-architect-mcp
+npx --yes --package moretes-aws-architect-mcp@0.5.0 moretes-architect list
+npx --yes --package moretes-aws-architect-mcp@0.5.0 moretes-aws-architect-mcp
 ```
 
 The second command starts MCP stdio. Installation uses the network; deterministic review/calculation tools run offline afterward. Source builds remain available:
@@ -59,7 +59,7 @@ node dist/cli.js list       # pipeline CLI
 
 ## What it does
 
-Release 0.4.1 fixes large-queue numerical overflow and makes GitHub Action report-only mode fail on execution errors. See [release notes](release-notes.md) and [integration setup](integrations-clients.md). Queue calculations accept at most 100,000 concurrent slots; errors are explicit, never silently reported as successful reviews.
+Release 0.5.0 adds partial capacity scenarios, structured input errors and complete contract fingerprints. It retains the earlier queue and Action reliability fixes. See [release notes](release-notes.md) and [integration setup](integrations-clients.md). Queue calculations accept at most 100,000 concurrent slots; errors are explicit, never silently reported as successful reviews.
 
 | Group | Tools |
 |---|---|

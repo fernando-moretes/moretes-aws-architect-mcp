@@ -1,6 +1,6 @@
 # Tools guide
 
-A human guide to the 48 public tools of Moretes Architect MCP 0.4.1. Tools are grouped exactly as the server lists them (`toolGroups` in `src/server.ts`), so the order here matches what your client shows.
+A human guide to the 48 public tools of Moretes Architect MCP 0.5.0. Tools are grouped exactly as the server lists them (`toolGroups` in `src/server.ts`), so the order here matches what your client shows.
 
 For every tool: what it does, a minimal input, what the output contains, and the limitation you must keep in mind. Inputs marked "from docs/examples" are the real arguments used to produce the committed outputs in `docs/examples/<tool>.json`; those files are real tool results, regenerated with `node scripts/examples.mjs`. The exact JSON schema of each tool is in the generated [tool reference](tools.md); each heading below links to it.
 
