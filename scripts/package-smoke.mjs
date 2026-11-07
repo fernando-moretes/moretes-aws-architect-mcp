@@ -22,6 +22,9 @@ try{
  const bin=join(consumer,'node_modules','.bin');
  const groups=JSON.parse(run(join(bin,'moretes-architect'),['list','--json'],consumer));
  assert.equal(groups.flatMap(g=>g.tools).length,48);
+ const manifest=JSON.parse(run(join(bin,'moretes-architect'),['manifest'],consumer));
+ assert.equal(manifest.snapshot.server.version,version);
+ assert.equal(manifest.snapshot.tools.length,48);
  const queue=JSON.parse(run(join(bin,'moretes-architect'),['call','queue_sizing','--arg','arrivalsPerSecond=900','--arg','serviceTimeMs=1000','--arg','consumers=1000'],consumer));
  assert.equal(queue.waitProbability,0.0006);assert.equal(queue.meanInSystem,900.005);
  const client=new Client({name:'package-smoke',version});
@@ -30,7 +33,9 @@ try{
  try{
   await client.connect(transport);
   assert.equal(client.getServerVersion()?.version,version);
-  assert.equal((await client.listTools()).tools.length,48);
+  const listed=(await client.listTools()).tools;
+  assert.equal(listed.length,48);
+  assert.deepEqual([...listed].sort((a,b)=>a.name < b.name ? -1 : a.name > b.name ? 1 : 0),manifest.snapshot.tools);
   const result=await client.callTool({name:'queue_sizing',arguments:{arrivalsPerSecond:900,serviceTimeMs:1000,consumers:1000}});
   assert.equal(result.structuredContent?.waitProbability,0.0006);
   assert.equal((await client.callTool({name:'aws_account_identity',arguments:{}})).isError,true);

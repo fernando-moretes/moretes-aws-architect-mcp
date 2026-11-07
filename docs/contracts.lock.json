@@ -1,0 +1,204 @@
+{
+  "algorithm": "sha256-sorted-json-v1",
+  "digest": "bbe21df9dbcbf00628cd8d4126285a36f8054b4c6185d4c4b28ff61eb99411a6",
+  "toolDigests": [
+    {
+      "name": "agent_eval_plan",
+      "digest": "851df2286c762d3544f75d5665fa2d880f75a08d92a619369dd5268eaf84c1f8"
+    },
+    {
+      "name": "agent_tool_contract",
+      "digest": "877a76aca9140de2a9169f0bb4943fc798e7ede6363e1ae6f1c16cb2c7f9be1b"
+    },
+    {
+      "name": "architect_panel",
+      "digest": "dff6b761d7d2fa040e9a0f2338c25cbbdb30c734fed4ce6620a7a1ef863b8042"
+    },
+    {
+      "name": "architecture_diagram",
+      "digest": "e23e3826dd4235d5e1aa443f3135ae4d8030256b438b29835075e371d3ddaf39"
+    },
+    {
+      "name": "architecture_pattern",
+      "digest": "207868bd61cabaed242d95c66150932fc5f48705dc16be7599d2f4f6446cdd61"
+    },
+    {
+      "name": "aws_knowledge_read",
+      "digest": "0efab2b7686bd787f26c6f12a47ec15e7ede3a648fb33c7e9448cbb9ea354171"
+    },
+    {
+      "name": "aws_knowledge_search",
+      "digest": "a11edd600c34173925bbc1fbd0efd68da044cef84edcc5a778dd64d163ece601"
+    },
+    {
+      "name": "aws_regional_availability",
+      "digest": "db1bf96d6312f6d1d78222394c9782b2ec61008fa33b0cbe1f6fc09efbf02bcc"
+    },
+    {
+      "name": "aws_regions",
+      "digest": "97962cf36c2ffbef66f2ea0dd241883b77ac55df0f2ba0fde3bf97c5c0ad6eab"
+    },
+    {
+      "name": "aws_skill",
+      "digest": "fe32d6e8c2cb012763dcb1b5924f6e65a6dbdc1416c27c0bb4e681c5776e7a64"
+    },
+    {
+      "name": "c4_model",
+      "digest": "d2496e2dfda1d99d5841d389fc6f75bccbec9d707ea8c0e0c3074b4eee4b8c50"
+    },
+    {
+      "name": "capacity_plan",
+      "digest": "493d9fd306a63d4b68aa5f98080e38705511119c626c24db3719d0b0fee519ed"
+    },
+    {
+      "name": "cloudformation_review",
+      "digest": "ca04dc42779b23e66730be0c357dccf98c49134b3eb76cb65d387650cae498cb"
+    },
+    {
+      "name": "code_review_architecture",
+      "digest": "c43989e6fe54bcf752e485c5dd5ac5452f9415902ffe68aaabd799c01550a930"
+    },
+    {
+      "name": "cost_model",
+      "digest": "5cd3c2ea82d1523c285d80b2ab3b09f30248e544938073965201e2da687b4227"
+    },
+    {
+      "name": "data_classification",
+      "digest": "886cac16d06271e5b5a2c7bb8f9afc443eb9895588450de57fec64d5279f63aa"
+    },
+    {
+      "name": "decision_record",
+      "digest": "4a338fe9769ff403fc957e74d7194556b1375c4005cf69b3caf72631b18db021"
+    },
+    {
+      "name": "dependency_manifest_review",
+      "digest": "98ed91401a543f18561636a2cbda4cd9a86cd184e3bb4b6fc8b14dce20dc7a56"
+    },
+    {
+      "name": "dr_strategy",
+      "digest": "914122eccb28621757b8d218a44798e01f3e6a6153d68212419ac4ed069b87ed"
+    },
+    {
+      "name": "event_contract",
+      "digest": "a920296dce5761e80c44e9dd1b1975df4782cb28a1aa272590a19d05815c4689"
+    },
+    {
+      "name": "failure_rehearsal",
+      "digest": "e768b5ac2a68e9c2e722467fe415e2f15815b32ea0bce2497f0fc14b4bb18fe9"
+    },
+    {
+      "name": "finops_unit_economics",
+      "digest": "7aa9f0437655cc372bb65c8af3b001e459a24b25d33dacaa21eee937a0f296f4"
+    },
+    {
+      "name": "github_public_repository",
+      "digest": "637c44fc9d66977211ce4f688aae6fb5a2aca630930a6031226cfd78268bc448"
+    },
+    {
+      "name": "iam_policy_review",
+      "digest": "63555cb216d9bc5d5a2b3cd8fbff4ee72bb968ebefa9ed18d07e4045b84eaf7f"
+    },
+    {
+      "name": "implementation_plan",
+      "digest": "b9f79a48a8bdf41d7388ed58d211cc537ceca7462634a307e067d97ba1cc04f2"
+    },
+    {
+      "name": "integration_catalog",
+      "digest": "1f0d410a229bfb5d51518a624b0e71ec7f7af6919fe9ddcb4c9c670c92fa2857"
+    },
+    {
+      "name": "integration_config",
+      "digest": "195f836399509fa5d2883be656f5cfcbb4add2cd92e8b97822dc68d219bda859"
+    },
+    {
+      "name": "kubernetes_manifest_review",
+      "digest": "f51a306ae931490370d483808b90819be4a1d8b0fde37dbdb4047cd87196394a"
+    },
+    {
+      "name": "latency_budget",
+      "digest": "f54241c072a186f6028545e7d5c60501b71f9f76e5b0cbf1f9fe8497a824a26c"
+    },
+    {
+      "name": "mcp_config_review",
+      "digest": "14f363391e0c4db9a4d66daefe6bf7e5e707c09630c0a36cfce8e7a23332c1ae"
+    },
+    {
+      "name": "mcp_server_review",
+      "digest": "40d646fad93bd9e347df9ebd0910dc2a6050a956494089385d1c60bad2b3da10"
+    },
+    {
+      "name": "migration_plan",
+      "digest": "e344d1e62d33ed322cd9d0bfb69d197c4af896eab47c1e95eb37bd215779315b"
+    },
+    {
+      "name": "openapi_review",
+      "digest": "8cf6da2ed08ae74ae8ba5e524447678e7efc73a43f9e0863f8c7ab3c934b58a5"
+    },
+    {
+      "name": "postmortem",
+      "digest": "0a43633c1446c534414aff11dad83bb16ac77a498560080984db8479dc195a22"
+    },
+    {
+      "name": "prompt_injection_checklist",
+      "digest": "93054161e700662fc27b8bd1b63c360de2ed2c01809a4a1ac5f9239de66604d8"
+    },
+    {
+      "name": "queue_sizing",
+      "digest": "d7b6eb648cfd98fc9e103c25cb058247e050ee7bdf231cd00a9cc03097f2ccd6"
+    },
+    {
+      "name": "rag_pipeline_plan",
+      "digest": "414e2cfcf93c5e61d3b8c712948f92edc580d08a3cd3a540ddb2cc1637486331"
+    },
+    {
+      "name": "requirements_check",
+      "digest": "c85057c8fbfc0474b358a99d6069ac98453205e79ada1932268d05e516924d9c"
+    },
+    {
+      "name": "retry_policy",
+      "digest": "f263d16113a07ac009d435975d3fd3d872230be6e8617a92bdeb68c9f37fdce8"
+    },
+    {
+      "name": "runbook",
+      "digest": "fdac12f6dfb9c0cf54031bab9cdbe9efccab9d51e7e840a0f747b8099a10f75c"
+    },
+    {
+      "name": "sequence_diagram",
+      "digest": "ff741601026d097cc32a50d9d8039242190c41fec0f34d997cf65d62d1bef58f"
+    },
+    {
+      "name": "service_compare",
+      "digest": "344f9c08d76c264600f1218d38ab80aedc92517f045f9465e9e1a9b860f12899"
+    },
+    {
+      "name": "service_equivalents",
+      "digest": "a661f1b20075b8ac79872995684f5f14a69a2cf51f1951633e854c6c06458ab3"
+    },
+    {
+      "name": "slo_budget",
+      "digest": "603ef50a94c347b6315c7fcfa5c93d54c0bb35616468d4b8bcd4e8fad998bfbe"
+    },
+    {
+      "name": "storage_growth",
+      "digest": "8255439d58660aef5ac581ad6bbee102b138aacc54667239f15254fe097299f7"
+    },
+    {
+      "name": "terraform_plan_review",
+      "digest": "3e6d3636ad63ebeb0f4a143385ff943c9565bcd4c3ed33cd4792b51d136f1e77"
+    },
+    {
+      "name": "threat_model",
+      "digest": "56921dda4b2041634909fab9b16297129988a2e57821ac8f7470005a00887344"
+    },
+    {
+      "name": "well_architected_review",
+      "digest": "3dcefe8fbd8f64965188e3e14fd69a82ac463062b18c7c850ddaef0ab7d7f5d2"
+    }
+  ],
+  "schemaVersion": 1,
+  "server": {
+    "name": "moretes-aws-architect",
+    "version": "0.4.1"
+  },
+  "scope": "public-tools"
+}

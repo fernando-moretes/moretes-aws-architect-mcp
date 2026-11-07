@@ -29,6 +29,8 @@ Check that `Project` is an active cost-allocation tag. Do not write deployment o
 
 ## Health and incidents
 
+Source-build diagnostic (requires deployment before use on the public origin): `/health` includes a contract fingerprint and `/manifest.json` exposes the full public-tool snapshot with conditional ETags. Compare it against a reviewed build using [the contract manifest guide](contract-manifest.md). A matching hash does not establish security or unchanged implementation behavior.
+
 `GET /health` reports version and public tool count; it is a process/configuration check, not an upstream dependency check. `npm run smoke` additionally calls official AWS Knowledge, validates a calculation and tests public account-tool rejection.
 
 For 5xx: inspect the scoped Lambda log group `/aws/lambda/moretes-aws-architect-mcp`, error/duration metrics and current package version. Logs contain only request ID, duration and HTTP status. Do not turn on raw body logging to troubleshoot customer input. For 429: distinguish API throttling from daily quota; the latter response mentions the daily service limit.

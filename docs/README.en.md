@@ -7,6 +7,8 @@
 
 # Moretes Architect MCP (English)
 
+Source-build improvement: `node dist/cli.js manifest` exports complete public tool contracts with per-tool hashes, output schemas and safety annotations. See [verifiable contracts](contract-manifest.md). This feature requires building the current checkout; npm publication and public deployment are separate steps.
+
 **Evidence-first architecture, for any cloud, inside your coding agent.**
 
 An MCP server that puts **48 deterministic architecture tools** and **10 architect personas** inside Claude Code, Codex, Kiro, Cursor, VS Code, Gemini CLI, Amazon Q and any MCP client. Your client's model reasons; the server returns calculations, structures, official sources and explicit gaps. **The server never calls a model**, never touches your account over the internet and needs no API key.
