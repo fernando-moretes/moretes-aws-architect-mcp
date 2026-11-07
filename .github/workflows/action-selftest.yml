@@ -12,7 +12,7 @@ jobs:
   selftest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Fixtures from the documented examples
         run: |
           node -e 'const e=require("./docs/examples/terraform_plan_review.json");require("fs").writeFileSync("plan.json",JSON.stringify(e.arguments.plan))'
